@@ -11,11 +11,6 @@ package asum.regalpruefung;
  */
 public class AsumRegalpruefung {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+
     
 }
