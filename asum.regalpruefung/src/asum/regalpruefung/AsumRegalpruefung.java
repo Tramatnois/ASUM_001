@@ -7,7 +7,7 @@ package asum.regalpruefung;
 
 /**
  *
- * @author tramatnois
+ * @author tramatnois2
  */
 public class AsumRegalpruefung {
 
