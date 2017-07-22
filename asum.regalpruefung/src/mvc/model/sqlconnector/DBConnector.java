@@ -65,6 +65,10 @@ public abstract class DBConnector {
         return rs;
     }
 
+    public Connection getConnection() {
+        return connection;
+    }
+
     @Override
     protected void finalize() throws Throwable {
         try {
