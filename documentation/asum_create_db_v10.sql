@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `ASUM_GmbH` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `ASUM_GmbH`;
 -- MySQL dump 10.13  Distrib 5.7.17, for macos10.12 (x86_64)
 --
 -- Host: localhost    Database: ASUM_GmbH
@@ -139,8 +141,11 @@ CREATE TABLE `inspection_comment_tab` (
   `idinspection_comment` int(11) NOT NULL,
   `comment` varchar(45) DEFAULT NULL,
   `inspection_id` int(11) NOT NULL,
+  `characteristic_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`idinspection_comment`),
   KEY `inspection_id_idx` (`inspection_id`),
+  KEY `fk_inspcomment_characteristic_idx` (`characteristic_id`),
+  CONSTRAINT `fk_inspcomment_characteristic` FOREIGN KEY (`characteristic_id`) REFERENCES `characteristic_tab` (`idcharacteristic`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_inspcomment_inspresult` FOREIGN KEY (`inspection_id`) REFERENCES `inspection_result_tab` (`idinspection_result`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -230,7 +235,10 @@ CREATE TABLE `inspectionplan_tab` (
   `idinspectionplan` int(11) NOT NULL,
   `norm` varchar(45) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`idinspectionplan`)
+  `characteristic_group_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idinspectionplan`),
+  KEY `fk_inspplan_characteristic_group_idx` (`characteristic_group_id`),
+  CONSTRAINT `fk_inspplan_characteristic_group` FOREIGN KEY (`characteristic_group_id`) REFERENCES `characteristic_group_tab` (`idcharacteristic_group`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -240,7 +248,7 @@ CREATE TABLE `inspectionplan_tab` (
 
 LOCK TABLES `inspectionplan_tab` WRITE;
 /*!40000 ALTER TABLE `inspectionplan_tab` DISABLE KEYS */;
-INSERT INTO `inspectionplan_tab` VALUES (1,'DIN EN 15635','Regalprüfung nach DIN EN 15635');
+INSERT INTO `inspectionplan_tab` VALUES (1,'DIN EN 15635','Regalprüfung nach DIN EN 15635',NULL);
 /*!40000 ALTER TABLE `inspectionplan_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -279,4 +287,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-22 18:56:51
+-- Dump completed on 2017-07-22 22:46:31
