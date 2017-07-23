@@ -8,7 +8,13 @@ package mvc.model.sqlconnector;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import mvc.model.CustomerDTO;
 
 /**
  *
@@ -56,7 +62,23 @@ public class DBConnection extends DBConnector{
 	} 
     }
     public static void main(String[] args) {
+         CustomerDTO customer = new CustomerDTO();
+        String query;
+        PreparedStatement preparedStmt;
+        ResultSet rs;
         DBConnection conn = new DBConnection();
+        query = "SELECT * FROM customer_tab where idcustomer=?";
+
+        try {
+            preparedStmt = conn.getConnection().prepareStatement(query);
+        preparedStmt.setInt(1, 1);
+        rs = preparedStmt.executeQuery();
+        rs.next();
+        System.out.println(rs.getString("name"));
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
         
 }
