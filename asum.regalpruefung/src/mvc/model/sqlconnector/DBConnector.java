@@ -28,7 +28,10 @@ public abstract class DBConnector {
     private ArrayList<ResultSet> resultSetList = new ArrayList<ResultSet>();
     private ArrayList<Statement> statementList = new ArrayList<Statement>();
 
-    public DBConnector(String host, String database, String user, String passwd) {
+    public DBConnector() {
+        
+    }
+    public final void connect(String host, String database, String user, String passwd) {
 
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
