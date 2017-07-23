@@ -21,18 +21,24 @@ import mvc.model.CustomerDTO;
  * @author danie
  */
 public class DBConnection extends DBConnector{
-    
+    private static DBConnection instance;
     private String driver;
     private String host;
     private String database;
     private String username;
     private String password;
 
-    public DBConnection() {
+    private DBConnection() {
         //super("localhost", "asum_gmbh", "root", "");
         super();
         this.get_Properties();
         this.connect(host,database,username,password);
+        
+    }
+    public static DBConnection getInstance() {
+        if(DBConnection.instance == null)
+            instance = new DBConnection();
+        return instance;
     }
     
     private void get_Properties() {
@@ -60,25 +66,5 @@ public class DBConnection extends DBConnector{
 			}
 		}
 	} 
-    }
-    public static void main(String[] args) {
-         CustomerDTO customer = new CustomerDTO();
-        String query;
-        PreparedStatement preparedStmt;
-        ResultSet rs;
-        DBConnection conn = new DBConnection();
-        query = "SELECT * FROM customer_tab where idcustomer=?";
-
-        try {
-            preparedStmt = conn.getConnection().prepareStatement(query);
-        preparedStmt.setInt(1, 1);
-        rs = preparedStmt.executeQuery();
-        rs.next();
-        System.out.println(rs.getString("name"));
-        } catch (SQLException ex) {
-            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-        
+    }                
 }
