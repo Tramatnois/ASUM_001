@@ -18,9 +18,9 @@ import mvc.model.sqlconnector.DBConnection;
  *
  * @author LT Dan
  */
-public class CustomerDAO {
+public class CustomerDAO extends AbstractDAO{
 
-    DBConnection connection = new DBConnection();
+    //DBConnection connection = new DBConnection();
 
     /**
      * Returns a single customer ordered by ID
