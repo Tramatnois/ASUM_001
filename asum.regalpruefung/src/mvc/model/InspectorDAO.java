@@ -50,49 +50,49 @@ public class InspectorDAO {
     }
 
     /**
-     * returns a List of all Customer in the database
+     * returns a List of all Inspector in the database
      *
-     * @return Array List with all customer
+     * @return Array List with all inspector
      */
-    /*
-    public ArrayList<CustomerDTO> selectAllCustomer() throws SQLException {
-        ArrayList<CustomerDTO> customerList = new ArrayList<>();
+    
+    public ArrayList<InspectorDTO> selectAllInspector() throws SQLException {
+        ArrayList<InspectorDTO> inspectorList = new ArrayList<>();
         String query;
         ResultSet rs;
-        query = "SELECT * FROM customer_tab";
+        query = "SELECT * FROM inspector_tab";
         PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
-        rs = preparedStmt.executeQuery("SELECT * FROM customer_tab");
+        rs = preparedStmt.executeQuery("SELECT * FROM inspector_tab");
         while (rs.next()) {
-            customerList.add(this.mapCustomer(rs));
+            inspectorList.add(this.mapInspector(rs));
         }
         // execute the preparedstatement
 
         rs.close();
         preparedStmt.close();
-        return customerList;
+        return inspectorList;
     }
-*/
+
     /**
-     * Adds a customer to the Database. Id of the customer object is ignored
+     * Adds a inspector to the Database. Id of the inspector object is ignored
      *
-     * @param customer
+     * @param inspector
      * @throws SQLException
      *//*
-    public void insertCustomer(CustomerDTO customer) throws SQLException {
+    public void insertInspector(InspectorDTO inspector) throws SQLException {
 
-        String query = " insert into customer_tab (name, street, zipcode, city, contactperson, phone, fax, email)"
+        String query = " insert into inspector_tab (name, street, zipcode, city, contactperson, phone, fax, email)"
                 + " values (?, ?, ?, ?, ?, ? , ? , ?)";
 
         // create the mysql insert preparedstatement
         PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
-        preparedStmt.setString(1, customer.getName());
-        preparedStmt.setString(2, customer.getStreet());
-        preparedStmt.setString(3, customer.getZipcode());
-        preparedStmt.setString(4, customer.getCity());
-        preparedStmt.setString(5, customer.getContactperson());
-        preparedStmt.setString(6, customer.getPhone());
-        preparedStmt.setString(7, customer.getFax());
-        preparedStmt.setString(8, customer.getEmail());
+        preparedStmt.setString(1, inspector.getName());
+        preparedStmt.setString(2, inspector.getStreet());
+        preparedStmt.setString(3, inspector.getZipcode());
+        preparedStmt.setString(4, inspector.getCity());
+        preparedStmt.setString(5, inspector.getContactperson());
+        preparedStmt.setString(6, inspector.getPhone());
+        preparedStmt.setString(7, inspector.getFax());
+        preparedStmt.setString(8, inspector.getEmail());
 
         // execute the preparedstatement
         preparedStmt.execute();
@@ -100,28 +100,28 @@ public class InspectorDAO {
     }
 */
     /**
-     * Updates a customer in the database
+     * Updates a inspector in the database
      *
-     * @param customer customer who is updated. All fields of the object are
+     * @param inspector inspector who is updated. All fields of the object are
      * updated.
      * @throws SQLException
      */
     /*
-    public void updateCustomer(CustomerDTO customer) throws SQLException {
+    public void updateInspector(InspectorDTO inspector) throws SQLException {
 
-        String query = "Update customer_tab SET name=?, street=?, zipcode=?, city=?, contactperson=?, phone=?, fax=?, email=? WHERE idcustomer=?";
+        String query = "Update inspector_tab SET name=?, street=?, zipcode=?, city=?, contactperson=?, phone=?, fax=?, email=? WHERE idinspector=?";
 
         // create the mysql insert preparedstatement
         PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
-        preparedStmt.setString(1, customer.getName());
-        preparedStmt.setString(2, customer.getStreet());
-        preparedStmt.setString(3, customer.getZipcode());
-        preparedStmt.setString(4, customer.getCity());
-        preparedStmt.setString(5, customer.getContactperson());
-        preparedStmt.setString(6, customer.getPhone());
-        preparedStmt.setString(7, customer.getFax());
-        preparedStmt.setString(8, customer.getEmail());
-        preparedStmt.setInt(9, customer.getIdcustomer());
+        preparedStmt.setString(1, inspector.getName());
+        preparedStmt.setString(2, inspector.getStreet());
+        preparedStmt.setString(3, inspector.getZipcode());
+        preparedStmt.setString(4, inspector.getCity());
+        preparedStmt.setString(5, inspector.getContactperson());
+        preparedStmt.setString(6, inspector.getPhone());
+        preparedStmt.setString(7, inspector.getFax());
+        preparedStmt.setString(8, inspector.getEmail());
+        preparedStmt.setInt(9, inspector.getIdinspector());
         // execute the preparedstatement
         preparedStmt.executeUpdate();
         preparedStmt.close();
@@ -129,30 +129,30 @@ public class InspectorDAO {
     }*/
 
     /**
-     * Deletes a customer from Database It is enough if the customer object
+     * Deletes a inspector from Database It is enough if the inspector object
      * contains an id
      *
-     * @param customer customer who should be deleted
+     * @param inspector inspector who should be deleted
      * @throws SQLException
      *//*
-    public void deleteCustomer(CustomerDTO customer) throws SQLException {
+    public void deleteInspector(InspectorDTO inspector) throws SQLException {
 
-        String query = "DELETE FROM customer_tab WHERE idcustomer=?";
+        String query = "DELETE FROM inspector_tab WHERE idinspector=?";
         // create the mysql insert preparedstatement
         PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
-        preparedStmt.setInt(1, customer.getIdcustomer());
+        preparedStmt.setInt(1, inspector.getIdinspector());
         // execute the preparedstatement
         preparedStmt.execute();
 
     }
 */
     /**
-     * Maps a resutlSet to a CustomerDTO Object
+     * Maps a resutlSet to a InspectorDTO Object
      *
      *
-     * @param rs ResultSet. The Pointer must be set on the customer who should
+     * @param rs ResultSet. The Pointer must be set on the inspector who should
      * be mapped
-     * @return mapped CustomerDTO object
+     * @return mapped InspectorDTO object
      * @throws SQLException
      */
     private InspectorDTO mapInspector(ResultSet rs) throws SQLException {
