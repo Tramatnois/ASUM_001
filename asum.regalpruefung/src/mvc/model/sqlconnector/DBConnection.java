@@ -55,5 +55,8 @@ public class DBConnection extends DBConnector{
 		}
 	} 
     }
+    public static void main(String[] args) {
+        DBConnection conn = new DBConnection();
+    }
         
 }
