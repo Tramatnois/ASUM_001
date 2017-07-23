@@ -30,11 +30,21 @@ public class Mainframe extends javax.swing.JFrame {
         jPanel_InspOperation = new javax.swing.JPanel();
         jPanel_Customer = new javax.swing.JPanel();
         jLabel_customer_name = new javax.swing.JLabel();
-        jTF_customer_name = new javax.swing.JTextField();
+        jLabel_customerName = new javax.swing.JLabel();
         jButton_search_customer = new javax.swing.JButton();
         jLabel_storageRack = new javax.swing.JLabel();
-        jTextField_storageRack = new javax.swing.JTextField();
+        jLabel_storageRackID = new javax.swing.JLabel();
         jButton_search_storageRack = new javax.swing.JButton();
+        jPanel_InspectionPlan = new javax.swing.JPanel();
+        jButton_createNewInspection = new javax.swing.JButton();
+        jButton_getOldInspection = new javax.swing.JButton();
+        jButton_setInsp_asTemplate = new javax.swing.JButton();
+        jLabel_inspectionPlan = new javax.swing.JLabel();
+        jPanel_Inspector = new javax.swing.JPanel();
+        jLabel_inspectorName = new javax.swing.JLabel();
+        jLabel_inspectorStreet = new javax.swing.JLabel();
+        jLabel_inspectorZipCode = new javax.swing.JLabel();
+        jLabel_inspectorCity = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu_main = new javax.swing.JMenu();
         jMenuItem_connect = new javax.swing.JMenuItem();
@@ -42,6 +52,7 @@ public class Mainframe extends javax.swing.JFrame {
         jMenuItem_exit = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPanel_InspOperation.setBorder(new javax.swing.border.MatteBorder(null));
 
@@ -50,13 +61,9 @@ public class Mainframe extends javax.swing.JFrame {
         jLabel_customer_name.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel_customer_name.setText("Auftraggeber:");
 
-        jTF_customer_name.setEditable(false);
-        jTF_customer_name.setText("customer_name");
-        jTF_customer_name.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTF_customer_nameActionPerformed(evt);
-            }
-        });
+        jLabel_customerName.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel_customerName.setText("customerName");
+        jLabel_customerName.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
         jButton_search_customer.setText(". . .");
         jButton_search_customer.addActionListener(new java.awt.event.ActionListener() {
@@ -68,13 +75,8 @@ public class Mainframe extends javax.swing.JFrame {
         jLabel_storageRack.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel_storageRack.setText("Regalnummer:");
 
-        jTextField_storageRack.setEditable(false);
-        jTextField_storageRack.setText("storageRack ID");
-        jTextField_storageRack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_storageRackActionPerformed(evt);
-            }
-        });
+        jLabel_storageRackID.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel_storageRackID.setText("storageRack ID");
 
         jButton_search_storageRack.setText(". . .");
         jButton_search_storageRack.addActionListener(new java.awt.event.ActionListener() {
@@ -92,15 +94,16 @@ public class Mainframe extends javax.swing.JFrame {
                 .addGroup(jPanel_CustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel_customer_name)
                     .addGroup(jPanel_CustomerLayout.createSequentialGroup()
-                        .addComponent(jTF_customer_name, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel_customerName, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton_search_customer, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(25, 25, 25))
             .addGroup(jPanel_CustomerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel_storageRack, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField_storageRack, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel_storageRackID, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton_search_storageRack, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -112,14 +115,112 @@ public class Mainframe extends javax.swing.JFrame {
                 .addComponent(jLabel_customer_name)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_CustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTF_customer_name, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                    .addComponent(jButton_search_customer, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton_search_customer, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_customerName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_CustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_storageRack, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField_storageRack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_search_storageRack, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton_search_storageRack, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_storageRackID))
                 .addGap(8, 8, 8))
+        );
+
+        jPanel_InspectionPlan.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        jButton_createNewInspection.setText("Neue Prüfung");
+        jButton_createNewInspection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_createNewInspectionActionPerformed(evt);
+            }
+        });
+
+        jButton_getOldInspection.setText("Alte Prüfungen");
+
+        jButton_setInsp_asTemplate.setText("<html>Alte Prüfung<br>als Vorlage nutzen</html>");
+        jButton_setInsp_asTemplate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_setInsp_asTemplateActionPerformed(evt);
+            }
+        });
+
+        jLabel_inspectionPlan.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel_inspectionPlan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_inspectionPlan.setText("inspectionPlan");
+
+        javax.swing.GroupLayout jPanel_InspectionPlanLayout = new javax.swing.GroupLayout(jPanel_InspectionPlan);
+        jPanel_InspectionPlan.setLayout(jPanel_InspectionPlanLayout);
+        jPanel_InspectionPlanLayout.setHorizontalGroup(
+            jPanel_InspectionPlanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_InspectionPlanLayout.createSequentialGroup()
+                .addContainerGap(40, Short.MAX_VALUE)
+                .addComponent(jButton_createNewInspection)
+                .addGap(18, 18, 18)
+                .addComponent(jButton_getOldInspection, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton_setInsp_asTemplate, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45))
+            .addGroup(jPanel_InspectionPlanLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel_inspectionPlan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel_InspectionPlanLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton_createNewInspection, jButton_getOldInspection});
+
+        jPanel_InspectionPlanLayout.setVerticalGroup(
+            jPanel_InspectionPlanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_InspectionPlanLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel_inspectionPlan)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel_InspectionPlanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton_getOldInspection, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_createNewInspection, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_setInsp_asTemplate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jPanel_Inspector.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        jLabel_inspectorName.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel_inspectorName.setText("inspectorName");
+
+        jLabel_inspectorStreet.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel_inspectorStreet.setText("inspectorStreet");
+
+        jLabel_inspectorZipCode.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel_inspectorZipCode.setText("insp_zipcode");
+
+        jLabel_inspectorCity.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel_inspectorCity.setText("city");
+
+        javax.swing.GroupLayout jPanel_InspectorLayout = new javax.swing.GroupLayout(jPanel_Inspector);
+        jPanel_Inspector.setLayout(jPanel_InspectorLayout);
+        jPanel_InspectorLayout.setHorizontalGroup(
+            jPanel_InspectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_InspectorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel_InspectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel_inspectorName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel_inspectorStreet, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                    .addGroup(jPanel_InspectorLayout.createSequentialGroup()
+                        .addComponent(jLabel_inspectorZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel_inspectorCity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel_InspectorLayout.setVerticalGroup(
+            jPanel_InspectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_InspectorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel_inspectorName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel_inspectorStreet)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel_InspectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_inspectorZipCode)
+                    .addComponent(jLabel_inspectorCity))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel_InspOperationLayout = new javax.swing.GroupLayout(jPanel_InspOperation);
@@ -128,15 +229,23 @@ public class Mainframe extends javax.swing.JFrame {
             jPanel_InspOperationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_InspOperationLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel_Customer, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(415, Short.MAX_VALUE))
+                .addComponent(jPanel_Customer, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel_InspectionPlan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel_Inspector, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel_InspOperationLayout.setVerticalGroup(
             jPanel_InspOperationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_InspOperationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel_Customer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel_InspOperationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel_Inspector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel_InspOperationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel_Customer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel_InspectionPlan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         jMenu_main.setText("Menü");
@@ -163,15 +272,15 @@ public class Mainframe extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel_InspOperation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel_InspOperation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(92, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel_InspOperation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(255, Short.MAX_VALUE))
+                .addContainerGap(203, Short.MAX_VALUE))
         );
 
         pack();
@@ -181,14 +290,6 @@ public class Mainframe extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem_connectActionPerformed
 
-    private void jTF_customer_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_customer_nameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTF_customer_nameActionPerformed
-
-    private void jTextField_storageRackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_storageRackActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_storageRackActionPerformed
-
     private void jButton_search_customerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_search_customerActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_search_customerActionPerformed
@@ -196,6 +297,14 @@ public class Mainframe extends javax.swing.JFrame {
     private void jButton_search_storageRackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_search_storageRackActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_search_storageRackActionPerformed
+
+    private void jButton_createNewInspectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_createNewInspectionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_createNewInspectionActionPerformed
+
+    private void jButton_setInsp_asTemplateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_setInsp_asTemplateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_setInsp_asTemplateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -233,18 +342,28 @@ public class Mainframe extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_createNewInspection;
+    private javax.swing.JButton jButton_getOldInspection;
     private javax.swing.JButton jButton_search_customer;
     private javax.swing.JButton jButton_search_storageRack;
+    private javax.swing.JButton jButton_setInsp_asTemplate;
+    private javax.swing.JLabel jLabel_customerName;
     private javax.swing.JLabel jLabel_customer_name;
+    private javax.swing.JLabel jLabel_inspectionPlan;
+    private javax.swing.JLabel jLabel_inspectorCity;
+    private javax.swing.JLabel jLabel_inspectorName;
+    private javax.swing.JLabel jLabel_inspectorStreet;
+    private javax.swing.JLabel jLabel_inspectorZipCode;
     private javax.swing.JLabel jLabel_storageRack;
+    private javax.swing.JLabel jLabel_storageRackID;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem_connect;
     private javax.swing.JMenuItem jMenuItem_exit;
     private javax.swing.JMenu jMenu_main;
     private javax.swing.JPanel jPanel_Customer;
     private javax.swing.JPanel jPanel_InspOperation;
+    private javax.swing.JPanel jPanel_InspectionPlan;
+    private javax.swing.JPanel jPanel_Inspector;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JTextField jTF_customer_name;
-    private javax.swing.JTextField jTextField_storageRack;
     // End of variables declaration//GEN-END:variables
 }
