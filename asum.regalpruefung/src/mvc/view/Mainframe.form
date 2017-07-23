@@ -58,7 +58,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel_InspOperation" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="92" max="32767" attributes="0"/>
+              <EmptySpace pref="96" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -67,7 +67,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel_InspOperation" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="203" max="32767" attributes="0"/>
+              <EmptySpace pref="315" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -76,8 +76,8 @@
     <Container class="javax.swing.JPanel" name="jPanel_InspOperation">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-            <MatteColorBorder/>
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder/>
           </Border>
         </Property>
       </Properties>
@@ -91,7 +91,10 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel_InspectionPlan" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jPanel_Inspector" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jPanel_Inspector" max="32767" attributes="0"/>
+                      <Component id="jPanel_date" max="32767" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -99,15 +102,19 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                  <EmptySpace pref="10" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel_Inspector" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jPanel_Customer" max="32767" attributes="0"/>
                           <Component id="jPanel_InspectionPlan" max="32767" attributes="0"/>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jPanel_Inspector" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jPanel_date" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="121" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -321,7 +328,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel_inspectorName" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel_inspectorStreet" alignment="0" pref="188" max="32767" attributes="0"/>
+                          <Component id="jLabel_inspectorStreet" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel_inspectorZipCode" min="-2" pref="60" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -335,7 +342,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabel_inspectorName" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel_inspectorStreet" min="-2" max="-2" attributes="0"/>
@@ -344,7 +351,6 @@
                           <Component id="jLabel_inspectorZipCode" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel_inspectorCity" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="40" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -381,6 +387,58 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="city"/>
               </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel_date">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                <TitledBorder/>
+              </Border>
+            </Property>
+          </Properties>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                      <Component id="jLabel_date_label" min="-2" pref="60" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jTextField_date" min="-2" pref="108" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel_date_label" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField_date" alignment="3" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabel_date_label">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Lucida Grande" size="14" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Datum:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextField_date">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="date"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField_dateActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
