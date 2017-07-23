@@ -5,6 +5,7 @@
  */
 package mvc.model;
 
+import java.beans.Customizer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,17 +26,23 @@ public class CustomerDto {
 
     public CustomerDao selectSingleCustomer(int idcustomer) throws SQLException {
         CustomerDao customer = new CustomerDao();
-        Statement stmt;
+        String query;
+        PreparedStatement preparedStmt;
         ResultSet rs;
-            stmt = connection.getConnection().createStatement();
-            rs = stmt.executeQuery("SELECT * FROM customer_tab where idcustomer=" + idcustomer);
-            if (rs.next()) {
-                customer = this.mapCustomer(rs);
-            } else {
-                return null;
-            }
-            rs.close();
-            stmt.close();
+
+        query = "SELECT * FROM customer_tab where idcustomer=?";
+
+        preparedStmt = connection.getConnection().prepareStatement(query);
+        preparedStmt.setInt(1, idcustomer);
+
+        rs = preparedStmt.executeQuery();
+        if (rs.next()) {
+            customer = this.mapCustomer(rs);
+        } else {
+            return null;
+        }
+        rs.close();
+        preparedStmt.close();
 
         return customer;
     }
@@ -45,36 +52,40 @@ public class CustomerDto {
      */
     public ArrayList<CustomerDao> selectAllCustomer() throws SQLException {
         ArrayList<CustomerDao> customerList = new ArrayList<>();
-                Statement stmt;
+        String query;
         ResultSet rs;
-            stmt = connection.getConnection().createStatement();
-            rs = stmt.executeQuery("SELECT * FROM customer_tab");
-            while (rs.next())
-                customerList.add(this.mapCustomer(rs));
-            rs.close();
-            stmt.close();
+        query = "SELECT * FROM customer_tab";
+        PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
+        rs = preparedStmt.executeQuery("SELECT * FROM customer_tab");
+        while (rs.next()) {
+            customerList.add(this.mapCustomer(rs));
+        }
+        // execute the preparedstatement
+        
+        rs.close();
+        preparedStmt.close();
         return customerList;
     }
-    public void insertCustomer(CustomerDao customer) throws SQLException{
-        
-        
+
+    public void insertCustomer(CustomerDao customer) throws SQLException {
+
         String query = " insert into customer_tab (name, street, zipcode, city, contactperson, phone, fax, email)"
-        + " values (?, ?, ?, ?, ?, ? , ? , ?)";
+                + " values (?, ?, ?, ?, ?, ? , ? , ?)";
 
-      // create the mysql insert preparedstatement
-      PreparedStatement preparedStmt =  connection.getConnection().prepareStatement(query);
-      preparedStmt.setString (1, customer.getName());
-      preparedStmt.setString (2, customer.getStreet());
-      preparedStmt.setString (3, customer.getZipcode());
-      preparedStmt.setString (4, customer.getCity());
-      preparedStmt.setString (5, customer.getContactperson());
-      preparedStmt.setString (6, customer.getPhone());
-      preparedStmt.setString (7, customer.getFax());
-      preparedStmt.setString (8, customer.getEmail());
+        // create the mysql insert preparedstatement
+        PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
+        preparedStmt.setString(1, customer.getName());
+        preparedStmt.setString(2, customer.getStreet());
+        preparedStmt.setString(3, customer.getZipcode());
+        preparedStmt.setString(4, customer.getCity());
+        preparedStmt.setString(5, customer.getContactperson());
+        preparedStmt.setString(6, customer.getPhone());
+        preparedStmt.setString(7, customer.getFax());
+        preparedStmt.setString(8, customer.getEmail());
 
-      // execute the preparedstatement
-      preparedStmt.execute();
-        
+        // execute the preparedstatement
+        preparedStmt.execute();
+        preparedStmt.close();
     }
 
     private CustomerDao mapCustomer(ResultSet rs) throws SQLException {
@@ -90,6 +101,37 @@ public class CustomerDto {
         customer.setFax(rs.getString("fax"));
         customer.setEmail(rs.getString("email"));
         return customer;
+    }
+
+    public void updateCustomer(CustomerDao customer) throws SQLException {
+
+        String query = "Update customer_tab SET name=?, street=?, zipcode=?, city=?, contactperson=?, phone=?, fax=?, email=? WHERE idcustomer=?";
+
+        // create the mysql insert preparedstatement
+        PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
+        preparedStmt.setString(1, customer.getName());
+        preparedStmt.setString(2, customer.getStreet());
+        preparedStmt.setString(3, customer.getZipcode());
+        preparedStmt.setString(4, customer.getCity());
+        preparedStmt.setString(5, customer.getContactperson());
+        preparedStmt.setString(6, customer.getPhone());
+        preparedStmt.setString(7, customer.getFax());
+        preparedStmt.setString(8, customer.getEmail());
+        preparedStmt.setInt(9, customer.getIdcustomer());
+        // execute the preparedstatement
+        preparedStmt.executeUpdate();
+        preparedStmt.close();
+
+    }
+        public void deleteCustomer(CustomerDao customer) throws SQLException {
+  
+        String query = "DELETE FROM customer_tab WHERE idcustomer=?";
+        // create the mysql insert preparedstatement
+        PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
+        preparedStmt.setInt(1, customer.getIdcustomer());
+        // execute the preparedstatement
+        preparedStmt.execute();
+
     }
 
 }
