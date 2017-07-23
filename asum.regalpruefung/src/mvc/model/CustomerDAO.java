@@ -17,15 +17,15 @@ import mvc.model.sqlconnector.DBConnection;
  *
  * @author LT Dan
  */
-public class CustomerDto {
+public class CustomerDAO {
 
     DBConnection connection = new DBConnection();
     /*
      * Returns a single customer ordered by ID
      */
 
-    public CustomerDao selectSingleCustomer(int idcustomer) throws SQLException {
-        CustomerDao customer = new CustomerDao();
+    public CustomerDTO selectSingleCustomer(int idcustomer) throws SQLException {
+        CustomerDTO customer = new CustomerDTO();
         String query;
         PreparedStatement preparedStmt;
         ResultSet rs;
@@ -50,8 +50,8 @@ public class CustomerDto {
     /**
      * returns a List of all Customer
      */
-    public ArrayList<CustomerDao> selectAllCustomer() throws SQLException {
-        ArrayList<CustomerDao> customerList = new ArrayList<>();
+    public ArrayList<CustomerDTO> selectAllCustomer() throws SQLException {
+        ArrayList<CustomerDTO> customerList = new ArrayList<>();
         String query;
         ResultSet rs;
         query = "SELECT * FROM customer_tab";
@@ -67,7 +67,7 @@ public class CustomerDto {
         return customerList;
     }
 
-    public void insertCustomer(CustomerDao customer) throws SQLException {
+    public void insertCustomer(CustomerDTO customer) throws SQLException {
 
         String query = " insert into customer_tab (name, street, zipcode, city, contactperson, phone, fax, email)"
                 + " values (?, ?, ?, ?, ?, ? , ? , ?)";
@@ -88,9 +88,9 @@ public class CustomerDto {
         preparedStmt.close();
     }
 
-    private CustomerDao mapCustomer(ResultSet rs) throws SQLException {
-        CustomerDao customer;
-        customer = new CustomerDao();
+    private CustomerDTO mapCustomer(ResultSet rs) throws SQLException {
+        CustomerDTO customer;
+        customer = new CustomerDTO();
         customer.setIdcustomer(rs.getInt("idcustomer"));
         customer.setName(rs.getString("name"));
         customer.setStreet("street");
@@ -103,7 +103,7 @@ public class CustomerDto {
         return customer;
     }
 
-    public void updateCustomer(CustomerDao customer) throws SQLException {
+    public void updateCustomer(CustomerDTO customer) throws SQLException {
 
         String query = "Update customer_tab SET name=?, street=?, zipcode=?, city=?, contactperson=?, phone=?, fax=?, email=? WHERE idcustomer=?";
 
@@ -123,7 +123,7 @@ public class CustomerDto {
         preparedStmt.close();
 
     }
-        public void deleteCustomer(CustomerDao customer) throws SQLException {
+        public void deleteCustomer(CustomerDTO customer) throws SQLException {
   
         String query = "DELETE FROM customer_tab WHERE idcustomer=?";
         // create the mysql insert preparedstatement
