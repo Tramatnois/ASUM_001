@@ -5,11 +5,9 @@
  */
 package mvc.model;
 
-import java.beans.Customizer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import mvc.model.sqlconnector.DBConnection;
 
@@ -17,38 +15,38 @@ import mvc.model.sqlconnector.DBConnection;
  *
  * @author LT Dan
  */
-public class CustomerDAO {
+public class InspectorDAO {
 
     DBConnection connection = new DBConnection();
 
     /**
-     * Returns a single customer ordered by ID
+     * Returns a single inspector ordered by ID
      *
-     * @param idcustomer = ID of the customer
-     * @return returns a single customer which is ordered by ID
+     * @param idinspector = ID of the inspector
+     * @return returns a single inspector which is ordered by ID
+     * @throws SQLException
      */
-
-    public CustomerDTO selectSingleCustomer(int idcustomer) throws SQLException {
-        CustomerDTO customer = new CustomerDTO();
+    public InspectorDTO selectSingleInspector(int idinspector) throws SQLException {
+        InspectorDTO inspector;
         String query;
         PreparedStatement preparedStmt;
         ResultSet rs;
 
-        query = "SELECT * FROM customer_tab where idcustomer=?";
+        query = "SELECT * FROM inspector_tab where idinspector=?";
 
         preparedStmt = connection.getConnection().prepareStatement(query);
-        preparedStmt.setInt(1, idcustomer);
+        preparedStmt.setInt(1, idinspector);
 
         rs = preparedStmt.executeQuery();
         if (rs.next()) {
-            customer = this.mapCustomer(rs);
+            inspector = this.mapInspector(rs);
         } else {
             return null;
         }
         rs.close();
         preparedStmt.close();
 
-        return customer;
+        return inspector;
     }
 
     /**
@@ -56,6 +54,7 @@ public class CustomerDAO {
      *
      * @return Array List with all customer
      */
+    /*
     public ArrayList<CustomerDTO> selectAllCustomer() throws SQLException {
         ArrayList<CustomerDTO> customerList = new ArrayList<>();
         String query;
@@ -72,13 +71,13 @@ public class CustomerDAO {
         preparedStmt.close();
         return customerList;
     }
-
+*/
     /**
      * Adds a customer to the Database. Id of the customer object is ignored
      *
      * @param customer
      * @throws SQLException
-     */
+     *//*
     public void insertCustomer(CustomerDTO customer) throws SQLException {
 
         String query = " insert into customer_tab (name, street, zipcode, city, contactperson, phone, fax, email)"
@@ -99,12 +98,15 @@ public class CustomerDAO {
         preparedStmt.execute();
         preparedStmt.close();
     }
+*/
     /**
      * Updates a customer in the database
-     * 
-     * @param customer customer who is updated. All fields of the object are updated
-     * @throws SQLException 
+     *
+     * @param customer customer who is updated. All fields of the object are
+     * updated.
+     * @throws SQLException
      */
+    /*
     public void updateCustomer(CustomerDTO customer) throws SQLException {
 
         String query = "Update customer_tab SET name=?, street=?, zipcode=?, city=?, contactperson=?, phone=?, fax=?, email=? WHERE idcustomer=?";
@@ -124,13 +126,15 @@ public class CustomerDAO {
         preparedStmt.executeUpdate();
         preparedStmt.close();
 
-    }
+    }*/
+
     /**
-     * Deletes a customer from Database
-     * It is enough if the customer object contains an id
+     * Deletes a customer from Database It is enough if the customer object
+     * contains an id
+     *
      * @param customer customer who should be deleted
-     * @throws SQLException 
-     */
+     * @throws SQLException
+     *//*
     public void deleteCustomer(CustomerDTO customer) throws SQLException {
 
         String query = "DELETE FROM customer_tab WHERE idcustomer=?";
@@ -141,27 +145,25 @@ public class CustomerDAO {
         preparedStmt.execute();
 
     }
+*/
     /**
      * Maps a resutlSet to a CustomerDTO Object
-     * 
-     * 
-     * @param rs ResultSet. The Pointer must be set on the customer who should be mapped
+     *
+     *
+     * @param rs ResultSet. The Pointer must be set on the customer who should
+     * be mapped
      * @return mapped CustomerDTO object
-     * @throws SQLException 
+     * @throws SQLException
      */
-    private CustomerDTO mapCustomer(ResultSet rs) throws SQLException {
-        CustomerDTO customer;
-        customer = new CustomerDTO();
-        customer.setIdcustomer(rs.getInt("idcustomer"));
-        customer.setName(rs.getString("name"));
-        customer.setStreet("street");
-        customer.setZipcode("zipcode");
-        customer.setCity(rs.getString("city"));
-        customer.setContactperson(rs.getString("contactperson"));
-        customer.setPhone("phone");
-        customer.setFax(rs.getString("fax"));
-        customer.setEmail(rs.getString("email"));
-        return customer;
+    private InspectorDTO mapInspector(ResultSet rs) throws SQLException {
+        InspectorDTO inspector;
+        inspector = new InspectorDTO();
+        inspector.setIdinspector(rs.getInt("idinspector"));
+        inspector.setName(rs.getString("name"));
+        inspector.setStreet(rs.getString("street"));
+        inspector.setZipcode(rs.getString("zipcode"));
+        inspector.setCity(rs.getString("city"));
+        return inspector;
     }
 
 }
