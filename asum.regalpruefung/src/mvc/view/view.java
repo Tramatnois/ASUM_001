@@ -7,7 +7,7 @@ package mvc.view;
 
 /**
  *
- * @author tramatnois
+ * @author tramatnois81
  */
 public class view {
     
