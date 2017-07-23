@@ -45,6 +45,9 @@ public class Mainframe extends javax.swing.JFrame {
         jLabel_inspectorStreet = new javax.swing.JLabel();
         jLabel_inspectorZipCode = new javax.swing.JLabel();
         jLabel_inspectorCity = new javax.swing.JLabel();
+        jPanel_date = new javax.swing.JPanel();
+        jLabel_date_label = new javax.swing.JLabel();
+        jTextField_date = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu_main = new javax.swing.JMenu();
         jMenuItem_connect = new javax.swing.JMenuItem();
@@ -54,7 +57,7 @@ public class Mainframe extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jPanel_InspOperation.setBorder(new javax.swing.border.MatteBorder(null));
+        jPanel_InspOperation.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jPanel_Customer.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -202,7 +205,7 @@ public class Mainframe extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel_InspectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel_inspectorName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_inspectorStreet, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                    .addComponent(jLabel_inspectorStreet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel_InspectorLayout.createSequentialGroup()
                         .addComponent(jLabel_inspectorZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -212,15 +215,46 @@ public class Mainframe extends javax.swing.JFrame {
         jPanel_InspectorLayout.setVerticalGroup(
             jPanel_InspectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_InspectorLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel_inspectorName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel_inspectorStreet)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_InspectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_inspectorZipCode)
-                    .addComponent(jLabel_inspectorCity))
-                .addContainerGap(40, Short.MAX_VALUE))
+                    .addComponent(jLabel_inspectorCity)))
+        );
+
+        jPanel_date.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        jLabel_date_label.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel_date_label.setText("Datum:");
+
+        jTextField_date.setText("date");
+        jTextField_date.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_dateActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel_dateLayout = new javax.swing.GroupLayout(jPanel_date);
+        jPanel_date.setLayout(jPanel_dateLayout);
+        jPanel_dateLayout.setHorizontalGroup(
+            jPanel_dateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_dateLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel_date_label, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField_date, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel_dateLayout.setVerticalGroup(
+            jPanel_dateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_dateLayout.createSequentialGroup()
+                .addGroup(jPanel_dateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_date_label)
+                    .addComponent(jTextField_date))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel_InspOperationLayout = new javax.swing.GroupLayout(jPanel_InspOperation);
@@ -233,19 +267,24 @@ public class Mainframe extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel_InspectionPlan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel_Inspector, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel_InspOperationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel_Inspector, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel_date, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel_InspOperationLayout.setVerticalGroup(
             jPanel_InspOperationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_InspOperationLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addContainerGap(10, Short.MAX_VALUE)
                 .addGroup(jPanel_InspOperationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel_Inspector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel_InspOperationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jPanel_Customer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel_InspectionPlan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(121, Short.MAX_VALUE))
+                        .addComponent(jPanel_InspectionPlan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel_InspOperationLayout.createSequentialGroup()
+                        .addComponent(jPanel_Inspector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(13, 13, 13))
         );
 
         jMenu_main.setText("Menü");
@@ -273,14 +312,14 @@ public class Mainframe extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel_InspOperation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel_InspOperation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(203, Short.MAX_VALUE))
+                .addContainerGap(315, Short.MAX_VALUE))
         );
 
         pack();
@@ -305,6 +344,10 @@ public class Mainframe extends javax.swing.JFrame {
     private void jButton_setInsp_asTemplateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_setInsp_asTemplateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_setInsp_asTemplateActionPerformed
+
+    private void jTextField_dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_dateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_dateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -349,6 +392,7 @@ public class Mainframe extends javax.swing.JFrame {
     private javax.swing.JButton jButton_setInsp_asTemplate;
     private javax.swing.JLabel jLabel_customerName;
     private javax.swing.JLabel jLabel_customer_name;
+    private javax.swing.JLabel jLabel_date_label;
     private javax.swing.JLabel jLabel_inspectionPlan;
     private javax.swing.JLabel jLabel_inspectorCity;
     private javax.swing.JLabel jLabel_inspectorName;
@@ -364,6 +408,8 @@ public class Mainframe extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_InspOperation;
     private javax.swing.JPanel jPanel_InspectionPlan;
     private javax.swing.JPanel jPanel_Inspector;
+    private javax.swing.JPanel jPanel_date;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JTextField jTextField_date;
     // End of variables declaration//GEN-END:variables
 }
