@@ -39,35 +39,38 @@ public class runApplication extends Application {
 //            scene.setRoot(createUIFromData(data));
 //            splashScreenStage.hide();
 //        });
-
         buildSplashScreenUI(splashScreenStage, splashScreenTask);
 
         // manage stage layout:
 //        primaryStage.yProperty().addListener((obs, oldY, newY) -> splashScreenStage.setY(newY.doubleValue() - 100));
 ////        primaryStage.setTitle("Application");
-
         Parent root;
         root = FXMLLoader.load(getClass().getResource("/mvc_view_application/FXML_Application_Document.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         //splashScreenStage.setTitle("Wie könnte das Programm heißen?");
-        
+
 // maximize screen
         javafx.geometry.Rectangle2D bounds = screen.getVisualBounds();
         primaryStage.setX(bounds.getMinX());
         primaryStage.setY(bounds.getMinY());
         primaryStage.setWidth(bounds.getWidth());
         primaryStage.setHeight(bounds.getHeight());
-        // set delay event and close after delay the scene
+// set delay event and close after delay the scene
         PauseTransition delay = new PauseTransition(Duration.seconds(5));
         delay.setOnFinished(event -> splashScreenStage.close());
+        delay.setOnFinished(event -> primaryStage.show());
+
         delay.play();
 // display GUI
-        
-        splashScreenStage.show();
+
         splashScreenStage.centerOnScreen();
+        splashScreenStage.show();
 //        primaryStage.show();
 //        primaryStage.centerOnScreen();
+//        splashScreenStage.toFront();
+        
+        primaryStage.setOnCloseRequest(event -> splashScreenStage.close());
 
     }
 

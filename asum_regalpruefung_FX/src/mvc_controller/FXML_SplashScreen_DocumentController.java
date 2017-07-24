@@ -97,7 +97,7 @@ public class FXML_SplashScreen_DocumentController implements Initializable {
 
             fadeOut.setOnFinished((e) -> {
                 try {
-                    AnchorPane parentContent = FXMLLoader.load(getClass().getResource(("FXML_SplashScreen_Document")));
+                    AnchorPane parentContent = FXMLLoader.load(getClass().getResource(("/mvc_view_splashScreen/FXML_SplashScreen_Document.fxml")));
                     root.getChildren().setAll(parentContent);
 
                 } catch (IOException ex) {
