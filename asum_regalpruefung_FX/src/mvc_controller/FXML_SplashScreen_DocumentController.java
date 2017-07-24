@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mvc_view_splashScreen;
+package mvc_controller;
 
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -22,7 +22,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import mvc_view.NavigationDrawer;
+import mvc_view.SplashScreenDrawer;
 
 /**
  * FXML Controller class
@@ -44,7 +44,7 @@ public class FXML_SplashScreen_DocumentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        if (!NavigationDrawer.isSplashLoaded) {
+        if (!SplashScreenDrawer.isSplashLoaded) {
             loadSplashScreen();
         }
 
@@ -72,7 +72,7 @@ public class FXML_SplashScreen_DocumentController implements Initializable {
 
     private void loadSplashScreen() {
         try {
-            NavigationDrawer.isSplashLoaded = true;
+            SplashScreenDrawer.isSplashLoaded = true;
 
             StackPane pane = FXMLLoader.load(getClass().getResource("/mvc_view_splashScreen/SplashScreen.fxml"));
             root.getChildren().setAll(pane);

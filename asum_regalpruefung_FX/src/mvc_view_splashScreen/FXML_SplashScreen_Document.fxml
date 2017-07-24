@@ -6,7 +6,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="360.0" prefWidth="508.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="mvc_view_splashScreen.FXML_SplashScreen_DocumentController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="172.0" prefWidth="445.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="mvc_controller.FXML_SplashScreen_DocumentController">
     <stylesheets>
         <URL value="@fxml_document.css" />
     </stylesheets>

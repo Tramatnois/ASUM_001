@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-public class NavigationDrawer extends Application {
+public class SplashScreenDrawer extends Application {
 
     public static Boolean isSplashLoaded = false;
     Screen screen = Screen.getPrimary();
