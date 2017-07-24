@@ -27,7 +27,7 @@ public class SplashScreenDrawer extends Application {
         Scene scene = new Scene(root);
 
         splashScreenStage.setScene(scene);
-        //splashScreenStage.setTitle("Wie könnte das Programm heißen?");
+//        splashScreenStage.setTitle("Wie könnte das Programm heißen?");
         splashScreenStage.initStyle(StageStyle.UNDECORATED);
 // set delay event and close after delay the scene
         PauseTransition delay = new PauseTransition(Duration.seconds(5));

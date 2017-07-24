@@ -44,7 +44,7 @@ public class runApplication extends Application {
 
         // manage stage layout:
 //        primaryStage.yProperty().addListener((obs, oldY, newY) -> splashScreenStage.setY(newY.doubleValue() - 100));
-//        primaryStage.setTitle("Application");
+////        primaryStage.setTitle("Application");
 
         Parent root;
         root = FXMLLoader.load(getClass().getResource("/mvc_view_application/FXML_Application_Document.fxml"));
