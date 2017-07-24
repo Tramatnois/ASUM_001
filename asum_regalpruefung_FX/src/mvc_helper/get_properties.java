@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mvc_main;
+package mvc_helper;
 
 import java.io.FileInputStream;
 import java.io.IOException;
