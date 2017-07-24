@@ -66,8 +66,8 @@ public class runApplication extends Application {
         
         splashScreenStage.show();
         splashScreenStage.centerOnScreen();
-        primaryStage.show();
-        primaryStage.centerOnScreen();
+//        primaryStage.show();
+//        primaryStage.centerOnScreen();
 
     }
 
