@@ -5,3 +5,8 @@
 .mainFxmlClass {
 
 }
+.VBox_Inspector {
+    -fx-border-radius: 5;
+    -fx-border: 1;
+    -fx-border-color: #004887;
+}
