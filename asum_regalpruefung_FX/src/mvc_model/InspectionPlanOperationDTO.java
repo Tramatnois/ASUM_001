@@ -17,7 +17,7 @@ public class InspectionPlanOperationDTO {
     private String norm;
     private String description;
     private String storacgeRack;
-    private String locatioN;
+    private String location;
     private CustomerDAO customer;
     private InspectorDAO inspector;
     private InspectionPlanTemplateDAO inspectionplan;
@@ -48,12 +48,12 @@ public class InspectionPlanOperationDTO {
         this.storacgeRack = storacgeRack;
     }
 
-    public String getLocatioN() {
-        return locatioN;
+    public String getLocation() {
+        return location;
     }
 
-    public void setLocatioN(String locatioN) {
-        this.locatioN = locatioN;
+    public void setLocation(String locatioN) {
+        this.location = locatioN;
     }
 
     public CustomerDAO getCustomer() {
