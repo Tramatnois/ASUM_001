@@ -6,6 +6,7 @@
 package mvc_model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,6 +22,15 @@ public class InspectionPlanOperationDTO {
     private CustomerDAO customer;
     private InspectorDAO inspector;
     private InspectionPlanTemplateDAO inspectionplan;
+    private ArrayList<CharacteristicGroupOperationDTO> characteristicGroupList;
+
+    public ArrayList<CharacteristicGroupOperationDTO> getCharacteristicGroupList() {
+        return characteristicGroupList;
+    }
+
+    public void setCharacteristicGroupList(ArrayList<CharacteristicGroupOperationDTO> characteristicGroupList) {
+        this.characteristicGroupList = characteristicGroupList;
+    }
 
     public int getId() {
         return id;
