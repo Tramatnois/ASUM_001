@@ -5,9 +5,11 @@
  */
 package mvc.model;
 
-import mvc_model.CustomerDTO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mvc_model.CustomerDAO;
-import java.util.ArrayList;
+import mvc_model.CustomerDTO;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,95 +19,80 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author tramatnois
+ * @author LT Dan
  */
 public class CustomerDAOTest {
-    
+
+    CustomerDAO customerDto;
+
     public CustomerDAOTest() {
+        customerDto = new CustomerDAO();
     }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+
+
+    /**
+     * Add a customer Test
+     */
+    @Test
+    public void insertCustomerTest() {
+        CustomerDTO customer = new CustomerDTO();
+        customer.setCity("Stadt");
+        customer.setContactperson("Willy Müller");
+        customer.setEmail("A@A.de");
+        customer.setFax("02478 84499748");
+        customer.setName("Wilhelm");
+        customer.setPhone("02478 54848484");
+        customer.setStreet("Straße 1");
+        customer.setZipcode("84879");
+        try {
+            customerDto.insertCustomer(customer);
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDAOTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        assertTrue(true);
     }
 
     /**
-     * Test of selectSingleCustomer method, of class CustomerDAO.
+     * Test of selectSingleCustomer method, of class CustomerDto.
      */
     @Test
-    public void testSelectSingleCustomer() throws Exception {
-        System.out.println("selectSingleCustomer");
-        int idcustomer = 0;
-        CustomerDAO instance = new CustomerDAO();
-        CustomerDTO expResult = null;
-        CustomerDTO result = instance.selectSingleCustomer(idcustomer);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of selectAllCustomer method, of class CustomerDAO.
-     */
-    @Test
-    public void testSelectAllCustomer() throws Exception {
-        System.out.println("selectAllCustomer");
-        CustomerDAO instance = new CustomerDAO();
-        ArrayList<CustomerDTO> expResult = null;
-        ArrayList<CustomerDTO> result = instance.selectAllCustomer();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of insertCustomer method, of class CustomerDAO.
-     */
-    @Test
-    public void testInsertCustomer() throws Exception {
-        System.out.println("insertCustomer");
+    public void selectSingleCustomerTest() {
         CustomerDTO customer = null;
-        CustomerDAO instance = new CustomerDAO();
-        instance.insertCustomer(customer);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        try {
+            customer = customerDto.selectSingleCustomer(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDAOTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        assertEquals("Wilhelm", customer.getName());
     }
-
-    /**
-     * Test of updateCustomer method, of class CustomerDAO.
-     */
-    @Test
-    public void testUpdateCustomer() throws Exception {
-        System.out.println("updateCustomer");
-        CustomerDTO customer = null;
-        CustomerDAO instance = new CustomerDAO();
-        instance.updateCustomer(customer);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        @Test
+    public void updateCustomerTest() throws SQLException {
+        CustomerDTO customer = customerDto.selectSingleCustomer(1);
+        customer.setCity("Schaffhausen");
+        customerDto.updateCustomer(customer);
+        customer = null;
+        customer = customer = customerDto.selectSingleCustomer(1);
+        
+        
+        assertEquals("Schaffhausen", customer.getCity());
     }
-
-    /**
-     * Test of deleteCustomer method, of class CustomerDAO.
-     */
-    @Test
-    public void testDeleteCustomer() throws Exception {
-        System.out.println("deleteCustomer");
-        CustomerDTO customer = null;
-        CustomerDAO instance = new CustomerDAO();
-        instance.deleteCustomer(customer);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+            @Test
+    public void deleteCustomerTest() throws SQLException {
+        
+        CustomerDTO customer = new CustomerDTO();
+        customer.setCity("Stadt");
+        customer.setContactperson("Willy Müller");
+        customer.setEmail("A@A.de");
+        customer.setFax("02478 84499748");
+        customer.setName("Wilhelm");
+        customer.setPhone("02478 54848484");
+        customer.setStreet("Straße 1");
+        customer.setZipcode("84879");
+        customerDto.insertCustomer(customer);
+        
+        customer = customerDto.selectSingleCustomer(2);
+        
+        customerDto.deleteCustomer(customer);
+        assertTrue(true);
     }
-    
 }

@@ -15,9 +15,10 @@ import mvc_model_sqlconnector.DBConnection;
  *
  * @author LT Dan
  */
-public class InspectorDAO {
+public class InspectorDAO extends AbstractDAO{
 
-    DBConnection connection = new DBConnection();
+
+      //DBConnection connection = new DBConnection();
 
     /**
      * Returns a single inspector ordered by ID
@@ -77,11 +78,11 @@ public class InspectorDAO {
      *
      * @param inspector
      * @throws SQLException
-     *//*
+     */
     public void insertInspector(InspectorDTO inspector) throws SQLException {
 
-        String query = " insert into inspector_tab (name, street, zipcode, city, contactperson, phone, fax, email)"
-                + " values (?, ?, ?, ?, ?, ? , ? , ?)";
+        String query = " insert into inspector_tab (name, street, zipcode, city)"
+                + " values (?, ?, ?, ?)";
 
         // create the mysql insert preparedstatement
         PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
@@ -89,16 +90,12 @@ public class InspectorDAO {
         preparedStmt.setString(2, inspector.getStreet());
         preparedStmt.setString(3, inspector.getZipcode());
         preparedStmt.setString(4, inspector.getCity());
-        preparedStmt.setString(5, inspector.getContactperson());
-        preparedStmt.setString(6, inspector.getPhone());
-        preparedStmt.setString(7, inspector.getFax());
-        preparedStmt.setString(8, inspector.getEmail());
 
         // execute the preparedstatement
         preparedStmt.execute();
         preparedStmt.close();
     }
-*/
+
     /**
      * Updates a inspector in the database
      *
@@ -106,10 +103,10 @@ public class InspectorDAO {
      * updated.
      * @throws SQLException
      */
-    /*
+    
     public void updateInspector(InspectorDTO inspector) throws SQLException {
 
-        String query = "Update inspector_tab SET name=?, street=?, zipcode=?, city=?, contactperson=?, phone=?, fax=?, email=? WHERE idinspector=?";
+        String query = "Update inspector_tab SET name=?, street=?, zipcode=?, city=? WHERE idinspector=?";
 
         // create the mysql insert preparedstatement
         PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
@@ -117,16 +114,12 @@ public class InspectorDAO {
         preparedStmt.setString(2, inspector.getStreet());
         preparedStmt.setString(3, inspector.getZipcode());
         preparedStmt.setString(4, inspector.getCity());
-        preparedStmt.setString(5, inspector.getContactperson());
-        preparedStmt.setString(6, inspector.getPhone());
-        preparedStmt.setString(7, inspector.getFax());
-        preparedStmt.setString(8, inspector.getEmail());
-        preparedStmt.setInt(9, inspector.getIdinspector());
+        preparedStmt.setInt(5, inspector.getId());
         // execute the preparedstatement
         preparedStmt.executeUpdate();
         preparedStmt.close();
 
-    }*/
+    }
 
     /**
      * Deletes a inspector from Database It is enough if the inspector object
@@ -134,18 +127,18 @@ public class InspectorDAO {
      *
      * @param inspector inspector who should be deleted
      * @throws SQLException
-     *//*
+     */
     public void deleteInspector(InspectorDTO inspector) throws SQLException {
 
         String query = "DELETE FROM inspector_tab WHERE idinspector=?";
         // create the mysql insert preparedstatement
         PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
-        preparedStmt.setInt(1, inspector.getIdinspector());
+        preparedStmt.setInt(1, inspector.getId());
         // execute the preparedstatement
         preparedStmt.execute();
 
     }
-*/
+
     /**
      * Maps a resutlSet to a InspectorDTO Object
      *
@@ -158,7 +151,7 @@ public class InspectorDAO {
     private InspectorDTO mapInspector(ResultSet rs) throws SQLException {
         InspectorDTO inspector;
         inspector = new InspectorDTO();
-        inspector.setIdinspector(rs.getInt("idinspector"));
+        inspector.setId(rs.getInt("idinspector"));
         inspector.setName(rs.getString("name"));
         inspector.setStreet(rs.getString("street"));
         inspector.setZipcode(rs.getString("zipcode"));

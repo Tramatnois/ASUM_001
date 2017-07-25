@@ -5,22 +5,18 @@
  */
 package mvc_model;
 
-import java.beans.Customizer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import mvc_model.CustomerDTO;
 import mvc_model_sqlconnector.DBConnection;
 
 /**
  *
  * @author LT Dan
  */
-public class CustomerDAO {
+public class CustomerDAO extends AbstractDAO{
 
-    DBConnection connection = new DBConnection();
 
     /**
      * Returns a single customer ordered by ID
@@ -120,7 +116,7 @@ public class CustomerDAO {
         preparedStmt.setString(6, customer.getPhone());
         preparedStmt.setString(7, customer.getFax());
         preparedStmt.setString(8, customer.getEmail());
-        preparedStmt.setInt(9, customer.getIdcustomer());
+        preparedStmt.setInt(9, customer.getId());
         // execute the preparedstatement
         preparedStmt.executeUpdate();
         preparedStmt.close();
@@ -137,7 +133,7 @@ public class CustomerDAO {
         String query = "DELETE FROM customer_tab WHERE idcustomer=?";
         // create the mysql insert preparedstatement
         PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
-        preparedStmt.setInt(1, customer.getIdcustomer());
+        preparedStmt.setInt(1, customer.getId());
         // execute the preparedstatement
         preparedStmt.execute();
 
@@ -153,7 +149,7 @@ public class CustomerDAO {
     private CustomerDTO mapCustomer(ResultSet rs) throws SQLException {
         CustomerDTO customer;
         customer = new CustomerDTO();
-        customer.setIdcustomer(rs.getInt("idcustomer"));
+        customer.setId(rs.getInt("idcustomer"));
         customer.setName(rs.getString("name"));
         customer.setStreet("street");
         customer.setZipcode("zipcode");

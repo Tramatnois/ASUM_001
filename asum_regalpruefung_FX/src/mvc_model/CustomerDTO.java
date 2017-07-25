@@ -14,7 +14,7 @@ package mvc_model;
  */
 public class CustomerDTO {
 
-    int idcustomer;
+    private int id;
     private String name;
     private String street;
     private String zipcode;
@@ -32,13 +32,14 @@ public class CustomerDTO {
         this.street = street;
     }
 
-    public int getIdcustomer() {
-        return idcustomer;
+    public int getId() {
+        return id;
     }
 
-    public void setIdcustomer(int idcustomer) {
-        this.idcustomer = idcustomer;
+    public void setId(int id) {
+        this.id = id;
     }
+
 
     public String getName() {
         return name;

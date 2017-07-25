@@ -8,31 +8,31 @@ package mvc_model_sqlconnector;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import mvc_model.CustomerDTO;
 
 /**
  *
  * @author danie
  */
 public class DBConnection extends DBConnector{
-    
+    private static DBConnection instance;
     private String driver;
     private String host;
     private String database;
     private String username;
     private String password;
 
-    public DBConnection() {
+    private DBConnection() {
         //super("localhost", "asum_gmbh", "root", "");
         super();
         this.get_Properties();
         this.connect(host,database,username,password);
+        
+    }
+    public static DBConnection getInstance() {
+        if(DBConnection.instance == null)
+            instance = new DBConnection();
+        return instance;
     }
     
     private void get_Properties() {
@@ -60,25 +60,5 @@ public class DBConnection extends DBConnector{
 			}
 		}
 	} 
-    }
-    public static void main(String[] args) {
-         CustomerDTO customer = new CustomerDTO();
-        String query;
-        PreparedStatement preparedStmt;
-        ResultSet rs;
-        DBConnection conn = new DBConnection();
-        query = "SELECT * FROM customer_tab where idcustomer=?";
-
-        try {
-            preparedStmt = conn.getConnection().prepareStatement(query);
-        preparedStmt.setInt(1, 1);
-        rs = preparedStmt.executeQuery();
-        rs.next();
-        System.out.println(rs.getString("name"));
-        } catch (SQLException ex) {
-            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-        
+    }                
 }
