@@ -113,7 +113,7 @@ public class InspectorDAO extends AbstractDAO{
         preparedStmt.setString(2, inspector.getStreet());
         preparedStmt.setString(3, inspector.getZipcode());
         preparedStmt.setString(4, inspector.getCity());
-        preparedStmt.setInt(5, inspector.getIdinspector());
+        preparedStmt.setInt(5, inspector.getId());
         // execute the preparedstatement
         preparedStmt.executeUpdate();
         preparedStmt.close();
@@ -132,7 +132,7 @@ public class InspectorDAO extends AbstractDAO{
         String query = "DELETE FROM inspector_tab WHERE idinspector=?";
         // create the mysql insert preparedstatement
         PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
-        preparedStmt.setInt(1, inspector.getIdinspector());
+        preparedStmt.setInt(1, inspector.getId());
         // execute the preparedstatement
         preparedStmt.execute();
 
@@ -150,7 +150,7 @@ public class InspectorDAO extends AbstractDAO{
     private InspectorDTO mapInspector(ResultSet rs) throws SQLException {
         InspectorDTO inspector;
         inspector = new InspectorDTO();
-        inspector.setIdinspector(rs.getInt("idinspector"));
+        inspector.setId(rs.getInt("idinspector"));
         inspector.setName(rs.getString("name"));
         inspector.setStreet(rs.getString("street"));
         inspector.setZipcode(rs.getString("zipcode"));

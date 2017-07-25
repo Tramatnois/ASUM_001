@@ -12,9 +12,9 @@ package mvc.model;
 public class InspectionResultDTO {
     private int inspectionResult;
     private String result;
-    private InspectionOperationDTO inspectionOperation;
-    private CharacteristicDAO characteristic;
-    private InspectionCommentDTO inspectioncomment;
+    private InspectionPlanOperationDTO inspectionOperation;
+    private CharacteristicOperationDAO characteristic;
+    private InspectionOperationCommentDTO inspectioncomment;
 
     public int getInspectionResult() {
         return inspectionResult;
@@ -32,28 +32,30 @@ public class InspectionResultDTO {
         this.result = result;
     }
 
-    public InspectionOperationDTO getInspectionOperation() {
+    public InspectionPlanOperationDTO getInspectionOperation() {
         return inspectionOperation;
     }
 
-    public void setInspectionOperation(InspectionOperationDTO inspectionOperation) {
+    public void setInspectionOperation(InspectionPlanOperationDTO inspectionOperation) {
         this.inspectionOperation = inspectionOperation;
     }
 
-    public CharacteristicDAO getCharacteristic() {
-        return characteristic;
-    }
+ 
 
-    public void setCharacteristic(CharacteristicDAO characteristic) {
-        this.characteristic = characteristic;
-    }
-
-    public InspectionCommentDTO getInspectioncomment() {
+    public InspectionOperationCommentDTO getInspectioncomment() {
         return inspectioncomment;
     }
 
-    public void setInspectioncomment(InspectionCommentDTO inspectioncomment) {
+    public void setInspectioncomment(InspectionOperationCommentDTO inspectioncomment) {
         this.inspectioncomment = inspectioncomment;
+    }
+
+    public CharacteristicOperationDAO getCharacteristic() {
+        return characteristic;
+    }
+
+    public void setCharacteristic(CharacteristicOperationDAO characteristic) {
+        this.characteristic = characteristic;
     }
     
     

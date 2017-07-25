@@ -9,21 +9,21 @@ import java.util.ArrayList;
 
 /**
  *
- * @author LT Dan
+ * @author danie
  */
-class CharacteristcGroupDTO {
-    private int idcharacteristicgroup;
+public class CharacteristicGroupOperationDTO {
+    private int id;
     private int groupnumber;
     private String description;
-    private InspectionPlanDTO inspectionPlanDTO;
-    private ArrayList<CharacteristicDTO> characteristicList;
+    private InspectionPlanOperationDTO inspectionPlanDTO;
+    private ArrayList<CharacteristicOperationDTO> characteristicList;
 
-    public int getIdcharacteristicgroup() {
-        return idcharacteristicgroup;
+    public int getId() {
+        return id;
     }
 
-    public void setIdcharacteristicgroup(int idcharacteristicgroup) {
-        this.idcharacteristicgroup = idcharacteristicgroup;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getGroupnumber() {
@@ -42,20 +42,22 @@ class CharacteristcGroupDTO {
         this.description = description;
     }
 
-    public InspectionPlanDTO getInspectionPlanDTO() {
+    public InspectionPlanOperationDTO getInspectionPlanDTO() {
         return inspectionPlanDTO;
     }
 
-    public void setInspectionPlanDTO(InspectionPlanDTO inspectionPlanDTO) {
+    public void setInspectionPlanDTO(InspectionPlanOperationDTO inspectionPlanDTO) {
         this.inspectionPlanDTO = inspectionPlanDTO;
     }
 
-    public ArrayList<CharacteristicDTO> getCharacteristicList() {
+    public ArrayList<CharacteristicOperationDTO> getCharacteristicList() {
         return characteristicList;
     }
 
-    public void setCharacteristicList(ArrayList<CharacteristicDTO> characteristicList) {
+    public void setCharacteristicList(ArrayList<CharacteristicOperationDTO> characteristicList) {
         this.characteristicList = characteristicList;
     }
-    
+
+
+
 }

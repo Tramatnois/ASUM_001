@@ -7,8 +7,8 @@ package mvc.model;
 
 /**
  *
- * @author LT Dan
+ * @author danie
  */
-public class InspectionOperationDAO extends AbstractDAO{
+public class CharacteristicGroupOperationDAO extends AbstractDAO{
     
 }

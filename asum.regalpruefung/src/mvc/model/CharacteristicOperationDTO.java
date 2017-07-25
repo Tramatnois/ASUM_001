@@ -7,22 +7,22 @@ package mvc.model;
 
 /**
  *
- * @author LT Dan
+ * @author danie
  */
-class CharacteristicDTO {
-    private int characteristic;
+class CharacteristicOperationDTO {
+    private int id;
     private String description;
     private int position;
-    private InspectionPlanDTO inspectionPlan;
+    private InspectionPlanOperationDTO inspectionPlan;
     private CharacteristicTypeDAO characteristicType;
-    private CharacteristcGroupDTO characteristicgroup;
+    private CharacteristicGroupOperationDTO characteristicgroup;
 
-    public int getCharacteristic() {
-        return characteristic;
+    public int getId() {
+        return id;
     }
 
-    public void setCharacteristic(int characteristic) {
-        this.characteristic = characteristic;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -41,11 +41,11 @@ class CharacteristicDTO {
         this.position = position;
     }
 
-    public InspectionPlanDTO getInspectionPlan() {
+    public InspectionPlanOperationDTO getInspectionPlan() {
         return inspectionPlan;
     }
 
-    public void setInspectionPlan(InspectionPlanDTO inspectionPlan) {
+    public void setInspectionPlan(InspectionPlanOperationDTO inspectionPlan) {
         this.inspectionPlan = inspectionPlan;
     }
 
@@ -57,15 +57,14 @@ class CharacteristicDTO {
         this.characteristicType = characteristicType;
     }
 
-    public CharacteristcGroupDTO getCharacteristicgroup() {
+    public CharacteristicGroupOperationDTO getCharacteristicgroup() {
         return characteristicgroup;
     }
 
-    public void setCharacteristicgroup(CharacteristcGroupDTO characteristicgroup) {
+    public void setCharacteristicgroup(CharacteristicGroupOperationDTO characteristicgroup) {
         this.characteristicgroup = characteristicgroup;
     }
-    
-    
+
     
     
 }

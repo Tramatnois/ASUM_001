@@ -11,19 +11,20 @@ package mvc.model;
  */
 public class InspectorDTO {
 
-    private int idinspector;
+    private int id;
     private String name;
     private String street;
     private String zipcode;
     private String city;
 
-    public int getIdinspector() {
-        return idinspector;
+    public int getId() {
+        return id;
     }
 
-    public void setIdinspector(int idinspector) {
-        this.idinspector = idinspector;
+    public void setId(int id) {
+        this.id = id;
     }
+
 
     public String getName() {
         return name;

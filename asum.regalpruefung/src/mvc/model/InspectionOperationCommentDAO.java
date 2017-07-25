@@ -9,6 +9,6 @@ package mvc.model;
  *
  * @author LT Dan
  */
-public class InspectionCommentDAO extends AbstractDAO{
+public class InspectionOperationCommentDAO extends AbstractDAO{
     
 }

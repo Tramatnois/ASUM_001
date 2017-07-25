@@ -11,22 +11,26 @@ import java.sql.Date;
  *
  * @author LT Dan
  */
-public class InspectionOperationDTO {
-    private int idinspectionoperation;
+public class InspectionPlanOperationDTO {
+    private int id;
     private Date date;
+    private String norm;
+    private String description;
     private String storacgeRack;
     private String locatioN;
     private CustomerDAO customer;
     private InspectorDAO inspector;
-    private InspectionPlanDAO inspectionplan;
+    private InspectionPlanTemplateDAO inspectionplan;
 
-    public int getIdinspectionoperation() {
-        return idinspectionoperation;
+    public int getId() {
+        return id;
     }
 
-    public void setIdinspectionoperation(int idinspectionoperation) {
-        this.idinspectionoperation = idinspectionoperation;
+    public void setId(int id) {
+        this.id = id;
     }
+
+   
 
     public Date getDate() {
         return date;
@@ -68,12 +72,28 @@ public class InspectionOperationDTO {
         this.inspector = inspector;
     }
 
-    public InspectionPlanDAO getInspectionplan() {
+    public InspectionPlanTemplateDAO getInspectionplan() {
         return inspectionplan;
     }
 
-    public void setInspectionplan(InspectionPlanDAO inspectionplan) {
+    public void setInspectionplan(InspectionPlanTemplateDAO inspectionplan) {
         this.inspectionplan = inspectionplan;
+    }
+
+    public String getNorm() {
+        return norm;
+    }
+
+    public void setNorm(String norm) {
+        this.norm = norm;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
     
 }

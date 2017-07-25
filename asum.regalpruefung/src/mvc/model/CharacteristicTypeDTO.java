@@ -10,17 +10,17 @@ package mvc.model;
  * @author LT Dan
  */
 public class CharacteristicTypeDTO {
-    private int idcharacteristictype;
+    private int id;
     private String description;
 
-    public int getIdcharacteristictype() {
-        return idcharacteristictype;
+    public int getId() {
+        return id;
     }
 
-    
-    public void setIdcharacteristictype(int idcharacteristictype) {
-        this.idcharacteristictype = idcharacteristictype;
+    public void setId(int id) {
+        this.id = id;
     }
+
 
     public String getDescription() {
         return description;

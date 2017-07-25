@@ -11,21 +11,23 @@ import java.util.ArrayList;
  *
  * @author LT Dan
  */
-public class InspectionPlanDTO {
+public class InspectionPlanTemplateDTO {
 
-    private int idinspectionplan;
+    private int id;
     private String norm;
     private String description;
-    private ArrayList<CharacteristcGroupDTO> characteristicGroupList;
+    private ArrayList<CharacteristicGroupTemplateDTO> characteristicGroupList;
     //private ArrayList<Object> characteristicList;
 
-    public int getIdinspectionplan() {
-        return idinspectionplan;
+    public int getId() {
+        return id;
     }
 
-    public void setIdinspectionplan(int idinspectionplan) {
-        this.idinspectionplan = idinspectionplan;
+    public void setId(int id) {
+        this.id = id;
     }
+
+
 
     public String getNorm() {
         return norm;
@@ -43,11 +45,11 @@ public class InspectionPlanDTO {
         this.description = description;
     }
 
-    public ArrayList<CharacteristcGroupDTO> getCharacteristicGroupList() {
+    public ArrayList<CharacteristicGroupTemplateDTO> getCharacteristicGroupList() {
         return characteristicGroupList;
     }
 
-    public void setCharacteristicGroupList(ArrayList<CharacteristcGroupDTO> characteristicGroupList) {
+    public void setCharacteristicGroupList(ArrayList<CharacteristicGroupTemplateDTO> characteristicGroupList) {
         this.characteristicGroupList = characteristicGroupList;
     }
     }

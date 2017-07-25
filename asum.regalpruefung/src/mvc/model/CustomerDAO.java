@@ -120,7 +120,7 @@ public class CustomerDAO extends AbstractDAO{
         preparedStmt.setString(6, customer.getPhone());
         preparedStmt.setString(7, customer.getFax());
         preparedStmt.setString(8, customer.getEmail());
-        preparedStmt.setInt(9, customer.getIdcustomer());
+        preparedStmt.setInt(9, customer.getId());
         // execute the preparedstatement
         preparedStmt.executeUpdate();
         preparedStmt.close();
@@ -137,7 +137,7 @@ public class CustomerDAO extends AbstractDAO{
         String query = "DELETE FROM customer_tab WHERE idcustomer=?";
         // create the mysql insert preparedstatement
         PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
-        preparedStmt.setInt(1, customer.getIdcustomer());
+        preparedStmt.setInt(1, customer.getId());
         // execute the preparedstatement
         preparedStmt.execute();
 
@@ -153,7 +153,7 @@ public class CustomerDAO extends AbstractDAO{
     private CustomerDTO mapCustomer(ResultSet rs) throws SQLException {
         CustomerDTO customer;
         customer = new CustomerDTO();
-        customer.setIdcustomer(rs.getInt("idcustomer"));
+        customer.setId(rs.getInt("idcustomer"));
         customer.setName(rs.getString("name"));
         customer.setStreet("street");
         customer.setZipcode("zipcode");
