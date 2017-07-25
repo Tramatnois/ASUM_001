@@ -7,7 +7,9 @@ package mvc_controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -15,6 +17,13 @@ import javafx.fxml.Initializable;
  * @author tramatnois
  */
 public class FXML_Application_DocumentController implements Initializable {
+
+    @FXML
+    private VBox VBox_Top_left;
+    @FXML
+    private VBox VBox_Top_Center;
+    @FXML
+    private VBox VBox_Top_Right;
 
     /**
      * Initializes the controller class.

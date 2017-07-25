@@ -36,17 +36,15 @@ public class runApplication extends Application {
 //    final ProgressBar[] pbs = new ProgressBar[values.length];
 //    final ProgressIndicator[] pins = new ProgressIndicator[values.length];
 //    final HBox hbs[] = new HBox[values.length];
-
     Screen screen = Screen.getPrimary();
-
+    
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+        
         Task<SplashScreenDrawer> splashScreenTask = createSplashScreenTask();
         Stage splashScreenStage = new Stage();
         
         buildSplashScreenUI(splashScreenStage, splashScreenTask);
-        
 
         // manage stage layout:
         primaryStage.yProperty().addListener((obs, oldY, newY) -> splashScreenStage.setY(newY.doubleValue() - 100));
@@ -68,7 +66,7 @@ public class runApplication extends Application {
         PauseTransition delay = new PauseTransition(Duration.seconds(5));
         delay.setOnFinished(event -> splashScreenStage.close());
         delay.setOnFinished(event -> primaryStage.show());
-
+        
         delay.play();
 // display GUI
 
@@ -78,24 +76,25 @@ public class runApplication extends Application {
 //        primaryStage.show();
 //        primaryStage.centerOnScreen();
 //        splashScreenStage.toFront();
+        primaryStage.setOnShowing(event -> splashScreenStage.close());
         primaryStage.setOnCloseRequest(event -> splashScreenStage.close());
-
+        
     }
-
+    
     public static void main(String[] args) {
         launch(args);
     }
-
+    
     private Task<SplashScreenDrawer> createSplashScreenTask() {
         return new Task<SplashScreenDrawer>() {
             @Override
             public SplashScreenDrawer call() throws Exception {
-
+                
                 return new SplashScreenDrawer();
             }
         };
     }
-
+    
     private void buildSplashScreenUI(Stage splashScreenStage, Task<SplashScreenDrawer> splashScreenTask) throws IOException {
         Parent root_splash;
         root_splash = FXMLLoader.load(getClass().getResource("/mvc_view_splashScreen/FXML_SplashScreen_Document.fxml"));
@@ -103,5 +102,5 @@ public class runApplication extends Application {
         splashScreenStage.setScene(splashScreenScene);
         splashScreenStage.initStyle(StageStyle.UNDECORATED);
     }
-
+    
 }
