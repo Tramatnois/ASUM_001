@@ -10,3 +10,9 @@
     -fx-border: 1;
     -fx-border-color: #004887;
 }
+.date-picker-display-node{
+    -fx-alignment:CENTER;
+}
+.jfx-hamburger{
+    
+}
