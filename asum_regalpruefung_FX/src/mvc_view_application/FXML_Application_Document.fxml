@@ -30,12 +30,12 @@
                         </Label>
                         <HBox prefHeight="27.0" prefWidth="253.0">
                            <children>
-                              <TextField disable="true" prefHeight="27.0" prefWidth="296.0">
+                              <TextField fx:id="tf_customer_name" disable="true" prefHeight="27.0" prefWidth="296.0">
                                  <HBox.margin>
                                     <Insets left="3.0" top="2.0" />
                                  </HBox.margin>
                               </TextField>
-                              <Button maxWidth="10.0" mnemonicParsing="false" text="Button">
+                              <Button fx:id="btn_load_customer" maxWidth="10.0" mnemonicParsing="false" onAction="#btn_load_customer_handler" text="Button">
                                  <HBox.margin>
                                     <Insets top="2.0" />
                                  </HBox.margin></Button>

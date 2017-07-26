@@ -5,16 +5,25 @@
  */
 package mvc_controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import mvc_model.CustomerDTO;
 
 /**
@@ -48,6 +57,10 @@ public class FXML_Application_DocumentController implements Initializable {
     private TextField tf_inspectionType;
     @FXML
     private TextField tf_date;
+    @FXML
+    private Button btn_load_customer;
+    @FXML
+    private TextField tf_customer_name;
 
     /**
      * Initializes the controller class.
@@ -56,6 +69,29 @@ public class FXML_Application_DocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         tf_date.setText(new SimpleDateFormat("dd.MM.yyyy").format(new Date()));
+    }
+
+    @FXML
+    private void btn_load_customer_handler(ActionEvent event) {
+        try {
+            Parent root;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mvc_view_application/FXML_Customer_Document.fxml"));
+//            root = FXMLLoader.load(getClass().getResource("/mvc_view_application/FXML_Customer_Document.fxml"));
+            root = (Parent) loader.load();
+            FXML_Customer_DocumentController controller = (FXML_Customer_DocumentController) loader.getController();
+            controller.setReference(this);
+            Stage customerStage = new Stage();
+            Scene scene = new Scene(root);
+            customerStage.setScene(scene);
+            customerStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(FXML_Application_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void setCustomername(String name) {
+        System.out.println(name);
+        tf_customer_name.setText(name);
     }
 
 }
