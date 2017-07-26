@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="400.0" prefWidth="178.0" stylesheets="@fxml_sidepanelcontent.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvc_controller.SidePanelContentController">
+   <children>
+      <ImageView fitHeight="127.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../mvc_view_splashScreen/ASUM_logo-1.png" />
+         </image>
+         <VBox.margin>
+            <Insets bottom="15.0" />
+         </VBox.margin>
+      </ImageView>
+      <JFXButton fx:id="btn1" buttonType="RAISED" onAction="#changeColor" prefHeight="74.0" prefWidth="213.0" ripplerFill="#f2f2f2" text=". . . mit Datenbank verbinden" />
+      <JFXButton fx:id="btn2" buttonType="RAISED" layoutX="10.0" layoutY="123.0" onAction="#changeColor" prefHeight="74.0" prefWidth="213.0" ripplerFill="#fc0000" text="Kundendaten pflegen" />
+      <JFXButton fx:id="btn3" buttonType="RAISED" layoutX="10.0" layoutY="197.0" onAction="#changeColor" prefHeight="74.0" prefWidth="213.0" ripplerFill="#fc0000" text="Prüfpläne pflegen" />
+      <JFXButton fx:id="btn_exit" buttonType="RAISED" layoutX="10.0" layoutY="271.0" onAction="#exit" prefHeight="74.0" prefWidth="213.0" ripplerFill="#fc0000" text="Programm beenden" />
+   </children>
+</VBox>

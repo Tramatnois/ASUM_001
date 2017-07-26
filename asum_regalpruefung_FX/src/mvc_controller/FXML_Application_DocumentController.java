@@ -5,9 +5,14 @@
  */
 package mvc_controller;
 
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -22,6 +27,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import mvc_model.CustomerDTO;
@@ -32,7 +39,7 @@ import mvc_model.CustomerDTO;
  * @author tramatnois
  */
 public class FXML_Application_DocumentController implements Initializable {
-
+    
     @FXML
     private VBox VBox_Top_left;
     @FXML
@@ -56,11 +63,19 @@ public class FXML_Application_DocumentController implements Initializable {
     @FXML
     private TextField tf_inspectionType;
     @FXML
-    private TextField tf_date;
-    @FXML
     private Button btn_load_customer;
     @FXML
     private TextField tf_customer_name;
+    @FXML
+    private JFXDrawer drawer;
+    @FXML
+    private JFXHamburger hamburger;
+    @FXML
+    private AnchorPane root;
+    @FXML
+    private JFXDatePicker tf_datepicker;
+    
+        public static AnchorPane rootP;
 
     /**
      * Initializes the controller class.
@@ -68,9 +83,31 @@ public class FXML_Application_DocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        tf_date.setText(new SimpleDateFormat("dd.MM.yyyy").format(new Date()));
-    }
+        
+        try {
+            VBox box = FXMLLoader.load(getClass().getResource("/mvc_view_application/SidePanelContent.fxml"));
+            drawer.setSidePane(box);
+        } catch (IOException ex) {
+            Logger.getLogger(FXML_Application_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburger);
+        transition.setRate(-1);
+        hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
+            transition.setRate(transition.getRate() * -1);
+            transition.play();
+            
+            if (drawer.isShown()) {
+                drawer.close();
+            } else {
+                drawer.open();
+            }
+        });
 
+//        tf_date.setText(new SimpleDateFormat("dd.MM.yyyy").format(new Date()));
+        tf_datepicker.setValue(LocalDate.now());
+    }
+    
     @FXML
     private void btn_load_customer_handler(ActionEvent event) {
         try {
@@ -88,10 +125,10 @@ public class FXML_Application_DocumentController implements Initializable {
             Logger.getLogger(FXML_Application_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     public void setCustomername(String name) {
         System.out.println(name);
         tf_customer_name.setText(name);
     }
-
+    
 }
