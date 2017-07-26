@@ -61,7 +61,6 @@ public class FXML_Customer_DocumentController implements Initializable {
 
     private FXML_Application_DocumentController fxml_application_controller;
 
-    CustomerDAO customerDAO;
 
     /**
      * Initializes the controller class.
@@ -70,15 +69,13 @@ public class FXML_Customer_DocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             // TODO
-            customerDAO = new CustomerDAO();
             data = FXCollections.observableArrayList();
 
-            for (CustomerDTO customer : customerDAO.selectAllCustomer()) {
+            for (CustomerDTO customer : new CustomerDAO().selectAllCustomer()) {
                 data.add(customer);
-
             }
 
-            tbl_view_customer_id.setCellValueFactory(new PropertyValueFactory<>("idcustomer"));
+            tbl_view_customer_id.setCellValueFactory(new PropertyValueFactory<>("id"));
             tbl_view_customer_name.setCellValueFactory(new PropertyValueFactory<>("name"));
             tbl_view_customer_street.setCellValueFactory(new PropertyValueFactory<>("street"));
             tbl_view_customer_zipcode.setCellValueFactory(new PropertyValueFactory<>("zipcode"));
