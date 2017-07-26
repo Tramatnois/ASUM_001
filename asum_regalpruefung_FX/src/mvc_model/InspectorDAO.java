@@ -5,6 +5,7 @@
  */
 package mvc_model;
 
+import com.mysql.jdbc.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -78,22 +79,26 @@ public class InspectorDAO extends AbstractDAO{
      *
      * @param inspector
      * @throws SQLException
+     * @return id of inserted Inspector or -1 = Error
      */
-    public void insertInspector(InspectorDTO inspector) throws SQLException {
-
+    public int insertInspector(InspectorDTO inspector) throws SQLException {
+        ResultSet rs;
+        int generatedKey =-1;
         String query = " insert into inspector_tab (name, street, zipcode, city)"
                 + " values (?, ?, ?, ?)";
 
         // create the mysql insert preparedstatement
-        PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
+        PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         preparedStmt.setString(1, inspector.getName());
         preparedStmt.setString(2, inspector.getStreet());
         preparedStmt.setString(3, inspector.getZipcode());
         preparedStmt.setString(4, inspector.getCity());
-
         // execute the preparedstatement
         preparedStmt.execute();
-        preparedStmt.close();
+        rs = preparedStmt.getGeneratedKeys();
+        if (rs.next())
+            generatedKey = rs.getInt(1);
+        return generatedKey;
     }
 
     /**

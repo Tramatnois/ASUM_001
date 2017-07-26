@@ -32,17 +32,20 @@ public class InspectorDAOTest {
      */
     @Test
     public void insertInspectorTest() {
+        int generatedkey = -1000;
+        
         InspectorDTO inspector = new InspectorDTO();
         inspector.setCity("Stadt");
         inspector.setName("Wilhelm");
         inspector.setStreet("Straße 1");
         inspector.setZipcode("84879");
         try {
-            inspectorDto.insertInspector(inspector);
+            generatedkey = inspectorDto.insertInspector(inspector);
         } catch (SQLException ex) {
             Logger.getLogger(InspectorDAOTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         assertTrue(true);
+        //assertEquals(2, generatedkey);
     }
 
     /**
@@ -56,7 +59,7 @@ public class InspectorDAOTest {
         } catch (SQLException ex) {
             Logger.getLogger(InspectorDAOTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        assertEquals("Wilhelm", inspector.getName());
+        assertEquals("ASUM GmbH", inspector.getName());
     }
         @Test
     public void updateInspectorTest() throws SQLException {
@@ -71,15 +74,15 @@ public class InspectorDAOTest {
     }
             @Test
     public void deleteInspectorTest() throws SQLException {
-        
+        int generatedkey;
         InspectorDTO inspector = new InspectorDTO();
         inspector.setCity("Stadt");
         inspector.setName("Wilhelm");
         inspector.setStreet("Straße 1");
         inspector.setZipcode("84879");
-        inspectorDto.insertInspector(inspector);
+        generatedkey = inspectorDto.insertInspector(inspector);
         
-        inspector = inspectorDto.selectSingleInspector(2);
+        inspector = inspectorDto.selectSingleInspector(generatedkey);
         
         inspectorDto.deleteInspector(inspector);
         assertTrue(true);

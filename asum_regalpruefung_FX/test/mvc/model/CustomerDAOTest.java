@@ -63,7 +63,7 @@ public class CustomerDAOTest {
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAOTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        assertEquals("Wilhelm", customer.getName());
+        assertEquals("Musterfirma", customer.getName());
     }
         @Test
     public void updateCustomerTest() throws SQLException {
@@ -78,7 +78,7 @@ public class CustomerDAOTest {
     }
             @Test
     public void deleteCustomerTest() throws SQLException {
-        
+        int generatedkey;
         CustomerDTO customer = new CustomerDTO();
         customer.setCity("Stadt");
         customer.setContactperson("Willy Müller");
@@ -88,9 +88,9 @@ public class CustomerDAOTest {
         customer.setPhone("02478 54848484");
         customer.setStreet("Straße 1");
         customer.setZipcode("84879");
-        customerDto.insertCustomer(customer);
+        generatedkey = customerDto.insertCustomer(customer);
         
-        customer = customerDto.selectSingleCustomer(2);
+        customer = customerDto.selectSingleCustomer(generatedkey);
         
         customerDto.deleteCustomer(customer);
         assertTrue(true);
