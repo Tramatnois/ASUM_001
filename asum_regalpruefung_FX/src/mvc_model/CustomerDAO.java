@@ -5,6 +5,7 @@
  */
 package mvc_model;
 
+import com.mysql.jdbc.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -75,14 +76,17 @@ public class CustomerDAO extends AbstractDAO{
      *
      * @param customer
      * @throws SQLException
+     * @ return generated key of inserted customer
      */
-    public void insertCustomer(CustomerDTO customer) throws SQLException {
+    public int insertCustomer(CustomerDTO customer) throws SQLException {
+        ResultSet rs;
+        int generatedKey =-1;
 
         String query = " insert into customer_tab (name, street, zipcode, city, contactperson, phone, fax, email)"
                 + " values (?, ?, ?, ?, ?, ? , ? , ?)";
 
         // create the mysql insert preparedstatement
-        PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
+        PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         preparedStmt.setString(1, customer.getName());
         preparedStmt.setString(2, customer.getStreet());
         preparedStmt.setString(3, customer.getZipcode());
@@ -94,7 +98,11 @@ public class CustomerDAO extends AbstractDAO{
 
         // execute the preparedstatement
         preparedStmt.execute();
+        rs = preparedStmt.getGeneratedKeys();
+        if (rs.next())
+            generatedKey = rs.getInt(1);
         preparedStmt.close();
+        return generatedKey;
     }
     /**
      * Updates a customer in the database

@@ -14,7 +14,7 @@ class CharacteristicTemplateDTO {
     private String description;
     private int position;
     private InspectionPlanTemplateDTO inspectionPlan;
-    private CharacteristicTypeDAO characteristicType;
+    private CharacteristicTypeDTO characteristicType;
     private CharacteristicGroupTemplateDTO characteristicgroup;
 
     public int getId() {
@@ -50,11 +50,11 @@ class CharacteristicTemplateDTO {
         this.inspectionPlan = inspectionPlan;
     }
 
-    public CharacteristicTypeDAO getCharacteristicType() {
+    public CharacteristicTypeDTO getCharacteristicType() {
         return characteristicType;
     }
 
-    public void setCharacteristicType(CharacteristicTypeDAO characteristicType) {
+    public void setCharacteristicType(CharacteristicTypeDTO characteristicType) {
         this.characteristicType = characteristicType;
     }
 
