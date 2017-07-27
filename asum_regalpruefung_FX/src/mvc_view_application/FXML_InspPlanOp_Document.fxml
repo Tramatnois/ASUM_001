@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="567.0" prefWidth="1031.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="mvc_controller.FXML_InspPlanOp_DocumentController">
+    <stylesheets>
+        <URL value="@fxml_inspectionplan_operation_document.css" />
+    </stylesheets>
+   <children>
+      <VBox prefHeight="567.0" prefWidth="1031.0">
+         <children>
+            <Label prefHeight="28.0" prefWidth="342.0" text="Prüfplanübersicht">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Label>
+            <SplitPane dividerPositions="0.5821185617103984" prefHeight="371.0" prefWidth="1031.0">
+               <items>
+                  <TreeTableView fx:id="tbl_view_inspplan_operation" prefHeight="369.0" prefWidth="542.0">
+                    <columns>
+                      <TreeTableColumn fx:id="tbl_view_inspplan_operation_cust_id" prefWidth="43.0" text="ID" />
+                      <TreeTableColumn fx:id="tbl_view_inspplan_operation_cust_name" prefWidth="176.0" text="Kunde" />
+                        <TreeTableColumn fx:id="tbl_view_inspplan_operation_id" minWidth="0.0" prefWidth="38.0" text="ID" />
+                        <TreeTableColumn fx:id="tbl_view_inspplan_operation_descr" minWidth="0.0" prefWidth="256.0" text="Prüfplan" />
+                        <TreeTableColumn fx:id="tbl_view_inspplan_operation_status" minWidth="0.0" prefWidth="82.0" text="Status" />
+                    </columns>
+                  </TreeTableView>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <JFXTextField fx:id="tf_view_inspplan_operation_date" labelFloat="true" promptText="Datum:">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <JFXTextField fx:id="tf_view_inspplan_operation_location" labelFloat="true" promptText="Ort der Prüfung:">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                     </children>
+                  </VBox>
+               </items>
+            </SplitPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

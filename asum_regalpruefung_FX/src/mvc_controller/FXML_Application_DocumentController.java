@@ -39,7 +39,7 @@ import mvc_model.CustomerDTO;
  * @author tramatnois
  */
 public class FXML_Application_DocumentController implements Initializable {
-    
+
     @FXML
     private VBox VBox_Top_left;
     @FXML
@@ -74,8 +74,10 @@ public class FXML_Application_DocumentController implements Initializable {
     private AnchorPane root;
     @FXML
     private JFXDatePicker tf_datepicker;
-    
-        public static AnchorPane rootP;
+
+    public static AnchorPane rootP;
+    @FXML
+    private Button btn_show_all_inspplan_operations;
 
     /**
      * Initializes the controller class.
@@ -83,20 +85,20 @@ public class FXML_Application_DocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
+
         try {
             VBox box = FXMLLoader.load(getClass().getResource("/mvc_view_application/SidePanelContent.fxml"));
             drawer.setSidePane(box);
         } catch (IOException ex) {
             Logger.getLogger(FXML_Application_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburger);
         transition.setRate(-1);
         hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
             transition.setRate(transition.getRate() * -1);
             transition.play();
-            
+
             if (drawer.isShown()) {
                 drawer.close();
             } else {
@@ -107,7 +109,7 @@ public class FXML_Application_DocumentController implements Initializable {
 //        tf_date.setText(new SimpleDateFormat("dd.MM.yyyy").format(new Date()));
         tf_datepicker.setValue(LocalDate.now());
     }
-    
+
     @FXML
     private void btn_load_customer_handler(ActionEvent event) {
         try {
@@ -115,8 +117,10 @@ public class FXML_Application_DocumentController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/mvc_view_application/FXML_Customer_Document.fxml"));
 //            root = FXMLLoader.load(getClass().getResource("/mvc_view_application/FXML_Customer_Document.fxml"));
             root = (Parent) loader.load();
+// get the FXML_Customer_DocumentController and set the current FXML_Application_DocumentController           
             FXML_Customer_DocumentController controller = (FXML_Customer_DocumentController) loader.getController();
             controller.setReference(this);
+
             Stage customerStage = new Stage();
             Scene scene = new Scene(root);
             customerStage.setScene(scene);
@@ -125,10 +129,25 @@ public class FXML_Application_DocumentController implements Initializable {
             Logger.getLogger(FXML_Application_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void setCustomername(String name) {
         System.out.println(name);
         tf_customer_name.setText(name);
     }
-    
+
+    @FXML
+    private void btn_show_all_inspplan_operations_handler(ActionEvent event) {
+        try {
+            Parent root;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mvc_view_application/FXML_InspPlanOp_Document.fxml"));
+            root = (Parent) loader.load();
+            Stage customerStage = new Stage();
+            Scene scene = new Scene(root);
+            customerStage.setScene(scene);
+            customerStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(FXML_Application_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

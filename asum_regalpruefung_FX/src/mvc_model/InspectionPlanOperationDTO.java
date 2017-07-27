@@ -23,6 +23,7 @@ public class InspectionPlanOperationDTO {
     private InspectorDAO inspector;
     private InspectionPlanTemplateDAO inspectionplan;
     private ArrayList<CharacteristicGroupOperationDTO> characteristicGroupList;
+//    private int inspectionplan_operation_status_id;
 
     public ArrayList<CharacteristicGroupOperationDTO> getCharacteristicGroupList() {
         return characteristicGroupList;

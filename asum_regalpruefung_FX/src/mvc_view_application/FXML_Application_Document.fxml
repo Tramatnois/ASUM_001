@@ -97,7 +97,7 @@
                                           <Insets right="5.0" />
                                        </HBox.margin>
                                     </TextField>
-                                    <Button maxWidth="40.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="40.0" text="Button">
+                                    <Button fx:id="btn_show_all_inspplan_operations" maxWidth="40.0" mnemonicParsing="false" onAction="#btn_show_all_inspplan_operations_handler" prefHeight="41.0" prefWidth="40.0" text="Button">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
