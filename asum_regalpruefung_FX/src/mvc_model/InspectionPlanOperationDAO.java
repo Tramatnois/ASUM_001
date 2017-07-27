@@ -49,6 +49,12 @@ public class InspectionPlanOperationDAO extends AbstractDAO{
      */
     private InspectionPlanOperationDTO mapInspectionPlanOperation(ResultSet rs) throws SQLException {
         InspectionPlanOperationDTO inspectionPlanOperation;
+        CustomerDTO customerDTO = new CustomerDTO();
+        
+     InspectorDTO inspector = new InspectorDTO();
+     InspectionPlanTemplateDTO inspectionPlanTemplateDTO = new InspectionPlanTemplateDTO();
+        
+        
         inspectionPlanOperation = new InspectionPlanOperationDTO();
         inspectionPlanOperation.setId(rs.getInt("idinspectionplan_operation"));
         inspectionPlanOperation.setDate(rs.getDate("date"));
@@ -56,6 +62,12 @@ public class InspectionPlanOperationDAO extends AbstractDAO{
         inspectionPlanOperation.setDescription("description");
         inspectionPlanOperation.setStoracgeRack(rs.getString("storage_Rack"));
         inspectionPlanOperation.setLocation(rs.getString("location"));
+        customerDTO.setId(rs.getInt("customer_id"));
+        inspectionPlanOperation.setCustomer(customerDTO);
+        inspector.setId(rs.getInt("inspector_id"));
+        inspectionPlanOperation.setInspector(inspector);
+        inspectionPlanTemplateDTO.setId(rs.getInt("inspectionplan_template_id"));
+        inspectionPlanOperation.setInspectionplan(inspectionPlanTemplateDTO);
         return inspectionPlanOperation;
     }
     

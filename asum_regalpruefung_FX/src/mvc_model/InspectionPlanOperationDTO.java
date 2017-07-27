@@ -19,9 +19,9 @@ public class InspectionPlanOperationDTO {
     private String description;
     private String storacgeRack;
     private String location;
-    private CustomerDAO customer;
-    private InspectorDAO inspector;
-    private InspectionPlanTemplateDAO inspectionplan;
+    private CustomerDTO customer;
+    private InspectorDTO inspector;
+    private InspectionPlanTemplateDTO inspectionplan;
     private ArrayList<CharacteristicGroupOperationDTO> characteristicGroupList;
 //    private int inspectionplan_operation_status_id;
 
@@ -67,27 +67,28 @@ public class InspectionPlanOperationDTO {
         this.location = locatioN;
     }
 
-    public CustomerDAO getCustomer() {
+    public CustomerDTO getCustomer() {
         return customer;
     }
 
-    public void setCustomer(CustomerDAO customer) {
+    public void setCustomer(CustomerDTO customer) {
         this.customer = customer;
     }
 
-    public InspectorDAO getInspector() {
+    public InspectorDTO getInspector() {
         return inspector;
     }
 
-    public void setInspector(InspectorDAO inspector) {
+    public void setInspector(InspectorDTO inspector) {
         this.inspector = inspector;
     }
 
-    public InspectionPlanTemplateDAO getInspectionplan() {
+
+    public InspectionPlanTemplateDTO getInspectionplan() {
         return inspectionplan;
     }
 
-    public void setInspectionplan(InspectionPlanTemplateDAO inspectionplan) {
+    public void setInspectionplan(InspectionPlanTemplateDTO inspectionplan) {
         this.inspectionplan = inspectionplan;
     }
 
