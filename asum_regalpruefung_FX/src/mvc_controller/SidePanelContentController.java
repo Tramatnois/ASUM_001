@@ -19,6 +19,10 @@ public class SidePanelContentController implements Initializable {
     private JFXButton btn3;
     @FXML
     private JFXButton btn_exit;
+    @FXML
+    private JFXButton btn4;
+    @FXML
+    private JFXButton btn5;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

@@ -15,9 +15,8 @@ import mvc_model_sqlconnector.DBConnection;
  *
  * @author LT Dan
  */
-public class InspectionPlanOperationDAO extends AbstractDAO{
-    
-    
+public class InspectionPlanOperationDAO extends AbstractDAO {
+
     /**
      * returns a List of all Customer in the database
      *
@@ -39,30 +38,34 @@ public class InspectionPlanOperationDAO extends AbstractDAO{
         preparedStmt.close();
         return inspectionPlanOperationList;
     }
+
     /**
      * Maps a resutlSet to a InspectionPlanOperationDTO2 Object
-     * 
-     * 
-     * @param rs ResultSet. The Pointer must be set on the inspectionPlanOperation who should be mapped
+     *
+     *
+     * @param rs ResultSet. The Pointer must be set on the
+     * inspectionPlanOperation who should be mapped
      * @return mapped InspectionPlanOperationDTO2 object
-     * @throws SQLException 
+     * @throws SQLException
      */
     private InspectionPlanOperationDTO mapInspectionPlanOperation(ResultSet rs) throws SQLException {
         InspectionPlanOperationDTO inspectionPlanOperation;
         CustomerDTO customerDTO = new CustomerDTO();
-        
-     InspectorDTO inspector = new InspectorDTO();
-     InspectionPlanTemplateDTO inspectionPlanTemplateDTO = new InspectionPlanTemplateDTO();
-        
-        
+        CustomerDAO customerDAO = new CustomerDAO();
+
+        InspectorDTO inspector = new InspectorDTO();
+        InspectionPlanTemplateDTO inspectionPlanTemplateDTO = new InspectionPlanTemplateDTO();
+
         inspectionPlanOperation = new InspectionPlanOperationDTO();
         inspectionPlanOperation.setId(rs.getInt("idinspectionplan_operation"));
         inspectionPlanOperation.setDate(rs.getDate("date"));
         inspectionPlanOperation.setNorm("norm");
-        inspectionPlanOperation.setDescription("description");
+        inspectionPlanOperation.setDescription(rs.getString("description"));
         inspectionPlanOperation.setStoracgeRack(rs.getString("storage_Rack"));
         inspectionPlanOperation.setLocation(rs.getString("location"));
-        customerDTO.setId(rs.getInt("customer_id"));
+//        customerDTO.setId(rs.getInt("customer_id"));
+//        customerDAO.selectSingleCustomer(customerDTO.getId());
+        customerDTO = customerDAO.selectSingleCustomer(rs.getInt("customer_id"));
         inspectionPlanOperation.setCustomer(customerDTO);
         inspector.setId(rs.getInt("inspector_id"));
         inspectionPlanOperation.setInspector(inspector);
@@ -70,5 +73,5 @@ public class InspectionPlanOperationDAO extends AbstractDAO{
         inspectionPlanOperation.setInspectionplan(inspectionPlanTemplateDTO);
         return inspectionPlanOperation;
     }
-    
+
 }

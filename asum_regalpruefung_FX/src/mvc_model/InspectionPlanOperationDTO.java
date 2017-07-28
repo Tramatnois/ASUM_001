@@ -5,18 +5,25 @@
  */
 package mvc_model;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import java.sql.Date;
 import java.util.ArrayList;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 
 /**
  *
  * @author LT Dan
  */
-public class InspectionPlanOperationDTO {
-    private int id;
+public class InspectionPlanOperationDTO extends RecursiveTreeObject<InspectionPlanOperationDTO> {
+
+    private IntegerProperty id;
     private Date date;
     private String norm;
-    private String description;
+    private StringProperty description;
     private String storacgeRack;
     private String location;
     private CustomerDTO customer;
@@ -33,15 +40,18 @@ public class InspectionPlanOperationDTO {
         this.characteristicGroupList = characteristicGroupList;
     }
 
-    public int getId() {
+    public Integer getId() {
+        return id.get();
+    }
+
+    public IntegerProperty getIdProperty() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(Integer id) {
+        this.id = new SimpleIntegerProperty();
+        this.id.set(id);
     }
-
-   
 
     public Date getDate() {
         return date;
@@ -83,7 +93,6 @@ public class InspectionPlanOperationDTO {
         this.inspector = inspector;
     }
 
-
     public InspectionPlanTemplateDTO getInspectionplan() {
         return inspectionplan;
     }
@@ -100,12 +109,25 @@ public class InspectionPlanOperationDTO {
         this.norm = norm;
     }
 
+//    public String getDescription() {
+//        return description;
+//    }
     public String getDescription() {
+        return description.get();
+    }
+
+    public StringProperty getDescriptionProperty() {
         return description;
+
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = new SimpleStringProperty();
+        this.description.set(description);
     }
-    
+
+    public StringProperty getNameProperty() {
+        return this.customer.getNameProperty();
+    }
+
 }

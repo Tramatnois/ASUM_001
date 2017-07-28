@@ -8,14 +8,20 @@
  */
 package mvc_model;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  *
  * @author LT Dan
  */
-public class CustomerDTO {
+public class CustomerDTO extends RecursiveTreeObject<CustomerDTO> {
 
-    private int id;
-    private String name;
+    private IntegerProperty id;
+    private StringProperty name;
     private String street;
     private String zipcode;
     private String city;
@@ -32,13 +38,26 @@ public class CustomerDTO {
         this.street = street;
     }
 
-    public int getId() {
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+    public Integer getId() {
+        return id.get();
+    }
+
+    public IntegerProperty getIdProperty() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(Integer id) {
+        this.id = new SimpleIntegerProperty();
+        this.id.set(id);
     }
+    
 
     
     
@@ -52,11 +71,16 @@ public class CustomerDTO {
 
 
     public String getName() {
+        return name.get();
+    }
+    
+    public StringProperty getNameProperty() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = new SimpleStringProperty();
+        this.name.set(name);
     }
 
     public String getZipcode() {

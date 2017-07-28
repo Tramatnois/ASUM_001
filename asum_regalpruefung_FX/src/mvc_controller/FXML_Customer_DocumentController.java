@@ -94,10 +94,6 @@ public class FXML_Customer_DocumentController implements Initializable {
 
     }
 
-    public void setReference(FXML_Application_DocumentController controller) {
-        this.fxml_application_controller = controller;
-    }
-
     @FXML
     private void btn_view_customer_OK_handler(ActionEvent event) {
         CustomerDTO customer = tbl_view_customer.getSelectionModel().getSelectedItem();
@@ -108,4 +104,8 @@ public class FXML_Customer_DocumentController implements Initializable {
 
     }
 
+    public void setReference(FXML_Application_DocumentController controller) {
+        this.fxml_application_controller = controller;
+    }
+    
 }

@@ -32,7 +32,7 @@ public class CustomerDAO extends AbstractDAO{
         PreparedStatement preparedStmt;
         ResultSet rs;
 
-        query = "SELECT * FROM customer_tab where idcustomer=?";
+        query = "SELECT * FROM customer_tab where idcustomer = ?";
 
         preparedStmt = connection.getConnection().prepareStatement(query);
         preparedStmt.setInt(1, idcustomer);

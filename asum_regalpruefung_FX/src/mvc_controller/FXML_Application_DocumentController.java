@@ -130,17 +130,16 @@ public class FXML_Application_DocumentController implements Initializable {
         }
     }
 
-    public void setCustomername(String name) {
-        System.out.println(name);
-        tf_customer_name.setText(name);
-    }
-
     @FXML
     private void btn_show_all_inspplan_operations_handler(ActionEvent event) {
         try {
             Parent root;
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/mvc_view_application/FXML_InspPlanOp_Document.fxml"));
             root = (Parent) loader.load();
+
+// get the FXML_InspPlanOp_DocumentController and set the current FXML_Application_DocumentController           
+            FXML_InspPlanOp_DocumentController controller = (FXML_InspPlanOp_DocumentController) loader.getController();
+            controller.setReference(this);
             Stage customerStage = new Stage();
             Scene scene = new Scene(root);
             customerStage.setScene(scene);
@@ -148,6 +147,16 @@ public class FXML_Application_DocumentController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(FXML_Application_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void setCustomername(String name) {
+        System.out.println(name);
+        tf_customer_name.setText(name);
+    }
+
+    public void setInspectionPlanOperation(String name) {
+        System.out.println(name);
+        tf_inspectionType.setText(name);
     }
 
 }
