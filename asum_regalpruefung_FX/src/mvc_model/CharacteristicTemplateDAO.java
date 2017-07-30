@@ -108,16 +108,15 @@ public class CharacteristicTemplateDAO extends AbstractDAO{
     
     public void updateCharacteristicTemplate(CharacteristicTemplateDTO characteristicTemplate) throws SQLException {
 
-        String query = "Update characteristicTemplate_tab SET description=? inspectionplan_template_id=? characteristic_type_id=? characteristic_group_template_id=? position=? WHERE idcharacteristic_template=?";
+        String query = "Update characteristic_template_tab SET description=?, characteristic_group_template_id=?, characteristic_type_id=? , position=? WHERE idcharacteristic_template=?";
 
         // create the mysql insert preparedstatement
         PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
         preparedStmt.setString(1, characteristicTemplate.getDescription());
-        preparedStmt.setInt(2, characteristicTemplate.getInspectionPlan().getId());
-        preparedStmt.setInt(3, characteristicTemplate.getCharacteristicType().getId());
-        preparedStmt.setInt(4, characteristicTemplate.getCharacteristicgroup().getId());
-        preparedStmt.setInt(5, characteristicTemplate.getPosition());
-        preparedStmt.setInt(6, characteristicTemplate.getId());
+        preparedStmt.setInt(2, characteristicTemplate.getCharacteristicType().getId());
+        preparedStmt.setInt(3, characteristicTemplate.getCharacteristicgroup().getId());
+        preparedStmt.setInt(4, characteristicTemplate.getPosition());
+        preparedStmt.setInt(5, characteristicTemplate.getId());
         // execute the preparedstatement
         preparedStmt.executeUpdate();
         preparedStmt.close();
