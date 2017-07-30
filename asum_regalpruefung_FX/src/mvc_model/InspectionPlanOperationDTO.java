@@ -30,7 +30,7 @@ public class InspectionPlanOperationDTO extends RecursiveTreeObject<InspectionPl
     private InspectorDTO inspector;
     private InspectionPlanTemplateDTO inspectionplan;
     private ArrayList<CharacteristicGroupOperationDTO> characteristicGroupList;
-//    private int inspectionplan_operation_status_id;
+    private InspectionPlanOperationStatusDTO inspectionPlanOperationStatus;
 
     public ArrayList<CharacteristicGroupOperationDTO> getCharacteristicGroupList() {
         return characteristicGroupList;
@@ -128,6 +128,14 @@ public class InspectionPlanOperationDTO extends RecursiveTreeObject<InspectionPl
 
     public StringProperty getNameProperty() {
         return this.customer.getNameProperty();
+    }
+
+    public InspectionPlanOperationStatusDTO getInspectionPlanOperationStatus() {
+        return inspectionPlanOperationStatus;
+    }
+
+    public void setInspectionPlanOperationStatus(InspectionPlanOperationStatusDTO inspectionPlanOperationStatus) {
+        this.inspectionPlanOperationStatus = inspectionPlanOperationStatus;
     }
 
 }

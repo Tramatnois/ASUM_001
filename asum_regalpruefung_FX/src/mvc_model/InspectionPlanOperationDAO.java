@@ -52,6 +52,9 @@ public class InspectionPlanOperationDAO extends AbstractDAO {
         InspectionPlanOperationDTO inspectionPlanOperation;
         CustomerDTO customerDTO = new CustomerDTO();
         CustomerDAO customerDAO = new CustomerDAO();
+        
+        InspectionPlanOperationStatusDTO inspplanop_StatusDTO = new InspectionPlanOperationStatusDTO();
+        InspectionPlanOperationStatusDAO inspplanop_StatusDAO = new InspectionPlanOperationStatusDAO();
 
         InspectorDTO inspector = new InspectorDTO();
         InspectionPlanTemplateDTO inspectionPlanTemplateDTO = new InspectionPlanTemplateDTO();
@@ -71,6 +74,10 @@ public class InspectionPlanOperationDAO extends AbstractDAO {
         inspectionPlanOperation.setInspector(inspector);
         inspectionPlanTemplateDTO.setId(rs.getInt("inspectionplan_template_id"));
         inspectionPlanOperation.setInspectionplan(inspectionPlanTemplateDTO);
+        
+        inspplanop_StatusDTO = inspplanop_StatusDAO.selectSingleInspectionPlanOperationStatus(rs.getInt("inspectionplan_operation_status_id"));
+        inspectionPlanOperation.setInspectionPlanOperationStatus(inspplanop_StatusDTO);
+        
         return inspectionPlanOperation;
     }
 

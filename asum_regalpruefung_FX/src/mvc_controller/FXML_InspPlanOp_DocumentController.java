@@ -69,25 +69,32 @@ public class FXML_InspPlanOp_DocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             // TODO
-
+//prepare column: InspectionID
             JFXTreeTableColumn<InspectionPlanOperationDTO, Integer> inspection_id = new JFXTreeTableColumn<>("ID");
             inspection_id.setPrefWidth(50);
-//            inspection_id.setPrefWidth(Control.USE_COMPUTED_SIZE);
+            //inspection_id.setPrefWidth(Control.USE_COMPUTED_SIZE);
             inspection_id.getStyleClass().add("col_inspection_id");
             inspection_id.setCellValueFactory((TreeTableColumn.CellDataFeatures<InspectionPlanOperationDTO, Integer> param) -> param.getValue().getValue().getIdProperty().asObject());
 
+//prepare column: Inspection
             JFXTreeTableColumn<InspectionPlanOperationDTO, String> inspection = new JFXTreeTableColumn<>("Prüfplan");
             inspection.setCellValueFactory((TreeTableColumn.CellDataFeatures<InspectionPlanOperationDTO, String> param) -> param.getValue().getValue().getDescriptionProperty());
 
-            //prepare column: KundenID
+//prepare column: KundenID
             JFXTreeTableColumn<InspectionPlanOperationDTO, Integer> customer_id = new JFXTreeTableColumn<>("KundenID");
             customer_id.getStyleClass().add("col_customer_id");
             customer_id.setCellValueFactory((TreeTableColumn.CellDataFeatures<InspectionPlanOperationDTO, Integer> param) -> param.getValue().getValue().getIdProperty().asObject());
 
-            //prepare column: Kundenname
-            JFXTreeTableColumn<InspectionPlanOperationDTO, String> customer = new JFXTreeTableColumn<>("Kundenname");
-            customer.setCellValueFactory((TreeTableColumn.CellDataFeatures<InspectionPlanOperationDTO, String> param) -> param.getValue().getValue().getNameProperty());
+//prepare column: Kundenname
+            JFXTreeTableColumn<InspectionPlanOperationDTO, String> customer = new JFXTreeTableColumn<>("Kunde");
+            customer.setCellValueFactory((TreeTableColumn.CellDataFeatures<InspectionPlanOperationDTO, String> param) -> param.getValue().getValue().getCustomer().getNameProperty());
 
+//prepare column: Status
+            JFXTreeTableColumn<InspectionPlanOperationDTO, String> status = new JFXTreeTableColumn<>("Status");
+            status.getStyleClass().add("col_status");
+            status.setCellValueFactory((TreeTableColumn.CellDataFeatures<InspectionPlanOperationDTO, String> param) -> param.getValue().getValue().getInspectionPlanOperationStatus().getDescriptionProperty());
+
+            
             data = FXCollections.observableArrayList();
 
             for (InspectionPlanOperationDTO inspplan_op : new InspectionPlanOperationDAO().selectAllInspectionPlanOperations()) {
@@ -97,7 +104,7 @@ public class FXML_InspPlanOp_DocumentController implements Initializable {
             final TreeItem<InspectionPlanOperationDTO> root;
             root = new RecursiveTreeItem<InspectionPlanOperationDTO>(data, RecursiveTreeObject::getChildren);
 
-            tbl_view_inspplan_operation.getColumns().setAll(inspection_id, inspection, customer_id, customer);
+            tbl_view_inspplan_operation.getColumns().setAll(inspection_id, inspection, customer_id, customer, status);
             tbl_view_inspplan_operation.setRoot(root);
             tbl_view_inspplan_operation.setShowRoot(false);
 
@@ -110,7 +117,7 @@ public class FXML_InspPlanOp_DocumentController implements Initializable {
     public void setReference(FXML_Application_DocumentController controller) {
         this.fxml_application_controller = controller;
     }
-    
+
     public static final LocalDate LOCAL_DATE(String dateString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(dateString, formatter);
