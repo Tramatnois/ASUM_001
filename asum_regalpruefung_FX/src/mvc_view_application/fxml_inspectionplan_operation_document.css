@@ -6,7 +6,6 @@
 
 }
 
-
 .tree-table-view{
     -fx-tree-table-color: rgba(0, 150, 0, 0.8);
     -fx-tree-table-rippler-color : rgba(255, 0, 0, 0.9);
@@ -93,3 +92,14 @@
 .col_customer_id {
     -fx-alignment: CENTER;
 }
+/*.DatePickerASUM > .arrow-button {
+    -fx-padding: 0px;
+    visibility: hidden;
+}
+.DatePickerASUM > .arrow-button > .arrow {
+    -fx-padding: 0px;
+    visibility: hidden;
+}
+.DatePickerASUM > .date-picker-display-node {
+    -fx-backgroud-insets: 1 1 1 1;
+}*/

@@ -24,22 +24,22 @@
                   <Font name="System Bold" size="21.0" />
                </font>
             </Label>
-            <SplitPane dividerPositions="0.6793002915451894" prefHeight="371.0" prefWidth="1031.0">
+            <SplitPane dividerPositions="0.6103012633624878" prefHeight="371.0" prefWidth="1031.0">
                <items>
                   <JFXTreeTableView fx:id="tbl_view_inspplan_operation" onMouseClicked="#tbl_view_inspplan_operation_handler" styleClass="JFXTreeTableColumn" />
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <HBox>
                            <children>
-                              <Label text="Datum der Prüfung:">
+                              <Label prefWidth="150.0" text="Datum der Prüfung:">
                                  <HBox.margin>
-                                    <Insets right="5.0" top="10.0" />
+                                    <Insets top="10.0" />
                                  </HBox.margin>
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <JFXDatePicker fx:id="tf_datepicker" editable="false" showWeekNumbers="true">
+                              <JFXDatePicker fx:id="tf_datepicker" editable="false" showWeekNumbers="true" styleClass="DatePickerASUM">
                                  <HBox.margin>
                                     <Insets top="5.0" />
                                  </HBox.margin>
@@ -51,12 +51,12 @@
                         </HBox>
                         <HBox>
                            <children>
-                              <Label text="Ort der Prüfung:">
+                              <Label prefWidth="150.0" text="Ort der Prüfung:">
                                  <HBox.margin>
-                                    <Insets right="5.0" top="10.0" />
+                                    <Insets top="10.0" />
                                  </HBox.margin>
                               </Label>
-                              <JFXTextField fx:id="tf_view_inspplan_operation_location" promptText="Ort der Prüfung:">
+                              <JFXTextField fx:id="tf_view_inspplan_operation_location" editable="false" promptText="Ort der Prüfung:">
                                  <HBox.margin>
                                     <Insets top="5.0" />
                                  </HBox.margin>
