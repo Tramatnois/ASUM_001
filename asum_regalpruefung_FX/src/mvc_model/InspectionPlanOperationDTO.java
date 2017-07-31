@@ -24,11 +24,11 @@ public class InspectionPlanOperationDTO extends RecursiveTreeObject<InspectionPl
     private Date date;
     private String norm;
     private StringProperty description;
-    private String storacgeRack;
+    private String storageRack;
     private String location;
     private CustomerDTO customer;
     private InspectorDTO inspector;
-    private InspectionPlanTemplateDTO inspectionplan;
+    private InspectionPlanTemplateDTO inspectionplanTemplate;
     private ArrayList<CharacteristicGroupOperationDTO> characteristicGroupList;
     private InspectionPlanOperationStatusDTO inspectionPlanOperationStatus;
 
@@ -61,13 +61,15 @@ public class InspectionPlanOperationDTO extends RecursiveTreeObject<InspectionPl
         this.date = date;
     }
 
-    public String getStoracgeRack() {
-        return storacgeRack;
+    public String getStorageRack() {
+        return storageRack;
     }
 
-    public void setStoracgeRack(String storacgeRack) {
-        this.storacgeRack = storacgeRack;
+    public void setStorageRack(String storageRack) {
+        this.storageRack = storageRack;
     }
+
+
 
     public String getLocation() {
         return location;
@@ -93,12 +95,12 @@ public class InspectionPlanOperationDTO extends RecursiveTreeObject<InspectionPl
         this.inspector = inspector;
     }
 
-    public InspectionPlanTemplateDTO getInspectionplan() {
-        return inspectionplan;
+    public InspectionPlanTemplateDTO getInspectionplanTemplate() {
+        return inspectionplanTemplate;
     }
 
-    public void setInspectionplan(InspectionPlanTemplateDTO inspectionplan) {
-        this.inspectionplan = inspectionplan;
+    public void setInspectionplanTemplate(InspectionPlanTemplateDTO inspectionplan) {
+        this.inspectionplanTemplate = inspectionplan;
     }
 
     public String getNorm() {
@@ -136,6 +138,10 @@ public class InspectionPlanOperationDTO extends RecursiveTreeObject<InspectionPl
 
     public void setInspectionPlanOperationStatus(InspectionPlanOperationStatusDTO inspectionPlanOperationStatus) {
         this.inspectionPlanOperationStatus = inspectionPlanOperationStatus;
+    }
+
+    void setInspectionplan(InspectionPlanTemplateDTO inspectionPlanTemplateDTO) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

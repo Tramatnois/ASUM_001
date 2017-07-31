@@ -35,7 +35,8 @@ public class InspectionPlanOperationStatusDTO {
     public String getDescription() {
         return description.get();
     }
-    public StringProperty getDescriptionProperty(){
+
+    public StringProperty getDescriptionProperty() {
         return description;
     }
 

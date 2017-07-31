@@ -6,10 +6,6 @@
 package mvc_model;
 
 import java.util.ArrayList;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -56,12 +52,31 @@ public class CharacteristicTemplateDAOTest {
      */
     @Test
     public void testInsertCharacteristicTemplate() throws Exception {
-        System.out.println("insertCharacteristicTemplate");
-        CharacteristicTemplateDTO characteristicTemplate = null;
-        CharacteristicTemplateDAO instance = new CharacteristicTemplateDAO();
-        instance.insertCharacteristicTemplate(characteristicTemplate);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+                      
+        int generatedkey = -1000;
+    
+        CharacteristicTemplateDTO characteristicTemplate = new CharacteristicTemplateDTO();
+        CharacteristicTypeDTO characteristicTypeDTO = new CharacteristicTypeDTO();
+        characteristicTypeDTO.setId(1);
+        characteristicTemplate.setCharacteristicType(characteristicTypeDTO);
+        CharacteristicGroupTemplateDTO characteristicGroupTemplateDTO = new CharacteristicGroupTemplateDTO();
+        characteristicGroupTemplateDTO.setId(1);
+        characteristicTemplate.setCharacteristicgroup(characteristicGroupTemplateDTO);
+        characteristicTemplate.setDescription("This is a super Test!");
+        characteristicTemplate.setPosition(1);
+        InspectionPlanTemplateDTO inspectionPlanTemplateDTO = new InspectionPlanTemplateDTO();
+        inspectionPlanTemplateDTO.setId(1);
+        characteristicTemplate.setInspectionPlan(inspectionPlanTemplateDTO);
+        
+        generatedkey = characteristicTemplateDAO.insertCharacteristicTemplate(characteristicTemplate);
+        characteristicTemplate = null;
+        characteristicTemplate =  characteristicTemplateDAO.selectSingleCharacteristicTemplate(generatedkey);
+        assertEquals("This is a super Test!", characteristicTemplate.getDescription());
+        characteristicTemplateDAO.deleteCharacteristicTemplate(characteristicTemplate);
+      
+        
+        
+        
     }
 
     /**
@@ -70,12 +85,33 @@ public class CharacteristicTemplateDAOTest {
      */
     @Test
     public void testUpdateCharacteristicTemplate() throws Exception {
-        System.out.println("updateCharacteristicTemplate");
-        CharacteristicTemplateDTO characteristicTemplate = null;
-        CharacteristicTemplateDAO instance = new CharacteristicTemplateDAO();
-        instance.updateCharacteristicTemplate(characteristicTemplate);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+                int generatedkey = -1000;
+    
+        CharacteristicTemplateDTO characteristicTemplate = new CharacteristicTemplateDTO();
+        CharacteristicTypeDTO characteristicTypeDTO = new CharacteristicTypeDTO();
+        characteristicTypeDTO.setId(1);
+        characteristicTemplate.setCharacteristicType(characteristicTypeDTO);
+        CharacteristicGroupTemplateDTO characteristicGroupTemplateDTO = new CharacteristicGroupTemplateDTO();
+        characteristicGroupTemplateDTO.setId(1);
+        characteristicTemplate.setCharacteristicgroup(characteristicGroupTemplateDTO);
+        characteristicTemplate.setDescription("This is a super Test!");
+        characteristicTemplate.setPosition(1);
+        InspectionPlanTemplateDTO inspectionPlanTemplateDTO = new InspectionPlanTemplateDTO();
+        inspectionPlanTemplateDTO.setId(1);
+        characteristicTemplate.setInspectionPlan(inspectionPlanTemplateDTO);
+        
+        generatedkey = characteristicTemplateDAO.insertCharacteristicTemplate(characteristicTemplate);
+        characteristicTemplate = null;
+        characteristicTemplate =  characteristicTemplateDAO.selectSingleCharacteristicTemplate(generatedkey);
+        characteristicTemplate.setDescription("What an update!");
+        characteristicTemplateDAO.updateCharacteristicTemplate(characteristicTemplate);
+        characteristicTemplate = null;
+        characteristicTemplate =  characteristicTemplateDAO.selectSingleCharacteristicTemplate(generatedkey);
+        
+        
+        
+        assertEquals("What an update!", characteristicTemplate.getDescription());
+        characteristicTemplateDAO.deleteCharacteristicTemplate(characteristicTemplate);
     }
 
     /**
