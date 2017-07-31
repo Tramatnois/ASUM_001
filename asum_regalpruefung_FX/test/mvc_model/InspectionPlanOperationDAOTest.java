@@ -5,6 +5,7 @@
  */
 package mvc_model;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -57,11 +58,46 @@ public class InspectionPlanOperationDAOTest {
     @Test
     public void testInsert() throws Exception {
         System.out.println("insert");
-        InspectionPlanOperationDTO inspectionPlanOperationDTO = null;
+        int generatedkey;
+        InspectionPlanOperationDTO inspectionPlanOperationDTO = new InspectionPlanOperationDTO();
         InspectionPlanOperationDAO instance = new InspectionPlanOperationDAO();
-        int expResult = 0;
-        int result = instance.insert(inspectionPlanOperationDTO);
-        assertEquals(expResult, "DIN EN 15635");
+        CharacteristicGroupOperationDTO characteristicGroupOperationDTO = new CharacteristicGroupOperationDTO();
+        characteristicGroupOperationDTO.setId(1);
+        inspectionPlanOperationDTO.setDate(new Date(2017, 5, 1));
+        
+        
+        CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setId(1);
+        inspectionPlanOperationDTO.setCustomer(customerDTO);
+        
+        inspectionPlanOperationDTO.setDescription("Beschreibung");
+                
+        InspectionPlanOperationStatusDTO inspectionPlanOperationStatusDTO = new InspectionPlanOperationStatusDTO();
+        inspectionPlanOperationStatusDTO.setId(1);
+        inspectionPlanOperationDTO.setInspectionPlanOperationStatus(inspectionPlanOperationStatusDTO);
+        
+        InspectionPlanTemplateDTO inspectionPlanTemplateDTO = new InspectionPlanTemplateDTO();
+        inspectionPlanTemplateDTO.setId(1);
+        inspectionPlanOperationDTO.setInspectionplanTemplate(inspectionPlanTemplateDTO);
+        
+        InspectorDTO inspectorDTO = new InspectorDTO();
+        inspectorDTO.setId(1);
+        inspectionPlanOperationDTO.setInspector(inspectorDTO);
+        
+        inspectionPlanOperationDTO.setLocation("Oben");
+        
+        inspectionPlanOperationDTO.setNorm("Norm 1");
+        
+        inspectionPlanOperationDTO.setStorageRack("4711");
+        
+        generatedkey = inspectionPlanOperationDAO.insert(inspectionPlanOperationDTO);
+        
+        inspectionPlanOperationDTO = null;
+        inspectionPlanOperationDTO = inspectionPlanOperationDAO.selectSingleById(generatedkey);
+                
+        
+        assertEquals(inspectionPlanOperationDTO.getNorm(), "Norm 1");
+        inspectionPlanOperationDAO.delete(inspectionPlanOperationDTO);
       
     }
 
