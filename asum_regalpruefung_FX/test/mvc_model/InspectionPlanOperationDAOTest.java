@@ -36,7 +36,8 @@ public class InspectionPlanOperationDAOTest {
        
         ArrayList<InspectionPlanOperationDTO> expResult = inspectionPlanOperationDAO.selectAllInspectionPlanOperations();
         assertEquals(expResult.get(0).getNorm(),"DIN EN 15635");
-        assertEquals(expResult.get(1).getDescription(), "Regalprüfung nach DIN EN 9999");
+        assertEquals(expResult.get(0).getInspectionPlanOperationStatus().getDescription(), "neu");
+        assertEquals(expResult.get(1).getDescription(), "Beschreibung");
         
     }
 
@@ -50,8 +51,19 @@ public class InspectionPlanOperationDAOTest {
         int id = 1;
         InspectionPlanOperationDTO expResult = inspectionPlanOperationDAO.selectSingleById(id);
         assertEquals(expResult.getNorm(), "DIN EN 15635");
+        assertEquals(expResult.getInspectionPlanOperationStatus().getDescription(), "neu");
     }
-
+    @Test
+    public void testSelectSingleFullByIdWithoutTemplate() throws Exception {
+        System.out.println("selectSingleById");
+        
+        int id = 1;
+        InspectionPlanOperationDTO expResult = inspectionPlanOperationDAO.selectSingleFullLoadByIdWithoutTemplate(id);
+        assertEquals(expResult.getNorm(), "DIN EN 15635");
+        assertEquals("neu", expResult.getInspectionPlanOperationStatus().getDescription());
+        assertEquals( "Schaffhausen", expResult.getCustomer().getCity());
+        assertEquals("Hindenburgstrasse 30",expResult.getInspector().getStreet());
+    }
     /**
      * Test of insert method, of class InspectionPlanOperationDAO.
      */
@@ -97,6 +109,7 @@ public class InspectionPlanOperationDAOTest {
                 
         
         assertEquals(inspectionPlanOperationDTO.getNorm(), "Norm 1");
+        assertEquals(inspectionPlanOperationDTO.getInspectionPlanOperationStatus().getDescription(), "neu");
         inspectionPlanOperationDAO.delete(inspectionPlanOperationDTO);
       
     }
@@ -107,11 +120,51 @@ public class InspectionPlanOperationDAOTest {
     @Test
     public void testUpdate() throws Exception {
         System.out.println("update");
-        InspectionPlanOperationDTO inspectionPlanOperationDTO = null;
+        int generatedkey;
+        InspectionPlanOperationDTO inspectionPlanOperationDTO = new InspectionPlanOperationDTO();
         InspectionPlanOperationDAO instance = new InspectionPlanOperationDAO();
-        instance.update(inspectionPlanOperationDTO);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        CharacteristicGroupOperationDTO characteristicGroupOperationDTO = new CharacteristicGroupOperationDTO();
+        characteristicGroupOperationDTO.setId(1);
+        inspectionPlanOperationDTO.setDate(new Date(2017, 5, 1));
+        
+        
+        CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setId(1);
+        inspectionPlanOperationDTO.setCustomer(customerDTO);
+        
+        inspectionPlanOperationDTO.setDescription("Beschreibung");
+                
+        InspectionPlanOperationStatusDTO inspectionPlanOperationStatusDTO = new InspectionPlanOperationStatusDTO();
+        inspectionPlanOperationStatusDTO.setId(1);
+        inspectionPlanOperationDTO.setInspectionPlanOperationStatus(inspectionPlanOperationStatusDTO);
+        
+        InspectionPlanTemplateDTO inspectionPlanTemplateDTO = new InspectionPlanTemplateDTO();
+        inspectionPlanTemplateDTO.setId(1);
+        inspectionPlanOperationDTO.setInspectionplanTemplate(inspectionPlanTemplateDTO);
+        
+        InspectorDTO inspectorDTO = new InspectorDTO();
+        inspectorDTO.setId(1);
+        inspectionPlanOperationDTO.setInspector(inspectorDTO);
+        
+        inspectionPlanOperationDTO.setLocation("Oben");
+        
+        inspectionPlanOperationDTO.setNorm("Norm 1");
+        
+        inspectionPlanOperationDTO.setStorageRack("4711");
+        
+        generatedkey = inspectionPlanOperationDAO.insert(inspectionPlanOperationDTO);
+        
+        inspectionPlanOperationDTO = null;
+        inspectionPlanOperationDTO = inspectionPlanOperationDAO.selectSingleById(generatedkey);
+                
+        inspectionPlanOperationDTO.setStorageRack("4712");
+        inspectionPlanOperationDAO.update(inspectionPlanOperationDTO);
+        inspectionPlanOperationDTO = null;
+        inspectionPlanOperationDTO = inspectionPlanOperationDAO.selectSingleById(generatedkey);
+        assertEquals(inspectionPlanOperationDTO.getStorageRack(), "4712");
+        
+        
+        inspectionPlanOperationDAO.delete(inspectionPlanOperationDTO);
     }
 
     /**
@@ -119,12 +172,49 @@ public class InspectionPlanOperationDAOTest {
      */
     @Test
     public void testDelete() throws Exception {
-        System.out.println("delete");
-        InspectionPlanOperationDTO inspectionPlanOperationDTO = null;
+        int generatedkey;
+        InspectionPlanOperationDTO inspectionPlanOperationDTO = new InspectionPlanOperationDTO();
         InspectionPlanOperationDAO instance = new InspectionPlanOperationDAO();
-        instance.delete(inspectionPlanOperationDTO);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        CharacteristicGroupOperationDTO characteristicGroupOperationDTO = new CharacteristicGroupOperationDTO();
+        characteristicGroupOperationDTO.setId(1);
+        inspectionPlanOperationDTO.setDate(new Date(2017, 5, 1));
+        
+        
+        CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setId(1);
+        inspectionPlanOperationDTO.setCustomer(customerDTO);
+        
+        inspectionPlanOperationDTO.setDescription("Beschreibung");
+                
+        InspectionPlanOperationStatusDTO inspectionPlanOperationStatusDTO = new InspectionPlanOperationStatusDTO();
+        inspectionPlanOperationStatusDTO.setId(1);
+        inspectionPlanOperationDTO.setInspectionPlanOperationStatus(inspectionPlanOperationStatusDTO);
+        
+        InspectionPlanTemplateDTO inspectionPlanTemplateDTO = new InspectionPlanTemplateDTO();
+        inspectionPlanTemplateDTO.setId(1);
+        inspectionPlanOperationDTO.setInspectionplanTemplate(inspectionPlanTemplateDTO);
+        
+        InspectorDTO inspectorDTO = new InspectorDTO();
+        inspectorDTO.setId(1);
+        inspectionPlanOperationDTO.setInspector(inspectorDTO);
+        
+        inspectionPlanOperationDTO.setLocation("Oben");
+        
+        inspectionPlanOperationDTO.setNorm("Norm 1");
+        
+        inspectionPlanOperationDTO.setStorageRack("4711");
+        
+        generatedkey = inspectionPlanOperationDAO.insert(inspectionPlanOperationDTO);
+        inspectionPlanOperationDTO = inspectionPlanOperationDAO.selectSingleById(generatedkey);
+        inspectionPlanOperationDAO.delete(inspectionPlanOperationDTO);
+        inspectionPlanOperationDTO = null;
+        inspectionPlanOperationDTO = inspectionPlanOperationDAO.selectSingleById(generatedkey);
+        if (inspectionPlanOperationDTO == null)
+            assertTrue(true);
+        else
+            assertTrue(false);
+            
+        
     }
     
 }

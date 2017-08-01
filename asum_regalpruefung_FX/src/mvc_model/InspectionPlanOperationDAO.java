@@ -26,9 +26,40 @@ public class InspectionPlanOperationDAO extends AbstractDAO {
         ArrayList<InspectionPlanOperationDTO> inspectionPlanOperationList = new ArrayList<>();
         String query;
         ResultSet rs;
-        query = "SELECT * FROM inspectionplan_operation_tab";
+        //query = "SELECT * FROM inspectionplan_operation_tab";
+            query = "SELECT ipo.idinspectionplan_operation, ipo.date, ipo.norm, ipo.description, ipo.storage_Rack, ipo.location, ipo.customer_id, ipo.inspector_id, ipo.inspectionplan_template_id,"
+                + " ipos.idinspectionplan_operation_status, ipos.description AS iposDescription "
+                + "FROM inspectionplan_operation_tab ipo JOIN inspectionplan_operation_status_tab ipos ON ipo.inspectionplan_operation_status_id  = ipos.idinspectionplan_operation_status "
+                ;
+ 
         PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
-        rs = preparedStmt.executeQuery("SELECT * FROM inspectionplan_operation_tab");
+        rs = preparedStmt.executeQuery();
+        while (rs.next()) {
+            inspectionPlanOperationList.add(this.mapInspectionPlanOperation(rs));
+        }
+        // execute the preparedstatement
+
+        rs.close();
+        preparedStmt.close();
+        return inspectionPlanOperationList;
+    }
+    public ArrayList<InspectionPlanOperationDTO> selectAllFullLoadWithoutTemplate() throws SQLException {
+        ArrayList<InspectionPlanOperationDTO> inspectionPlanOperationList = new ArrayList<>();
+        String query;
+        ResultSet rs;
+        //query = "SELECT * FROM inspectionplan_operation_tab";
+            query = "SELECT ipo.idinspectionplan_operation, ipo.date, ipo.norm, ipo.description, ipo.storage_Rack, ipo.location, ipo.inspectionplan_template_id, "
+                + "ipos.idinspectionplan_operation_status, ipos.description AS iposDescription, "
+                + "cus.idcustomer, cus.name AS cusname, cus.street AS cusstreet, cus.zipcode AS cuszipcode, cus.city AS cuscity, cus.contactperson AS cuscontactperson, cus.phone AS cusphone, cus.fax AS cusfax, cus.email AS cusemail, "
+                + "ins.idinspector, ins.name AS insname, ins.street AS insstreet, ins.zipcode AS inszipcode, ins.city AS inscity "
+                + "FROM inspectionplan_operation_tab ipo "
+                + "JOIN inspectionplan_operation_status_tab ipos ON ipo.inspectionplan_operation_status_id  = ipos.idinspectionplan_operation_status "
+                + "JOIN customer_tab cus ON ipo.customer_id=cus.idcustomer "
+                + "JOIN inspector_tab ins ON ipo.inspector_id=ins.idinspector ";
+ 
+ 
+        PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
+        rs = preparedStmt.executeQuery();
         while (rs.next()) {
             inspectionPlanOperationList.add(this.mapInspectionPlanOperation(rs));
         }
@@ -56,14 +87,49 @@ public class InspectionPlanOperationDAO extends AbstractDAO {
         PreparedStatement preparedStmt;
         ResultSet rs;
 
-        query = "SELECT * FROM inspectionplan_operation_tab where idinspectionplan_operation=?";
-
+        //query = "SELECT * FROM inspectionplan_operation_tab where idinspectionplan_operation=?";
+        query = "SELECT ipo.idinspectionplan_operation, ipo.date, ipo.norm, ipo.description, ipo.storage_Rack, ipo.location, ipo.customer_id, ipo.inspector_id, ipo.inspectionplan_template_id,"
+                + " ipos.idinspectionplan_operation_status, ipos.description AS iposDescription "
+                + "FROM inspectionplan_operation_tab ipo JOIN inspectionplan_operation_status_tab ipos ON ipo.inspectionplan_operation_status_id  = ipos.idinspectionplan_operation_status "
+                + "where idinspectionplan_operation=?";
+ 
         preparedStmt = connection.getConnection().prepareStatement(query);
         preparedStmt.setInt(1, id);
 
         rs = preparedStmt.executeQuery();
         if (rs.next()) {
             inspectionPlanOperationDTO = this.mapInspectionPlanOperation(rs);
+        } else {
+            return null;
+        }
+        rs.close();
+        preparedStmt.close();
+
+        return inspectionPlanOperationDTO;
+    }
+    public InspectionPlanOperationDTO selectSingleFullLoadByIdWithoutTemplate(int id) throws SQLException {
+        InspectionPlanOperationDTO inspectionPlanOperationDTO;
+        String query;
+        PreparedStatement preparedStmt;
+        ResultSet rs;
+
+        //query = "SELECT * FROM inspectionplan_operation_tab where idinspectionplan_operation=?";
+        query = "SELECT ipo.idinspectionplan_operation, ipo.date, ipo.norm, ipo.description, ipo.storage_Rack, ipo.location, ipo.inspectionplan_template_id, "
+                + "ipos.idinspectionplan_operation_status, ipos.description AS iposDescription, "
+                + "cus.idcustomer, cus.name AS cusname, cus.street AS cusstreet, cus.zipcode AS cuszipcode, cus.city AS cuscity, cus.contactperson AS cuscontactperson, cus.phone AS cusphone, cus.fax AS cusfax, cus.email AS cusemail, "
+                + "ins.idinspector, ins.name AS insname, ins.street AS insstreet, ins.zipcode AS inszipcode, ins.city AS inscity "
+                + "FROM inspectionplan_operation_tab ipo "
+                + "JOIN inspectionplan_operation_status_tab ipos ON ipo.inspectionplan_operation_status_id  = ipos.idinspectionplan_operation_status "
+                + "JOIN customer_tab cus ON ipo.customer_id=cus.idcustomer "
+                + "JOIN inspector_tab ins ON ipo.inspector_id=ins.idinspector "
+                + "WHERE idinspectionplan_operation=?";
+ 
+        preparedStmt = connection.getConnection().prepareStatement(query);
+        preparedStmt.setInt(1, id);
+
+        rs = preparedStmt.executeQuery();
+        if (rs.next()) {
+            inspectionPlanOperationDTO = this.mapFullInspectionPlanOperationWithoutTemplate(rs);
         } else {
             return null;
         }
@@ -132,6 +198,7 @@ public class InspectionPlanOperationDAO extends AbstractDAO {
         preparedStmt.setString(3, inspectionPlanOperationDTO.getDescription());
         preparedStmt.setString(4, inspectionPlanOperationDTO.getStorageRack());
         preparedStmt.setString(5, inspectionPlanOperationDTO.getLocation());
+        preparedStmt.setInt(6, inspectionPlanOperationDTO.getId());
         // execute the preparedstatement
         preparedStmt.executeUpdate();
         preparedStmt.close();
@@ -201,7 +268,61 @@ public class InspectionPlanOperationDAO extends AbstractDAO {
         inspectionPlanTemplateDTO.setId(rs.getInt("inspectionplan_template_id"));
         inspectionPlanOperation.setInspectionplanTemplate(inspectionPlanTemplateDTO);
         
-        inspectionPlanOperationStatusDTO.setId(rs.getInt("inspectionplan_operation_status_id"));
+        inspectionPlanOperationStatusDTO.setId(rs.getInt("idinspectionplan_operation_status"));
+        inspectionPlanOperationStatusDTO.setDescription(rs.getString("iposDescription"));
+        
+        inspectionPlanOperation.setInspectionPlanOperationStatus(inspectionPlanOperationStatusDTO);
+        
+        return inspectionPlanOperation;
+    }
+
+    private InspectionPlanOperationDTO mapFullInspectionPlanOperationWithoutTemplate(ResultSet rs) throws SQLException {
+          InspectionPlanOperationDTO inspectionPlanOperation;
+        
+        //@ Stefan hier mal langsam: Die Kundendaten etc. stelle ich später bereit
+        CustomerDTO customerDTO = new CustomerDTO();
+        InspectorDTO inspector = new InspectorDTO();
+        InspectionPlanTemplateDTO inspectionPlanTemplateDTO = new InspectionPlanTemplateDTO();
+        InspectionPlanOperationStatusDTO inspectionPlanOperationStatusDTO = new InspectionPlanOperationStatusDTO();
+        
+        
+        inspectionPlanOperation = new InspectionPlanOperationDTO();
+        inspectionPlanOperation.setId(rs.getInt("idinspectionplan_operation"));
+        inspectionPlanOperation.setDate(rs.getDate("date"));
+        inspectionPlanOperation.setNorm(rs.getString("norm"));
+        inspectionPlanOperation.setDescription(rs.getString("description"));
+        inspectionPlanOperation.setStorageRack(rs.getString("storage_Rack"));
+        inspectionPlanOperation.setLocation(rs.getString("location"));
+        //Map Customer
+        customerDTO.setId(rs.getInt("idcustomer"));
+        customerDTO.setName(rs.getString("cusname"));
+        customerDTO.setStreet(rs.getString("cusstreet"));
+        customerDTO.setZipcode(rs.getString("cuszipcode"));
+        customerDTO.setCity(rs.getString("cuscity"));
+        customerDTO.setContactperson(rs.getString("cuscontactperson"));
+        customerDTO.setContactperson(rs.getString("cuscontactperson"));
+        customerDTO.setPhone(rs.getString("cusphone"));
+        customerDTO.setFax(rs.getString("cusfax")); 
+        customerDTO.setEmail(rs.getString("cusemail"));
+        inspectionPlanOperation.setCustomer(customerDTO); 
+                
+              
+        //map Inspector
+        
+        inspector.setId(rs.getInt("idinspector"));
+        inspector.setName(rs.getString("insname"));
+        inspector.setStreet(rs.getString("insstreet"));
+        inspector.setZipcode(rs.getString("inszipcode"));
+        inspector.setCity(rs.getString("inscity"));
+        inspectionPlanOperation.setInspector(inspector);
+        
+        //map inspectionplan
+        inspectionPlanTemplateDTO.setId(rs.getInt("inspectionplan_template_id"));
+        inspectionPlanOperation.setInspectionplanTemplate(inspectionPlanTemplateDTO);
+        //map operation status
+        inspectionPlanOperationStatusDTO.setId(rs.getInt("idinspectionplan_operation_status"));
+        inspectionPlanOperationStatusDTO.setDescription(rs.getString("iposDescription"));
+        
         inspectionPlanOperation.setInspectionPlanOperationStatus(inspectionPlanOperationStatusDTO);
         
         return inspectionPlanOperation;

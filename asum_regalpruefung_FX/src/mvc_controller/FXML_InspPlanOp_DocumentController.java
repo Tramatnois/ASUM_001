@@ -97,7 +97,7 @@ public class FXML_InspPlanOp_DocumentController implements Initializable {
             
             data = FXCollections.observableArrayList();
 
-            for (InspectionPlanOperationDTO inspplan_op : new InspectionPlanOperationDAO().selectAllInspectionPlanOperations()) {
+            for (InspectionPlanOperationDTO inspplan_op : new InspectionPlanOperationDAO().selectAllFullLoadWithoutTemplate()) {
                 data.add(inspplan_op);
             }
 
