@@ -24,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import mvc_model.CustomerDAO;
 import mvc_model.CustomerDTO;
@@ -33,7 +34,7 @@ import mvc_model.CustomerDTO;
  *
  * @author tramatnois
  */
-public class FXML_Customer_DocumentController implements Initializable {
+public class FXML_Customer_DocumentController extends AnchorPane {
 
     @FXML
     private TableView<CustomerDTO> tbl_view_customer;
@@ -57,18 +58,45 @@ public class FXML_Customer_DocumentController implements Initializable {
     private TableColumn<CustomerDTO, String> tbl_view_customer_email;
     @FXML
     private Button btn_view_customer_OK;
+    @FXML
+    private AnchorPane subPane;
+
     private ObservableList<CustomerDTO> data;
-
     private FXML_Application_DocumentController fxml_application_controller;
-
+    private static FXML_Customer_DocumentController instance;
 
     /**
-     * Initializes the controller class.
+     * Statische Methode 'getInstance()Ä liefert die einzige Instanz der Klasse
+     * zurück. Ist synchronisiert und somit thread-sicher.
      */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public synchronized static FXML_Customer_DocumentController getInstance() {
+        if (instance == null) {
+            instance = new FXML_Customer_DocumentController();
+        }
+        return instance;
+    }
+
+    /**
+     * Konstruktor ist privat, Klasse darf nicht von außen instanziiert werden.
+     */
+    private FXML_Customer_DocumentController() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/mvc_view_application/FXML_Customer_Document.fxml"));
+// Tell the loader that this object is the BorderPane we've designed in FXML.
+        loader.setRoot(this);
+// Tell the loader that this is the object whose attributes and methods are referenced in FXML.
+        loader.setController(this);
+        // Load the FXML document. When this succeeds, the @FXML attributes will be ready to use.
         try {
-            // TODO
+            loader.load();
+        } catch (IOException ex) {
+            //Logger.getLogger(FXML_Application_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FXML_Application_DocumentController.class.getName()).log(Level.SEVERE, "Unable to load FXML_Customer_Document.fxml", ex);
+        }
+        initialize();
+    }
+
+    private void initialize() {
+        try {
             data = FXCollections.observableArrayList();
 
             for (CustomerDTO customer : new CustomerDAO().selectAllCustomer()) {
@@ -87,25 +115,57 @@ public class FXML_Customer_DocumentController implements Initializable {
 
             tbl_view_customer.setItems(null);
             tbl_view_customer.setItems(data);
-
         } catch (SQLException ex) {
             Logger.getLogger(FXML_Customer_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
+//    /**
+//     * Initializes the controller class.
+//     */
+//    @Override
+//    public void initialize(URL url, ResourceBundle rb) {
+//        try {
+//            // TODO
+//            
+//
+//                data = FXCollections.observableArrayList();
+//
+//                for (CustomerDTO customer : new CustomerDAO().selectAllCustomer()) {
+//                    data.add(customer);
+//                }
+//
+//                tbl_view_customer_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+//                tbl_view_customer_name.setCellValueFactory(new PropertyValueFactory<>("name"));
+//                tbl_view_customer_street.setCellValueFactory(new PropertyValueFactory<>("street"));
+//                tbl_view_customer_zipcode.setCellValueFactory(new PropertyValueFactory<>("zipcode"));
+//                tbl_view_customer_city.setCellValueFactory(new PropertyValueFactory<>("city"));
+//                tbl_view_customer_contactperson.setCellValueFactory(new PropertyValueFactory<>("contactperson"));
+//                tbl_view_customer_phone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+//                tbl_view_customer_fax.setCellValueFactory(new PropertyValueFactory<>("fax"));
+//                tbl_view_customer_email.setCellValueFactory(new PropertyValueFactory<>("email"));
+//
+//                tbl_view_customer.setItems(null);
+//                tbl_view_customer.setItems(data);/
+//               
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(FXML_Customer_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//    }
 
     @FXML
     private void btn_view_customer_OK_handler(ActionEvent event) {
         CustomerDTO customer = tbl_view_customer.getSelectionModel().getSelectedItem();
+//        this.fxml_application_controller.setCustomername(customer.getName());
         this.fxml_application_controller.setCustomername(customer.getName());
-
-        Stage stage = (Stage) btn_view_customer_OK.getScene().getWindow();
-        stage.close();
-
+        this.fxml_application_controller.drawerCustomerView.close();
+//        Stage stage = (Stage) btn_view_customer_OK.getScene().getWindow();        
+//        stage.close();
     }
 
     public void setReference(FXML_Application_DocumentController controller) {
         this.fxml_application_controller = controller;
     }
-    
+
 }

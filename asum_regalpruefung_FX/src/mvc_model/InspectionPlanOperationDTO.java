@@ -95,7 +95,13 @@ public class InspectionPlanOperationDTO extends RecursiveTreeObject<InspectionPl
         this.inspector = inspector;
     }
 
+    public InspectionPlanTemplateDTO getInspectionplanTemplate() {
+        return inspectionplanTemplate;
+    }
 
+    public void setInspectionplanTemplate(InspectionPlanTemplateDTO inspectionplan) {
+        this.inspectionplanTemplate = inspectionplan;
+    }
 
     public String getNorm() {
         return norm;
@@ -125,15 +131,7 @@ public class InspectionPlanOperationDTO extends RecursiveTreeObject<InspectionPl
     public StringProperty getNameProperty() {
         return this.customer.getNameProperty();
     }
-
-    public InspectionPlanTemplateDTO getInspectionplanTemplate() {
-        return inspectionplanTemplate;
-    }
-
-    public void setInspectionplanTemplate(InspectionPlanTemplateDTO inspectionplanTemplate) {
-        this.inspectionplanTemplate = inspectionplanTemplate;
-    }
-
+    
     public InspectionPlanOperationStatusDTO getInspectionPlanOperationStatus() {
         return inspectionPlanOperationStatus;
     }
@@ -142,5 +140,8 @@ public class InspectionPlanOperationDTO extends RecursiveTreeObject<InspectionPl
         this.inspectionPlanOperationStatus = inspectionPlanOperationStatus;
     }
 
+    void setInspectionplan(InspectionPlanTemplateDTO inspectionPlanTemplateDTO) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

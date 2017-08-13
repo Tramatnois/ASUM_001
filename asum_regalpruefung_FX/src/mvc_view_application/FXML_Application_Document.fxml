@@ -15,7 +15,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="root" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvc_controller.FXML_Application_DocumentController">
+<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" fx:id="rootPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox layoutY="41.0" prefHeight="759.0" prefWidth="1280.0" stylesheets="@fxml_application_document.css">
          <children>
@@ -202,7 +203,9 @@
             </ScrollPane>
          </children>
       </VBox>
-      <JFXDrawer fx:id="drawer" defaultDrawerSize="190.0" prefHeight="800.0" prefWidth="134.0" />
+         <JFXDrawer fx:id="drawerCustomerView" defaultDrawerSize="900.0" layoutX="16.0" layoutY="115.0" overLayVisible="false" prefHeight="302.0" prefWidth="542.0" />
       <JFXHamburger fx:id="hamburger" layoutX="1225.0" layoutY="14.0" />
    </children>
 </AnchorPane>
+<JFXDrawer fx:id="drawer" defaultDrawerSize="200.0" direction="TOP" overLayVisible="false" prefHeight="45.0" prefWidth="1067.0" />
+</fx:root>
