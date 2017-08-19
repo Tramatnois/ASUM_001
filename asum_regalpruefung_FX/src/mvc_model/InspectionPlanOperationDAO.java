@@ -88,7 +88,7 @@ public class InspectionPlanOperationDAO extends AbstractDAO {
         ResultSet rs;
 
         //query = "SELECT * FROM inspectionplan_operation_tab where idinspectionplan_operation=?";
-        query = "SELECT ipo.idinspectionplan_operation, ipo.date, ipo.norm, ipo.description, ipo.storage_Rack, ipo.location, ipo.customer_id, ipo.inspector_id, ipo.inspectionplan_template_id,"
+        query = "SELECT ipo.idinspectionplan_operation, ipo.date, ipo.norm, ipo.description, ipo.storage_Rack, ipo.location, ipo.customer_id, ipo.inspector_id, ipo.inspectionplan_template_id, ipo.inspectionplan_operation_status_id, "
                 + " ipos.idinspectionplan_operation_status, ipos.description AS iposDescription "
                 + "FROM inspectionplan_operation_tab ipo JOIN inspectionplan_operation_status_tab ipos ON ipo.inspectionplan_operation_status_id  = ipos.idinspectionplan_operation_status "
                 + "where idinspectionplan_operation=?";
@@ -248,6 +248,7 @@ public class InspectionPlanOperationDAO extends AbstractDAO {
 //        customerDTO.setId(rs.getInt("customer_id"));
 //        inspectionPlanOperation.setCustomer(customerDTO);
 //@ Daniel: Vielleicht im DTO eine get Methode für das DAO Objekt? Es macht kein Sinn hier ein DAO Objekt zu initialisieren
+//@Stefan: Warum nicht? Das CCustomer Objekt wird nur intialisiert, um die Customer ID zu tragen.
         CustomerDAO customerDAO = new CustomerDAO();
         customerDTO = customerDAO.selectSingleCustomer(rs.getInt("customer_id"));
         inspectionPlanOperation.setCustomer(customerDTO);
@@ -261,6 +262,8 @@ public class InspectionPlanOperationDAO extends AbstractDAO {
         //@ Daniel: Bitte erstmal nicht ändern. Müssen telefoinieren.
 //        inspectionPlanOperationStatusDTO.setId(rs.getInt("inspectionplan_operation_status_id"));
 //@ Daniel: Vielleicht im DTO eine get Methode für das DAO Objekt? Es macht kein Sinn hier ein DAO Objekt zu initialisieren
+//@Stefan: Warum nicht? Das CCustomer Objekt wird nur intialisiert, um die Customer ID zu tragen.
+         
         InspectionPlanOperationStatusDAO inspplanop_StatusDAO = new InspectionPlanOperationStatusDAO();
         inspectionPlanOperationStatusDTO = inspplanop_StatusDAO.selectSingleInspectionPlanOperationStatus(rs.getInt("inspectionplan_operation_status_id"));
         

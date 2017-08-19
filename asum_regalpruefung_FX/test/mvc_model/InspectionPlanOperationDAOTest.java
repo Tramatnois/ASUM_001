@@ -35,9 +35,9 @@ public class InspectionPlanOperationDAOTest {
         
        
         ArrayList<InspectionPlanOperationDTO> expResult = inspectionPlanOperationDAO.selectAllInspectionPlanOperations();
-        assertEquals(expResult.get(0).getNorm(),"DIN EN 15635");
-        assertEquals(expResult.get(0).getInspectionPlanOperationStatus().getDescription(), "neu");
-        assertEquals(expResult.get(1).getDescription(), "Beschreibung");
+        assertEquals("DIN EN 15635", expResult.get(0).getNorm());
+       assertEquals( "neu", expResult.get(0).getInspectionPlanOperationStatus().getDescription());
+        assertEquals("Regalprüfung nach DIN EN 9999", expResult.get(1).getDescription());
         
     }
 
@@ -62,7 +62,7 @@ public class InspectionPlanOperationDAOTest {
         assertEquals(expResult.getNorm(), "DIN EN 15635");
         assertEquals("neu", expResult.getInspectionPlanOperationStatus().getDescription());
         assertEquals( "Schaffhausen", expResult.getCustomer().getCity());
-        assertEquals("Hindenburgstrasse 30",expResult.getInspector().getStreet());
+        assertEquals("Hindenburgstraße 30",expResult.getInspector().getStreet());
     }
     /**
      * Test of insert method, of class InspectionPlanOperationDAO.
