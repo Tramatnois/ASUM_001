@@ -11,8 +11,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
-<AnchorPane id="AnchorPane" fx:id="ap_inspplan_operation" prefHeight="567.0" prefWidth="1031.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvc_controller.FXML_InspPlanOp_DocumentController">
+<fx:root prefHeight="366.0" prefWidth="687.0" styleClass="InspPlanOp" stylesheets="@fxml_inspectionplan_operation_document.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" fx:id="ap_inspplan_operation" prefHeight="567.0" prefWidth="1031.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@fxml_inspectionplan_operation_document.css" />
     </stylesheets>
@@ -74,3 +74,4 @@
       </VBox>
    </children>
 </AnchorPane>
+</fx:root>

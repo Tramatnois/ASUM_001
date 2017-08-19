@@ -16,15 +16,13 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.JavaFXBuilderFactory;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -35,7 +33,7 @@ import mvc_model.CustomerDTO;
  *
  * @author tramatnois
  */
-public class FXML_Application_DocumentController extends AnchorPane {
+public class FXML_Application_DocumentController extends BorderPane {
 
     @FXML
     private VBox VBox_Top_left;
@@ -229,22 +227,31 @@ public class FXML_Application_DocumentController extends AnchorPane {
 
     @FXML
     private void btn_show_all_inspplan_operations_handler(ActionEvent event) {
-        try {
-            Parent root;
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mvc_view_application/FXML_InspPlanOp_Document.fxml"));
-            root = (Parent) loader.load();
-
-// get the FXML_InspPlanOp_DocumentController and set the current FXML_Application_DocumentController           
-            FXML_InspPlanOp_DocumentController controller = (FXML_InspPlanOp_DocumentController) loader.getController();
-            controller.setReference(this);
-// get Singleton Customer Stage
-            FXML_Application_DocumentController.getInstance().setInspPlanOpStage(inspPlanOpStage);
-            Scene scene = new Scene(root);
-            inspPlanOpStage.setScene(scene);
-            inspPlanOpStage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(FXML_Application_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
+//        try {
+//            Parent root;
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mvc_view_application/FXML_InspPlanOp_Document.fxml"));
+//            root = (Parent) loader.load();
+//
+//// get the FXML_InspPlanOp_DocumentController and set the current FXML_Application_DocumentController           
+//            FXML_InspPlanOp_DocumentController controller = (FXML_InspPlanOp_DocumentController) loader.getController();
+//            controller.setReference(this);
+//// get Singleton Customer Stage
+//            FXML_Application_DocumentController.getInstance().setInspPlanOpStage(inspPlanOpStage);
+//            Scene scene = new Scene(root);
+//            inspPlanOpStage.setScene(scene);
+//            inspPlanOpStage.show();
+//        } catch (IOException ex) {
+//            Logger.getLogger(FXML_Application_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        FXML_InspPlanOp_DocumentController inspPlanOpPane = FXML_InspPlanOp_DocumentController.getInstance();
+        inspPlanOpPane.setReference(this);
+        drawerCustomerView.setSidePane(inspPlanOpPane);
+        if (drawerCustomerView.isShown()) {
+            drawerCustomerView.close();
+        } else {
+            drawerCustomerView.open();
         }
+
     }
 
     public void setCustomername(String name) {

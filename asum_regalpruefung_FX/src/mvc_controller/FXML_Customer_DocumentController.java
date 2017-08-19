@@ -5,6 +5,8 @@
  */
 package mvc_controller;
 
+import com.jfoenix.controls.JFXTreeTableColumn;
+import com.jfoenix.controls.JFXTreeTableView;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -23,6 +25,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -36,26 +40,28 @@ import mvc_model.CustomerDTO;
  */
 public class FXML_Customer_DocumentController extends AnchorPane {
 
+//    @FXML
+//    private TableView<CustomerDTO> tbl_view_customer;
+//    @FXML
+//    private TableColumn<CustomerDTO, Integer> tbl_view_customer_id;
+//    @FXML
+//    private TableColumn<CustomerDTO, String> tbl_view_customer_name;
+//    @FXML
+//    private TableColumn<CustomerDTO, String> tbl_view_customer_street;
+//    @FXML
+//    private TableColumn<CustomerDTO, String> tbl_view_customer_zipcode;
+//    @FXML
+//    private TableColumn<CustomerDTO, String> tbl_view_customer_city;
+//    @FXML
+//    private TableColumn<CustomerDTO, String> tbl_view_customer_contactperson;
+//    @FXML
+//    private TableColumn<CustomerDTO, String> tbl_view_customer_phone;
+//    @FXML
+//    private TableColumn<CustomerDTO, String> tbl_view_customer_fax;
+//    @FXML
+//    private TableColumn<CustomerDTO, String> tbl_view_customer_email;
     @FXML
-    private TableView<CustomerDTO> tbl_view_customer;
-    @FXML
-    private TableColumn<CustomerDTO, Integer> tbl_view_customer_id;
-    @FXML
-    private TableColumn<CustomerDTO, String> tbl_view_customer_name;
-    @FXML
-    private TableColumn<CustomerDTO, String> tbl_view_customer_street;
-    @FXML
-    private TableColumn<CustomerDTO, String> tbl_view_customer_zipcode;
-    @FXML
-    private TableColumn<CustomerDTO, String> tbl_view_customer_city;
-    @FXML
-    private TableColumn<CustomerDTO, String> tbl_view_customer_contactperson;
-    @FXML
-    private TableColumn<CustomerDTO, String> tbl_view_customer_phone;
-    @FXML
-    private TableColumn<CustomerDTO, String> tbl_view_customer_fax;
-    @FXML
-    private TableColumn<CustomerDTO, String> tbl_view_customer_email;
+    private JFXTreeTableView<CustomerDTO> tbl_view_customer;
     @FXML
     private Button btn_view_customer_OK;
     @FXML
@@ -97,24 +103,39 @@ public class FXML_Customer_DocumentController extends AnchorPane {
 
     private void initialize() {
         try {
+//prepare column: CustomerID
+            JFXTreeTableColumn<CustomerDTO, Integer> customer_id = new JFXTreeTableColumn<>("ID");
+            customer_id.setPrefWidth(50);
+            //inspection_id.setPrefWidth(Control.USE_COMPUTED_SIZE);
+            customer_id.getStyleClass().add("col_customer_id");
+            customer_id.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, Integer> param) -> param.getValue().getValue().getIdProperty().asObject());
+
+//prepare column: CustomerName
+            JFXTreeTableColumn<CustomerDTO, String> customer_name = new JFXTreeTableColumn<>("Kundenname");
+            customer_name.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, String> param) -> param.getValue().getValue().getNameProperty());
+            customer_name.getStyleClass().add("col_customer_id");
+
+            
+            
+            
             data = FXCollections.observableArrayList();
 
             for (CustomerDTO customer : new CustomerDAO().selectAllCustomer()) {
                 data.add(customer);
             }
 
-            tbl_view_customer_id.setCellValueFactory(new PropertyValueFactory<>("id"));
-            tbl_view_customer_name.setCellValueFactory(new PropertyValueFactory<>("name"));
-            tbl_view_customer_street.setCellValueFactory(new PropertyValueFactory<>("street"));
-            tbl_view_customer_zipcode.setCellValueFactory(new PropertyValueFactory<>("zipcode"));
-            tbl_view_customer_city.setCellValueFactory(new PropertyValueFactory<>("city"));
-            tbl_view_customer_contactperson.setCellValueFactory(new PropertyValueFactory<>("contactperson"));
-            tbl_view_customer_phone.setCellValueFactory(new PropertyValueFactory<>("phone"));
-            tbl_view_customer_fax.setCellValueFactory(new PropertyValueFactory<>("fax"));
-            tbl_view_customer_email.setCellValueFactory(new PropertyValueFactory<>("email"));
-
-            tbl_view_customer.setItems(null);
-            tbl_view_customer.setItems(data);
+//            tbl_view_customer_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+//            tbl_view_customer_name.setCellValueFactory(new PropertyValueFactory<>("name"));
+//            tbl_view_customer_street.setCellValueFactory(new PropertyValueFactory<>("street"));
+//            tbl_view_customer_zipcode.setCellValueFactory(new PropertyValueFactory<>("zipcode"));
+//            tbl_view_customer_city.setCellValueFactory(new PropertyValueFactory<>("city"));
+//            tbl_view_customer_contactperson.setCellValueFactory(new PropertyValueFactory<>("contactperson"));
+//            tbl_view_customer_phone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+//            tbl_view_customer_fax.setCellValueFactory(new PropertyValueFactory<>("fax"));
+//            tbl_view_customer_email.setCellValueFactory(new PropertyValueFactory<>("email"));
+//
+//            tbl_view_customer.setItems(null);
+//            tbl_view_customer.setItems(data);
         } catch (SQLException ex) {
             Logger.getLogger(FXML_Customer_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -156,9 +177,9 @@ public class FXML_Customer_DocumentController extends AnchorPane {
 
     @FXML
     private void btn_view_customer_OK_handler(ActionEvent event) {
-        CustomerDTO customer = tbl_view_customer.getSelectionModel().getSelectedItem();
+        TreeItem<CustomerDTO> customer = tbl_view_customer.getSelectionModel().getSelectedItem();
 //        this.fxml_application_controller.setCustomername(customer.getName());
-        this.fxml_application_controller.setCustomername(customer.getName());
+        this.fxml_application_controller.setCustomername(customer.getValue().getName());
         this.fxml_application_controller.drawerCustomerView.close();
 //        Stage stage = (Stage) btn_view_customer_OK.getScene().getWindow();        
 //        stage.close();
