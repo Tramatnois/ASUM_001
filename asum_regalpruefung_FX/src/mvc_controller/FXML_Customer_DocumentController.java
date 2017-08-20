@@ -7,6 +7,8 @@ package mvc_controller;
 
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -107,15 +109,21 @@ public class FXML_Customer_DocumentController extends AnchorPane {
             JFXTreeTableColumn<CustomerDTO, Integer> customer_id = new JFXTreeTableColumn<>("ID");
             customer_id.setPrefWidth(50);
             //inspection_id.setPrefWidth(Control.USE_COMPUTED_SIZE);
-            customer_id.getStyleClass().add("col_customer_id");
+            customer_id.getStyleClass().add("Col_customer_id");
             customer_id.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, Integer> param) -> param.getValue().getValue().getIdProperty().asObject());
 
 //prepare column: CustomerName
             JFXTreeTableColumn<CustomerDTO, String> customer_name = new JFXTreeTableColumn<>("Kundenname");
             customer_name.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, String> param) -> param.getValue().getValue().getNameProperty());
-            customer_name.getStyleClass().add("col_customer_id");
-
-            
+            customer_name.getStyleClass().add("Col_customer_name");
+//prepare column: CustomerStreet
+            JFXTreeTableColumn<CustomerDTO, String> customer_street = new JFXTreeTableColumn<>("Straße");
+            customer_street.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, String> param) -> param.getValue().getValue().getStreetProperty());
+            customer_street.getStyleClass().add("Col_customer_street");
+//prepare column: CustomerZipCode
+            JFXTreeTableColumn<CustomerDTO, String> customer_zipCode = new JFXTreeTableColumn<>("Postleitzahl");
+            customer_zipCode.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, String> param) -> param.getValue().getValue().getZipCodeProperty());
+            customer_zipCode.getStyleClass().add("Col_customer_zipCode");            
             
             
             data = FXCollections.observableArrayList();
@@ -124,8 +132,13 @@ public class FXML_Customer_DocumentController extends AnchorPane {
                 data.add(customer);
             }
 
-//            tbl_view_customer_id.setCellValueFactory(new PropertyValueFactory<>("id"));
-//            tbl_view_customer_name.setCellValueFactory(new PropertyValueFactory<>("name"));
+            final TreeItem<CustomerDTO> root;
+            root = new RecursiveTreeItem<CustomerDTO>(data, RecursiveTreeObject::getChildren);
+            
+            tbl_view_customer.getColumns().setAll(customer_id, customer_name, customer_street, customer_zipCode);
+            tbl_view_customer.setRoot(root);
+            tbl_view_customer.setShowRoot(false);
+            
 //            tbl_view_customer_street.setCellValueFactory(new PropertyValueFactory<>("street"));
 //            tbl_view_customer_zipcode.setCellValueFactory(new PropertyValueFactory<>("zipcode"));
 //            tbl_view_customer_city.setCellValueFactory(new PropertyValueFactory<>("city"));

@@ -159,11 +159,11 @@ public class CustomerDAO extends AbstractDAO{
         customer = new CustomerDTO();
         customer.setId(rs.getInt("idcustomer"));
         customer.setName(rs.getString("name"));
-        customer.setStreet("street");
-        customer.setZipcode("zipcode");
+        customer.setStreet(rs.getString("street"));
+        customer.setZipcode(rs.getString("zipcode"));
         customer.setCity(rs.getString("city"));
         customer.setContactperson(rs.getString("contactperson"));
-        customer.setPhone("phone");
+        customer.setPhone(rs.getString("phone"));
         customer.setFax(rs.getString("fax"));
         customer.setEmail(rs.getString("email"));
         return customer;

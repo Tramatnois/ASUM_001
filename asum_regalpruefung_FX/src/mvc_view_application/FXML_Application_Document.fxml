@@ -195,7 +195,7 @@
    <center>
    <ScrollPane prefHeight="629.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
      <content>
-       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="802.0" prefWidth="1332.0">
+       <AnchorPane>
             <children>
                <TableView fx:id="tableView_inspResults" prefHeight="634.0" prefWidth="1280.0">
                  <columns>
