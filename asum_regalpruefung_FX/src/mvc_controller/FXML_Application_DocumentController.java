@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import java.io.IOException;
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,13 +21,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.effect.PerspectiveTransform;
+import javafx.scene.effect.Reflection;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import mvc_model.CustomerDTO;
+import mvc_model_sqlconnector.DBConnection;
 
 /**
  * FXML Controller class
@@ -68,6 +75,8 @@ public class FXML_Application_DocumentController extends BorderPane {
     @FXML
     private JFXDatePicker tf_datepicker;
     @FXML
+    private TextField tf_connected;
+    @FXML
     private Button btn_show_all_inspplan_operations;
     @FXML
     private Button btn_load_customer;
@@ -81,6 +90,8 @@ public class FXML_Application_DocumentController extends BorderPane {
     private static FXML_Application_DocumentController instance;
     private static Stage inspPlanOpStage;
     private static Stage customerStage;
+
+    protected DBConnection connection;
 
     /**
      * Statische Methode 'getInstance()Ä liefert die einzige Instanz der Klasse
@@ -103,7 +114,7 @@ public class FXML_Application_DocumentController extends BorderPane {
         loader.setRoot(this);
 // Tell the loader that this is the object whose attributes and methods are referenced in FXML.
         loader.setController(this);
-        // Load the FXML document. When this succeeds, the @FXML attributes will be ready to use.
+// Load the FXML document. When this succeeds, the @FXML attributes will be ready to use.
         try {
             loader.load();
         } catch (IOException ex) {
@@ -135,6 +146,20 @@ public class FXML_Application_DocumentController extends BorderPane {
         });
 //        tf_date.setText(new SimpleDateFormat("dd.MM.yyyy").format(new Date()));
         tf_datepicker.setValue(LocalDate.now());
+// check the database connection
+        connection = DBConnection.getInstance();
+        DropShadow dropShadow = new DropShadow();
+        if (connection.IsConnected()) {
+            tf_connected.setText(connection.getHost() + "." + connection.getDatabase());
+//            dropShadow.setColor(Color.GREEN);
+//            tf_connected.setEffect(dropShadow);
+            tf_connected.setStyle("-fx-background-color: #009688;-fx-text-fill: white;");            
+        } else {
+            tf_connected.setText("connection failure");
+            dropShadow.setOffsetY(3.0f);
+            dropShadow.setColor(Color.RED);
+            tf_connected.setEffect(dropShadow);
+        }
     }
 
     public Stage getCustomerStage() {

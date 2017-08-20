@@ -1,25 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
-<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="351.0" prefWidth="924.0" styleClass="CustomerPane" stylesheets="@fxml_customer_document.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-<AnchorPane id="AnchorPane" fx:id="AnchorPane" layoutY="5.0" prefHeight="340.0" prefWidth="914.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-    <stylesheets>
-        <URL value="@fxml_customer_document.css" />
-    </stylesheets>
-   <children>
-      <Label alignment="CENTER" prefHeight="55.0" prefWidth="701.0" text="Kundendaten" textAlignment="CENTER" visible="false">
+<fx:root styleClass="CustomerPane" stylesheets="@fxml_customer_document.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="borderPane">
+   <center>
+      <JFXTreeTableView fx:id="tbl_view_customer" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+               <Insets bottom="10.0" left="25.0" right="15.0" top="10.0" />
+            </BorderPane.margin>
+         </JFXTreeTableView>
+   </center>
+   <bottom>
+      <Button fx:id="btn_view_customer_OK" mnemonicParsing="false" onAction="#btn_view_customer_OK_handler" text="OK" BorderPane.alignment="CENTER" />
+   </bottom>
+   <top>
+      <Label alignment="CENTER" prefHeight="33.0" prefWidth="1070.0" text="Kundendaten" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <font>
             <Font name="System Bold" size="28.0" />
          </font>
+            <BorderPane.margin>
+               <Insets top="10.0" />
+            </BorderPane.margin>
       </Label>
-         <JFXTreeTableView fx:id="tbl_view_customer" layoutX="26.0" prefHeight="317.0" prefWidth="869.0" />
-      <Button fx:id="btn_view_customer_OK" layoutX="393.0" layoutY="331.0" mnemonicParsing="false" onAction="#btn_view_customer_OK_handler" prefHeight="25.0" prefWidth="107.0" text="OK" />
-   </children>
-</AnchorPane>
+   </top>
+   <right>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <JFXTextField fx:id="tf_filter_name" focusColor="#009688" labelFloat="true" prefHeight="29.0" prefWidth="141.0" promptText="Filter nach Kunde">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+                  <VBox.margin>
+                     <Insets top="25.0" />
+                  </VBox.margin>
+            </JFXTextField>
+            <JFXTextField fx:id="tf_filter_contactPerson" focusColor="#009688" labelFloat="true" prefHeight="29.0" prefWidth="140.0" promptText="Filter nach Person">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+                  <VBox.margin>
+                     <Insets top="25.0" />
+                  </VBox.margin>
+            </JFXTextField>
+         </children>
+            <BorderPane.margin>
+               <Insets right="25.0" />
+            </BorderPane.margin>
+      </VBox>
+   </right>
+</BorderPane>
 </fx:root>

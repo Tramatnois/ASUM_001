@@ -2,8 +2,16 @@
  * Empty Stylesheet file.
  */
 
-.mainFxmlClass {
-
+.InspPlanOpPane {
+    /*-fx-background-color: skyblue, derive(skyblue, 25%);  set background to skyblue */
+    /*-fx-background-insets: 0, 20;*/
+    -fx-background-radius: 10, 10;
+    -fx-border-color: #009688;
+    /*-fx-border-style: segments(40, 4, 20, 4) phase 12 line-cap butt, segments(26, 4, 26, 4) phase 4 line-cap round;*/
+    /*-fx-border-insets: 0, 20 22 20 22;*/
+    -fx-border-radius: 10, 10;
+    -fx-border-width: 5, 5 0 5 0;
+    
 }
 
 .tree-table-view{

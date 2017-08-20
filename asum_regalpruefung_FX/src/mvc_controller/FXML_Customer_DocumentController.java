@@ -5,33 +5,27 @@
  */
 package mvc_controller;
 
+import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import mvc_model.CustomerDAO;
 import mvc_model.CustomerDTO;
 
@@ -42,28 +36,12 @@ import mvc_model.CustomerDTO;
  */
 public class FXML_Customer_DocumentController extends AnchorPane {
 
-//    @FXML
-//    private TableView<CustomerDTO> tbl_view_customer;
-//    @FXML
-//    private TableColumn<CustomerDTO, Integer> tbl_view_customer_id;
-//    @FXML
-//    private TableColumn<CustomerDTO, String> tbl_view_customer_name;
-//    @FXML
-//    private TableColumn<CustomerDTO, String> tbl_view_customer_street;
-//    @FXML
-//    private TableColumn<CustomerDTO, String> tbl_view_customer_zipcode;
-//    @FXML
-//    private TableColumn<CustomerDTO, String> tbl_view_customer_city;
-//    @FXML
-//    private TableColumn<CustomerDTO, String> tbl_view_customer_contactperson;
-//    @FXML
-//    private TableColumn<CustomerDTO, String> tbl_view_customer_phone;
-//    @FXML
-//    private TableColumn<CustomerDTO, String> tbl_view_customer_fax;
-//    @FXML
-//    private TableColumn<CustomerDTO, String> tbl_view_customer_email;
     @FXML
     private JFXTreeTableView<CustomerDTO> tbl_view_customer;
+    @FXML
+    private JFXTextField tf_filter_name;
+    @FXML
+    private JFXTextField tf_filter_contactPerson;    
     @FXML
     private Button btn_view_customer_OK;
     @FXML
@@ -111,7 +89,6 @@ public class FXML_Customer_DocumentController extends AnchorPane {
             //inspection_id.setPrefWidth(Control.USE_COMPUTED_SIZE);
             customer_id.getStyleClass().add("Col_customer_id");
             customer_id.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, Integer> param) -> param.getValue().getValue().getIdProperty().asObject());
-
 //prepare column: CustomerName
             JFXTreeTableColumn<CustomerDTO, String> customer_name = new JFXTreeTableColumn<>("Kundenname");
             customer_name.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, String> param) -> param.getValue().getValue().getNameProperty());
@@ -123,10 +100,28 @@ public class FXML_Customer_DocumentController extends AnchorPane {
 //prepare column: CustomerZipCode
             JFXTreeTableColumn<CustomerDTO, String> customer_zipCode = new JFXTreeTableColumn<>("Postleitzahl");
             customer_zipCode.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, String> param) -> param.getValue().getValue().getZipCodeProperty());
-            customer_zipCode.getStyleClass().add("Col_customer_zipCode");            
-            
-            
+            customer_zipCode.getStyleClass().add("Col_customer_zipCode");
+//prepare column: CustomerCity
+            JFXTreeTableColumn<CustomerDTO, String> customer_city = new JFXTreeTableColumn<>("Ort");
+            customer_city.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, String> param) -> param.getValue().getValue().getCityProperty());
+            customer_city.getStyleClass().add("Col_customer_city");
+//prepare column: CustomerContactPerson
+            JFXTreeTableColumn<CustomerDTO, String> customer_contactPerson = new JFXTreeTableColumn<>("Kontaktperson");
+            customer_contactPerson.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, String> param) -> param.getValue().getValue().getContactpersonProperty());
+            customer_contactPerson.getStyleClass().add("Col_customer_contactPerson");
+//prepare column: CustomerPhone
+            JFXTreeTableColumn<CustomerDTO, String> customer_phone = new JFXTreeTableColumn<>("Telefon");
+            customer_phone.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, String> param) -> param.getValue().getValue().getPhoneProperty());
+            customer_phone.getStyleClass().add("Col_customer_phone");
             data = FXCollections.observableArrayList();
+//prepare column: CustomerFax
+            JFXTreeTableColumn<CustomerDTO, String> customer_fax = new JFXTreeTableColumn<>("Fax");
+            customer_fax.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, String> param) -> param.getValue().getValue().getFaxProperty());
+            customer_fax.getStyleClass().add("Col_customer_fax");
+//prepare column: CustomerEmail
+            JFXTreeTableColumn<CustomerDTO, String> customer_email = new JFXTreeTableColumn<>("E-Mail");
+            customer_email.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, String> param) -> param.getValue().getValue().getEmailProperty());
+            customer_email.getStyleClass().add("Col_customer_contactPerson");
 
             for (CustomerDTO customer : new CustomerDAO().selectAllCustomer()) {
                 data.add(customer);
@@ -134,60 +129,45 @@ public class FXML_Customer_DocumentController extends AnchorPane {
 
             final TreeItem<CustomerDTO> root;
             root = new RecursiveTreeItem<CustomerDTO>(data, RecursiveTreeObject::getChildren);
-            
-            tbl_view_customer.getColumns().setAll(customer_id, customer_name, customer_street, customer_zipCode);
+
+            tbl_view_customer.getColumns().setAll(
+                                                    customer_id, customer_name, customer_street, customer_zipCode, customer_city, customer_contactPerson,
+                                                    customer_phone, customer_fax, customer_email
+                                                  );
             tbl_view_customer.setRoot(root);
             tbl_view_customer.setShowRoot(false);
-            
-//            tbl_view_customer_street.setCellValueFactory(new PropertyValueFactory<>("street"));
-//            tbl_view_customer_zipcode.setCellValueFactory(new PropertyValueFactory<>("zipcode"));
-//            tbl_view_customer_city.setCellValueFactory(new PropertyValueFactory<>("city"));
-//            tbl_view_customer_contactperson.setCellValueFactory(new PropertyValueFactory<>("contactperson"));
-//            tbl_view_customer_phone.setCellValueFactory(new PropertyValueFactory<>("phone"));
-//            tbl_view_customer_fax.setCellValueFactory(new PropertyValueFactory<>("fax"));
-//            tbl_view_customer_email.setCellValueFactory(new PropertyValueFactory<>("email"));
-//
-//            tbl_view_customer.setItems(null);
-//            tbl_view_customer.setItems(data);
+                                    
+// add filter for customer name
+            tf_filter_name.textProperty().addListener(new ChangeListener<String>(){
+                @Override
+                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                   tbl_view_customer.setPredicate(new Predicate<TreeItem<CustomerDTO>>() {
+                       @Override
+                       public boolean test(TreeItem<CustomerDTO> customer) {
+                           Boolean flag = customer.getValue().getName().contains(newValue);
+                           return flag;
+                       }
+                   });
+                }
+            } );
+// add filter for customer contact person
+            tf_filter_contactPerson.textProperty().addListener(new ChangeListener<String>(){
+                @Override
+                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                   tbl_view_customer.setPredicate(new Predicate<TreeItem<CustomerDTO>>() {
+                       @Override
+                       public boolean test(TreeItem<CustomerDTO> customer) {
+                           Boolean flag = customer.getValue().getContactperson().contains(newValue);
+                           return flag;
+                       }
+                   });
+                }
+            } );            
         } catch (SQLException ex) {
             Logger.getLogger(FXML_Customer_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-//    /**
-//     * Initializes the controller class.
-//     */
-//    @Override
-//    public void initialize(URL url, ResourceBundle rb) {
-//        try {
-//            // TODO
-//            
-//
-//                data = FXCollections.observableArrayList();
-//
-//                for (CustomerDTO customer : new CustomerDAO().selectAllCustomer()) {
-//                    data.add(customer);
-//                }
-//
-//                tbl_view_customer_id.setCellValueFactory(new PropertyValueFactory<>("id"));
-//                tbl_view_customer_name.setCellValueFactory(new PropertyValueFactory<>("name"));
-//                tbl_view_customer_street.setCellValueFactory(new PropertyValueFactory<>("street"));
-//                tbl_view_customer_zipcode.setCellValueFactory(new PropertyValueFactory<>("zipcode"));
-//                tbl_view_customer_city.setCellValueFactory(new PropertyValueFactory<>("city"));
-//                tbl_view_customer_contactperson.setCellValueFactory(new PropertyValueFactory<>("contactperson"));
-//                tbl_view_customer_phone.setCellValueFactory(new PropertyValueFactory<>("phone"));
-//                tbl_view_customer_fax.setCellValueFactory(new PropertyValueFactory<>("fax"));
-//                tbl_view_customer_email.setCellValueFactory(new PropertyValueFactory<>("email"));
-//
-//                tbl_view_customer.setItems(null);
-//                tbl_view_customer.setItems(data);/
-//               
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(FXML_Customer_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//    }
-
+    
     @FXML
     private void btn_view_customer_OK_handler(ActionEvent event) {
         TreeItem<CustomerDTO> customer = tbl_view_customer.getSelectionModel().getSelectedItem();

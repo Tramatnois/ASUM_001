@@ -18,6 +18,20 @@ public class DBConnection extends DBConnector{
     private static DBConnection instance;
     private String driver;
     private String host;
+    
+    private final boolean isConnected;
+
+    public boolean IsConnected() {
+        return isConnected;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public String getDatabase() {
+        return database;
+    }
     private String database;
     private String username;
     private String password;
@@ -26,7 +40,7 @@ public class DBConnection extends DBConnector{
         //super("localhost", "asum_gmbh", "root", "");
         super();
         this.get_Properties();
-        this.connect(host,database,username,password);
+        isConnected = this.connect(host,database,username,password);
         
     }
     public static DBConnection getInstance() {

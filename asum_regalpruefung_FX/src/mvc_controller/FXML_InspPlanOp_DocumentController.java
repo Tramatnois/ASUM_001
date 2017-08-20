@@ -7,10 +7,6 @@ package mvc_controller;
 
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
-import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
@@ -22,24 +18,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Control;
-import javafx.scene.control.DateCell;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import javafx.util.Callback;
-import mvc_model.CustomerDTO;
 import mvc_model.InspectionPlanOperationDAO;
 import mvc_model.InspectionPlanOperationDTO;
 
@@ -142,58 +128,6 @@ public class FXML_InspPlanOp_DocumentController extends AnchorPane {
         }
     }
 
-//    /**
-//     * Initializes the controller class.
-//     */
-//    @Override
-//    public void initialize(URL url, ResourceBundle rb) {
-//        try {
-//            // TODO
-////prepare column: InspectionID
-//            JFXTreeTableColumn<InspectionPlanOperationDTO, Integer> inspection_id = new JFXTreeTableColumn<>("ID");
-//            inspection_id.setPrefWidth(50);
-//            //inspection_id.setPrefWidth(Control.USE_COMPUTED_SIZE);
-//            inspection_id.getStyleClass().add("col_inspection_id");
-//            inspection_id.setCellValueFactory((TreeTableColumn.CellDataFeatures<InspectionPlanOperationDTO, Integer> param) -> param.getValue().getValue().getIdProperty().asObject());
-//
-////prepare column: Inspection
-//            JFXTreeTableColumn<InspectionPlanOperationDTO, String> inspection = new JFXTreeTableColumn<>("Prüfplan");
-//            inspection.setCellValueFactory((TreeTableColumn.CellDataFeatures<InspectionPlanOperationDTO, String> param) -> param.getValue().getValue().getDescriptionProperty());
-//
-////prepare column: KundenID
-//            JFXTreeTableColumn<InspectionPlanOperationDTO, Integer> customer_id = new JFXTreeTableColumn<>("KundenID");
-//            customer_id.getStyleClass().add("col_customer_id");
-//            customer_id.setCellValueFactory((TreeTableColumn.CellDataFeatures<InspectionPlanOperationDTO, Integer> param) -> param.getValue().getValue().getIdProperty().asObject());
-//
-////prepare column: Kundenname
-//            JFXTreeTableColumn<InspectionPlanOperationDTO, String> customer = new JFXTreeTableColumn<>("Kunde");
-//            customer.setCellValueFactory((TreeTableColumn.CellDataFeatures<InspectionPlanOperationDTO, String> param) -> param.getValue().getValue().getCustomer().getNameProperty());
-//
-////prepare column: Status
-//            JFXTreeTableColumn<InspectionPlanOperationDTO, String> status = new JFXTreeTableColumn<>("Status");
-//            status.getStyleClass().add("col_status");
-//            status.setCellValueFactory((TreeTableColumn.CellDataFeatures<InspectionPlanOperationDTO, String> param) -> param.getValue().getValue().getInspectionPlanOperationStatus().getDescriptionProperty());
-//
-//            
-//            data = FXCollections.observableArrayList();
-//
-////            for (InspectionPlanOperationDTO inspplan_op : new InspectionPlanOperationDAO().selectAllFullLoadWithoutTemplate()) {
-//            for (InspectionPlanOperationDTO inspplan_op : new InspectionPlanOperationDAO().selectAllInspectionPlanOperations()) {
-//                data.add(inspplan_op);
-//            }
-//
-//            final TreeItem<InspectionPlanOperationDTO> root;
-//            root = new RecursiveTreeItem<InspectionPlanOperationDTO>(data, RecursiveTreeObject::getChildren);
-//
-//            tbl_view_inspplan_operation.getColumns().setAll(inspection_id, inspection, customer_id, customer, status);
-//            tbl_view_inspplan_operation.setRoot(root);
-//            tbl_view_inspplan_operation.setShowRoot(false);
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(FXML_InspPlanOp_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//    }
     public void setReference(FXML_Application_DocumentController controller) {
         this.fxml_application_controller = controller;
     }

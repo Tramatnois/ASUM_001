@@ -25,14 +25,16 @@ public abstract class DBConnector {
     private ArrayList<Statement> statementList = new ArrayList<Statement>();
 
     public DBConnector() {
-        
-    }
-    public final void connect(String host, String database, String user, String passwd) {
 
+    }
+
+    public final boolean connect(String host, String database, String user, String passwd) {
+        boolean isConnected = false;
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             String connectionCommand = "jdbc:mysql://" + host + "/" + database + "?user=" + user + "&password=" + passwd;
             connection = DriverManager.getConnection(connectionCommand);
+            isConnected = true;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -42,12 +44,12 @@ public abstract class DBConnector {
         } catch (IllegalAccessException ex) {
             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return isConnected;
     }
 
     public ResultSet selectStatement(String table) throws Throwable {
         Statement stmt = null;
         ResultSet rs = null;
-
 
         try {
             stmt = connection.createStatement();
@@ -60,7 +62,7 @@ public abstract class DBConnector {
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
         }
-        
+
         return rs;
     }
 
@@ -73,10 +75,10 @@ public abstract class DBConnector {
         try {
             connection.close();
             for (ResultSet rs : resultSetList) {
-                rs.close();                
+                rs.close();
             }
-            for (Statement stms :statementList) {
-                stms.close();                
+            for (Statement stms : statementList) {
+                stms.close();
             }
 
         } catch (SQLException ex) {
