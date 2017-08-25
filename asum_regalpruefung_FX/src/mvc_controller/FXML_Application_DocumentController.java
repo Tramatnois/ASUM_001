@@ -5,34 +5,23 @@
  */
 package mvc_controller;
 
-import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import java.io.IOException;
-import java.sql.Connection;
-import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.ActionEvent;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.GaussianBlur;
-import javafx.scene.effect.PerspectiveTransform;
-import javafx.scene.effect.Reflection;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import mvc_model.CustomerDTO;
 import mvc_model_sqlconnector.DBConnection;
 
 /**
@@ -40,52 +29,40 @@ import mvc_model_sqlconnector.DBConnection;
  *
  * @author tramatnois
  */
-public class FXML_Application_DocumentController extends BorderPane {
+public class FXML_Application_DocumentController extends StackPane {
 
-    @FXML
-    private VBox VBox_Top_left;
-    @FXML
-    private VBox VBox_Top_Center;
-    @FXML
-    private VBox VBox_Top_Right;
-    @FXML
-    private TableView<CustomerDTO> tableView_inspResults;
-    @FXML
-    private TableColumn<CustomerDTO, Integer> clm_pos;
-    @FXML
-    private TableColumn<CustomerDTO, String> clm_characteristic;
-    @FXML
-    private TableColumn<CustomerDTO, Integer> clm_yes;
-    @FXML
-    private TableColumn<CustomerDTO, Integer> clm_neutral;
-    @FXML
-    private TableColumn<CustomerDTO, Integer> clm_no;
-    @FXML
-    private TableColumn<CustomerDTO, Boolean> clm_comments;
-    @FXML
-    private TextField tf_inspectionType;
-    @FXML
-    private TextField tf_customer_name;
-    @FXML
-    private JFXDrawer drawer;
-    @FXML
-    public JFXDrawer drawerCustomerView;
-    @FXML
-    private JFXHamburger hamburger;
-    @FXML
-    private JFXDatePicker tf_datepicker;
-    @FXML
-    private TextField tf_connected;
-    @FXML
-    private Button btn_show_all_inspplan_operations;
-    @FXML
-    private Button btn_load_customer;
     @FXML
     private AnchorPane rootPane;
     @FXML
-    private AnchorPane subPane;
-//    @FXML
-//    private AnchorPane customerPane;
+    private AnchorPane contentPane;
+
+    public AnchorPane getContentPane() {
+        return contentPane;
+    }
+    @FXML
+    private JFXDrawer drawerSlideMenue;
+
+    public JFXDrawer getDrawerSlideMenue() {
+        return drawerSlideMenue;
+    }
+
+    @FXML
+    private JFXHamburger hamburger;
+
+    @FXML
+    private HBox hoxImages;
+
+    @FXML
+    private ImageView imgInfo;
+
+    @FXML
+    private ImageView imgHome;
+
+    @FXML
+    private ImageView imgExit;
+
+    @FXML
+    private TextField tf_connected;
 
     private static FXML_Application_DocumentController instance;
     private static Stage inspPlanOpStage;
@@ -93,9 +70,24 @@ public class FXML_Application_DocumentController extends BorderPane {
 
     protected DBConnection connection;
 
+    private FXML_Application_DocumentController home;
+    private FXML_SidePanel_DocumentController sideMenu;
+    private CustomerController customer;
+
+    public CustomerController getCustomer() {
+        return customer;
+    }
+    private FXML_InspPlanOp_DocumentController inspectionPlanOperations;
+
+    public FXML_InspPlanOp_DocumentController getInspectionPlanOperations() {
+        return inspectionPlanOperations;
+    }
+
     /**
      * Statische Methode 'getInstance()Ä liefert die einzige Instanz der Klasse
      * zurück. Ist synchronisiert und somit thread-sicher.
+     *
+     * @return
      */
     public synchronized static FXML_Application_DocumentController getInstance() {
         if (instance == null) {
@@ -116,21 +108,38 @@ public class FXML_Application_DocumentController extends BorderPane {
         loader.setController(this);
 // Load the FXML document. When this succeeds, the @FXML attributes will be ready to use.
         try {
-            loader.load();
+            home = loader.load();
         } catch (IOException ex) {
-            //Logger.getLogger(FXML_Application_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
             Logger.getLogger(FXML_Application_DocumentController.class.getName()).log(Level.SEVERE, "Unable to load FXML_Application_Document.fxml", ex);
         }
         initialize();
     }
 
     private void initialize() {
-        try {
-            HBox box = FXMLLoader.load(getClass().getResource("/mvc_view_application/SidePanelContent.fxml"));
-            drawer.setSidePane(box);
-        } catch (IOException ex) {
-            Logger.getLogger(FXML_Application_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        this.sideMenu = FXML_SidePanel_DocumentController.getInstance(); //Logger.getLogger(FXML_StorageRackInsp_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        sideMenu.setOnMouseClicked(e -> System.out.println("MouseClick: sideMenu"));
+        drawerSlideMenue.setSidePane(sideMenu);
+        
+//        for (Node node : sideMenu.getChildren()){
+//            if (node.getAccessibleText() != null) {
+//                node.addEventHandler(MouseEvent.MOUSE_CLICKED, (eventHandler) -> {
+//                    switch (node.getAccessibleText()) {
+//                        case "showCustomer":
+//                            contentPane.getChildren().clear();
+//                            contentPane.getChildren().add((Node) customer);
+//                            break;
+//                    }
+//                });
+//            }
+//        }
+
+        this.customer = CustomerController.getInstance();
+//        customer.setOnMouseClicked(e -> System.out.println("MouseClick: customer"));
+//        customer.setPickOnBounds(false);
+        this.inspectionPlanOperations = FXML_InspPlanOp_DocumentController.getInstance();
+        
+        sideMenu.setReference(this);
 
         HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburger);
         transition.setRate(-1);
@@ -138,28 +147,19 @@ public class FXML_Application_DocumentController extends BorderPane {
             transition.setRate(transition.getRate() * -1);
             transition.play();
 
-            if (drawer.isShown()) {
-                drawer.close();
+            if (drawerSlideMenue.isShown()) {
+                drawerSlideMenue.close();
             } else {
-                drawer.open();
+                drawerSlideMenue.open();
             }
         });
-//        tf_date.setText(new SimpleDateFormat("dd.MM.yyyy").format(new Date()));
-        tf_datepicker.setValue(LocalDate.now());
-// check the database connection
         connection = DBConnection.getInstance();
         DropShadow dropShadow = new DropShadow();
-        if (connection.IsConnected()) {
-            tf_connected.setText(connection.getHost() + "." + connection.getDatabase());
+        tf_connected.setText(connection.getHost() + "." + connection.getDatabase());
 //            dropShadow.setColor(Color.GREEN);
-//            tf_connected.setEffect(dropShadow);
-            tf_connected.setStyle("-fx-background-color: #009688;-fx-text-fill: white;");            
-        } else {
-            tf_connected.setText("connection failure");
-            dropShadow.setOffsetY(3.0f);
-            dropShadow.setColor(Color.RED);
-            tf_connected.setEffect(dropShadow);
-        }
+        tf_connected.setEffect(dropShadow);
+        tf_connected.setStyle("-fx-background-color: #009688;-fx-text-fill: white;");
+
     }
 
     public Stage getCustomerStage() {
@@ -178,114 +178,19 @@ public class FXML_Application_DocumentController extends BorderPane {
         FXML_Application_DocumentController.inspPlanOpStage = inspPlanOpStage;
     }
 
-    /**
-     * Initializes the controller class.
-     */
-//    @Override
-//    public void initialize(URL url, ResourceBundle rb) {
-//        // TODO
-//
-//        try {
-//            VBox box = FXMLLoader.load(getClass().getResource("/mvc_view_application/SidePanelContent.fxml"));
-//            drawer.setSidePane(box);
-//        } catch (IOException ex) {
-//            Logger.getLogger(FXML_Application_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburger);
-//        transition.setRate(-1);
-//        hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
-//            transition.setRate(transition.getRate() * -1);
-//            transition.play();
-//
-//            if (drawer.isShown()) {
-//                drawer.close();
-//            } else {
-//                drawer.open();
-//            }
-//        });
-////        tf_date.setText(new SimpleDateFormat("dd.MM.yyyy").format(new Date()));
-//        tf_datepicker.setValue(LocalDate.now());
-//    }
     @FXML
-    private void btn_load_customer_handler(ActionEvent event) {
-//        try {
-//            Parent root;
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mvc_view_application/FXML_Customer_Document.fxml"));
-//            root = (Parent) loader.load();
-//        loadFXML("/mvc_view_application/FXML_Customer_Document.fxml");
-//// get the FXML_Customer_DocumentController and set the current FXML_Application_DocumentController           
-//            FXML_Customer_DocumentController controller = (FXML_Customer_DocumentController) loader.getController();
-//            controller.setReference(this);
-//// get Singleton Customer Stage
-//            customerStage = new Stage();
-//
-//            Scene scene = new Scene(root);
-//            customerStage.setScene(scene);
-//            customerStage.show();
-//        } catch (IOException ex) {
-//            Logger.getLogger(FXML_Application_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+    private void btn_exit_handler(MouseEvent event) {
+        Platform.exit();
+    }
 
-        FXML_Customer_DocumentController customerPane = FXML_Customer_DocumentController.getInstance();
-        customerPane.setReference(this);
-
-        //this.getChildren().add(customerPane);
-//        if (customerStage == null) {
-//            customerStage = new Stage();
-//            Scene scene = new Scene(customerPane);
-//            customerStage.setScene(scene);
-//            customerStage.show();
-//        } else {
-//            if (!customerStage.isFocused()) {
-//                customerStage.requestFocus();
-//            }
-//        }
-        drawerCustomerView.setSidePane(customerPane);
-        if (drawerCustomerView.isShown()) {
-            drawerCustomerView.close();
-        } else {
-            drawerCustomerView.open();
-        }
+    @FXML
+    private void btn_goHome_handler(MouseEvent event) {
 
     }
 
     @FXML
-    private void btn_show_all_inspplan_operations_handler(ActionEvent event) {
-//        try {
-//            Parent root;
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mvc_view_application/FXML_InspPlanOp_Document.fxml"));
-//            root = (Parent) loader.load();
-//
-//// get the FXML_InspPlanOp_DocumentController and set the current FXML_Application_DocumentController           
-//            FXML_InspPlanOp_DocumentController controller = (FXML_InspPlanOp_DocumentController) loader.getController();
-//            controller.setReference(this);
-//// get Singleton Customer Stage
-//            FXML_Application_DocumentController.getInstance().setInspPlanOpStage(inspPlanOpStage);
-//            Scene scene = new Scene(root);
-//            inspPlanOpStage.setScene(scene);
-//            inspPlanOpStage.show();
-//        } catch (IOException ex) {
-//            Logger.getLogger(FXML_Application_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        FXML_InspPlanOp_DocumentController inspPlanOpPane = FXML_InspPlanOp_DocumentController.getInstance();
-        inspPlanOpPane.setReference(this);
-        drawerCustomerView.setSidePane(inspPlanOpPane);
-        if (drawerCustomerView.isShown()) {
-            drawerCustomerView.close();
-        } else {
-            drawerCustomerView.open();
-        }
+    private void btn_showInfo_handler(MouseEvent event) {
 
     }
 
-    public void setCustomername(String name) {
-        System.out.println(name);
-        tf_customer_name.setText(name);
-    }
-
-    public void setInspectionPlanOperation(String name) {
-        System.out.println(name);
-        tf_inspectionType.setText(name);
-    }
 }

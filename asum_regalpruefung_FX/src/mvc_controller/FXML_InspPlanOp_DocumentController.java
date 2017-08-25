@@ -49,7 +49,7 @@ public class FXML_InspPlanOp_DocumentController extends AnchorPane {
     @FXML
     private AnchorPane ap_inspplan_operation;
 
-    private FXML_Application_DocumentController fxml_application_controller;
+    private FXML_StorageRackInsp_DocumentController fxml_application_controller;
     private static FXML_InspPlanOp_DocumentController instance;
 
     /**
@@ -76,8 +76,8 @@ public class FXML_InspPlanOp_DocumentController extends AnchorPane {
         try {
             loader.load();
         } catch (IOException ex) {
-            //Logger.getLogger(FXML_Application_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
-            Logger.getLogger(FXML_Application_DocumentController.class.getName()).log(Level.SEVERE, "Unable to load FXML_Customer_Document.fxml", ex);
+            //Logger.getLogger(FXML_StorageRackInsp_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FXML_StorageRackInsp_DocumentController.class.getName()).log(Level.SEVERE, "Unable to load FXML_Customer_Document.fxml", ex);
         }
         initialize();
     }
@@ -128,7 +128,7 @@ public class FXML_InspPlanOp_DocumentController extends AnchorPane {
         }
     }
 
-    public void setReference(FXML_Application_DocumentController controller) {
+    public void setReference(FXML_StorageRackInsp_DocumentController controller) {
         this.fxml_application_controller = controller;
     }
 
@@ -152,7 +152,7 @@ public class FXML_InspPlanOp_DocumentController extends AnchorPane {
             this.fxml_application_controller.setInspectionPlanOperation(inspplan_operation.getValue().getDescription());
 //            Stage stage = (Stage) ap_inspplan_operation.getScene().getWindow();
 //            stage.close();
-            this.fxml_application_controller.drawerCustomerView.close();
+            this.fxml_application_controller.drawerContentView.close();
 
         }
 
