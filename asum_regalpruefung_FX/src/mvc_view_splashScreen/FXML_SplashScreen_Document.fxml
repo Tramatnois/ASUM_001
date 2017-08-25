@@ -25,7 +25,7 @@
                <Font name="Bauhaus 93" size="24.0" />
             </font>
          </Label>
-         <Label fx:id="lbl_welcome" layoutX="258.0" layoutY="217.0" prefHeight="77.0" prefWidth="257.0" text="Hallo Du! Willkommen" textFill="WHITE" wrapText="true">
+         <Label fx:id="lbl_welcome" layoutX="228.0" layoutY="220.0" prefHeight="77.0" prefWidth="274.0" text="Hallo Falk! Willkommen" textFill="WHITE" wrapText="true">
             <font>
                <Font name="Hannotate SC Regular" size="26.0" />
             </font>
