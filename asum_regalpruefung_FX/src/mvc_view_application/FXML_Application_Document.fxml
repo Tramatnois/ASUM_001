@@ -1,239 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXToolbar?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<fx:root type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-   <AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="158.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
-      <children>
-         <VBox layoutY="41.0" prefHeight="115.0" prefWidth="1280.0" stylesheets="@fxml_application_document.css">
-            <children>
-               <AnchorPane prefHeight="95.0" prefWidth="600.0">
-                  <children>
-                     <HBox prefHeight="138.0" prefWidth="1280.0">
-                        <children>
-                           <VBox fx:id="VBox_Top_left" prefHeight="62.0" prefWidth="344.0">
-                              <children>
-                                 <Label prefHeight="17.0" prefWidth="248.0" text="Auftraggeber:">
-                                    <VBox.margin>
-                                       <Insets left="3.0" />
-                                    </VBox.margin>
-                                    <font>
-                                       <Font size="20.0" />
-                                    </font>
-                                 </Label>
-                                 <HBox prefHeight="27.0" prefWidth="253.0">
-                                    <children>
-                                       <TextField fx:id="tf_customer_name" disable="true" prefHeight="27.0" prefWidth="296.0">
-                                          <HBox.margin>
-                                             <Insets left="3.0" top="2.0" />
-                                          </HBox.margin>
-                                       </TextField>
-                                       <Button fx:id="btn_load_customer" maxWidth="10.0" mnemonicParsing="false" onAction="#btn_load_customer_handler" text="Button">
-                                          <HBox.margin>
-                                             <Insets top="2.0" />
-                                          </HBox.margin>
-                                       </Button>
-                                    </children>
-                                 </HBox>
-                                 <Label prefHeight="23.0" prefWidth="202.0" text="Regalnummer:">
-                                    <VBox.margin>
-                                       <Insets left="3.0" />
-                                    </VBox.margin>
-                                    <font>
-                                       <Font size="20.0" />
-                                    </font>
-                                 </Label>
-                                 <HBox prefHeight="34.0" prefWidth="231.0">
-                                    <children>
-                                       <TextField disable="true" prefHeight="27.0" prefWidth="295.0">
-                                          <HBox.margin>
-                                             <Insets left="3.0" top="2.0" />
-                                          </HBox.margin>
-                                       </TextField>
-                                       <Button maxWidth="10.0" mnemonicParsing="false" text="Button">
-                                          <HBox.margin>
-                                             <Insets top="2.0" />
-                                          </HBox.margin>
-                                       </Button>
-                                    </children>
-                                 </HBox>
-                              </children>
-                              <opaqueInsets>
-                                 <Insets />
-                              </opaqueInsets>
-                              <HBox.margin>
-                                 <Insets left="10.0" top="10.0" />
-                              </HBox.margin>
-                           </VBox>
-                           <VBox fx:id="VBox_Top_Center" prefHeight="101.0" prefWidth="776.0">
-                              <children>
-                                 <Label alignment="CENTER" disable="true" prefHeight="17.0" prefWidth="792.0" text="Art der Prüfung" visible="false">
-                                    <VBox.margin>
-                                       <Insets left="3.0" />
-                                    </VBox.margin>
-                                    <font>
-                                       <Font size="29.0" />
-                                    </font>
-                                 </Label>
-                                 <HBox alignment="CENTER" prefHeight="41.0" prefWidth="733.0">
-                                    <children>
-                                       <TextField fx:id="tf_inspectionType" disable="true" prefHeight="41.0" prefWidth="542.0" text="Regalprüfung nach DIN EN 15635">
-                                          <font>
-                                             <Font size="21.0" />
-                                          </font>
-                                          <HBox.margin>
-                                             <Insets right="5.0" />
-                                          </HBox.margin>
-                                       </TextField>
-                                       <Button fx:id="btn_show_all_inspplan_operations" maxWidth="40.0" mnemonicParsing="false" onAction="#btn_show_all_inspplan_operations_handler" prefHeight="41.0" prefWidth="40.0" text="Button">
-                                          <HBox.margin>
-                                             <Insets />
-                                          </HBox.margin>
-                                       </Button>
-                                    </children>
-                                 </HBox>
-                                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                    <children>
-                                       <Button layoutX="131.0" layoutY="14.0" mnemonicParsing="false" text="Neue Prüfung" />
-                                       <Button layoutX="379.0" layoutY="15.0" mnemonicParsing="false" text="Alte Prüfungen als Vorlage nutzen" />
-                                       <Button layoutX="252.0" layoutY="14.0" mnemonicParsing="false" text="Alte Prüfungen" />
-                                    </children>
-                                 </AnchorPane>
-                              </children>
-                           </VBox>
-                           <VBox fx:id="VBox_Top_Right" layoutX="316.0" layoutY="15.0" maxHeight="98.0" prefHeight="98.0" prefWidth="249.0" styleClass="VBox_Top_Right">
-                              <children>
-                                 <VBox prefHeight="200.0" prefWidth="100.0" styleClass="VBox_Inspector">
-                                    <children>
-                                       <Label text="ASUM GmbH">
-                                          <font>
-                                             <Font name="System Bold Italic" size="18.0" />
-                                          </font>
-                                          <VBox.margin>
-                                             <Insets left="5.0" top="3.0" />
-                                          </VBox.margin>
-                                       </Label>
-                                       <Label text="Hindenburgstraße 30">
-                                          <font>
-                                             <Font name="System Bold Italic" size="18.0" />
-                                          </font>
-                                          <VBox.margin>
-                                             <Insets left="5.0" />
-                                          </VBox.margin>
-                                       </Label>
-                                       <HBox prefHeight="100.0" prefWidth="190.0">
-                                          <children>
-                                             <Label text="73230">
-                                                <font>
-                                                   <Font name="System Bold Italic" size="18.0" />
-                                                </font>
-                                                <HBox.margin>
-                                                   <Insets left="5.0" />
-                                                </HBox.margin>
-                                             </Label>
-                                             <Label text="Kirchheim">
-                                                <font>
-                                                   <Font name="System Bold Italic" size="18.0" />
-                                                </font>
-                                                <HBox.margin>
-                                                   <Insets left="10.0" />
-                                                </HBox.margin>
-                                             </Label>
-                                          </children>
-                                       </HBox>
-                                    </children>
-                                 </VBox>
-                                 <VBox prefHeight="200.0" prefWidth="100.0">
-                                    <children>
-                                       <HBox>
-                                          <VBox.margin>
-                                             <Insets top="5.0" />
-                                          </VBox.margin>
-                                          <children>
-                                             <JFXDatePicker fx:id="tf_datepicker" editable="false" />
-                                          </children>
-                                       </HBox>
-                                    </children>
-                                 </VBox>
-                              </children>
-                              <HBox.margin>
-                                 <Insets left="5.0" right="5.0" top="5.0" />
-                              </HBox.margin>
-                              <padding>
-                                 <Insets left="5.0" right="5.0" />
-                              </padding>
-                           </VBox>
-                        </children>
-                        <padding>
-                           <Insets top="5.0" />
-                        </padding>
-                     </HBox>
-                  </children>
-               </AnchorPane>
-            </children>
-         </VBox>
-         <JFXDrawer fx:id="drawer" defaultDrawerSize="200.0" direction="TOP" overLayVisible="false" prefHeight="45.0" prefWidth="1067.0" />
-         <JFXHamburger fx:id="hamburger" layoutX="1225.0" layoutY="14.0" />
-      </children>
-   </AnchorPane>
-   </top>
-   <center>
-   <ScrollPane BorderPane.alignment="CENTER">
-     <content>
-       <AnchorPane>
-            <children>
-               <TableView fx:id="tableView_inspResults">
-                 <columns>
-                   <TableColumn fx:id="clm_pos" prefWidth="75.0" text="POS." />
-                   <TableColumn fx:id="clm_characteristic" prefWidth="817.0" />
-                     <TableColumn fx:id="clm_yes" minWidth="0.0" prefWidth="89.0" text="JA" />
-                     <TableColumn fx:id="clm_neutral" prefWidth="74.0" text="-" />
-                     <TableColumn fx:id="clm_no" prefWidth="107.0" text="NEIN" />
-                     <TableColumn fx:id="clm_comments" minWidth="2.0" prefWidth="111.0" text="KOMM." />
-                 </columns>
-               </TableView>
-                  <AnchorPane>
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1300.0" stylesheets="@../styles/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane fx:id="borderPane" prefHeight="720.0" prefWidth="1300.0">
+         <center>
+            <AnchorPane prefWidth="1300.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane fx:id="contentPane" layoutY="1.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <AnchorPane style="-fx-background-radius: 50px;">
                      <children>
-                        <JFXDrawer fx:id="drawerCustomerView" alignment="BOTTOM_CENTER" defaultDrawerSize="900.0" direction="BOTTOM" overLayVisible="false" prefHeight="25.0" prefWidth="739.0" />
+                     <JFXDrawer fx:id="drawerSlideMenue" defaultDrawerSize="200.0" overLayVisible="false" />
                      </children>
+                     <effect>
+                        <DropShadow color="#030303" />
+                     </effect>
                   </AnchorPane>
-            </children>
-         </AnchorPane>
-     </content>
-   </ScrollPane>
-   </center>
-   <bottom>
-      <HBox alignment="BOTTOM_RIGHT" prefHeight="0.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label alignment="BOTTOM_LEFT" contentDisplay="BOTTOM" prefHeight="86.0" prefWidth="82.0" text="connected to:">
-               <font>
-                  <Font name="System Bold Italic" size="12.0" />
-               </font>
-            </Label>
-            <TextField fx:id="tf_connected" editable="false" mouseTransparent="true" prefHeight="8.0" prefWidth="145.0" text="Database">
-               <HBox.margin>
-                  <Insets right="15.0" />
-               </HBox.margin>
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </TextField>
-         </children>
-      </HBox>
-   </bottom>
+               </children>
+            </AnchorPane>
+         </center>
+         <bottom>
+            <AnchorPane prefWidth="1300.0" BorderPane.alignment="BOTTOM_CENTER">
+               <children>
+                  <HBox alignment="CENTER" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1118.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="79.0" text="connected to:">
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tf_connected" editable="false" mouseTransparent="true" text="Database">
+                           <HBox.margin>
+                              <Insets right="15.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </bottom>
+         <top>
+            <JFXToolbar prefWidth="1300.0" styleClass="Toolbar" BorderPane.alignment="CENTER">
+               <right>
+                  <AnchorPane BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox fx:id="hoxImages" alignment="CENTER" layoutY="21.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <ImageView fx:id="imgInfo" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#btn_showInfo_handler" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/Circle%20Info%20-%2001.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                              <ImageView fx:id="imgHome" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#btn_goHome_handler" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/Home.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                              <ImageView fx:id="imgExit" fitHeight="20.0" fitWidth="20.0" layoutX="35.0" layoutY="10.0" onMouseClicked="#btn_exit_handler" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/Exit%20-%2002.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="107.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="107.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <image>
+                              <Image url="@../images/admin.png" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="152.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="155.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.953125">
+                           <font>
+                              <Font name="Roboto Light" size="14.0" />
+                           </font>
+                        </Text>
+                     </children>
+                     <padding>
+                        <Insets right="25.0" top="5.0" />
+                     </padding>
+                  </AnchorPane>
+               </right>
+               <left>
+                  <JFXHamburger fx:id="hamburger" prefWidth="94.0" BorderPane.alignment="CENTER" />
+               </left>
+            </JFXToolbar>
+         </top>
+      </BorderPane>
+   </children>
 </fx:root>

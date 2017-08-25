@@ -2,8 +2,9 @@
  * Empty Stylesheet file.
  */
 
-.mainFxmlClass {
-
+.Toolbar {
+    -fx-pref-height:50px;
+    -fx-background-color:  #FFA500;
 }
 .VBox_Inspector {
     -fx-border-radius: 5;
@@ -13,6 +14,10 @@
 .date-picker-display-node{
     -fx-alignment:CENTER;
 }
-.jfx-hamburger{
-    
+.jfx-hamburger {
+	-fx-background-color:  #FFA500;
+}
+
+.jfx-hamburger StackPane {
+	-fx-background-color: white;
 }

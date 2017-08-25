@@ -14,9 +14,9 @@ class CharacteristicOperationDTO {
     private String description;
     private int position;
     private InspectionPlanOperationDTO inspectionPlan;
-    private CharacteristicTypeDAO characteristicType;
+    private CharacteristicTypeDTO characteristicType;
     private CharacteristicGroupOperationDTO characteristicgroup;
-    private InspectionResultDTO restult;
+    private InspectionResultDTO result;
     private InspectionOperationCommentDTO comment;
 
     public int getId() {
@@ -51,11 +51,11 @@ class CharacteristicOperationDTO {
         this.inspectionPlan = inspectionPlan;
     }
 
-    public CharacteristicTypeDAO getCharacteristicType() {
+    public CharacteristicTypeDTO getCharacteristicType() {
         return characteristicType;
     }
 
-    public void setCharacteristicType(CharacteristicTypeDAO characteristicType) {
+    public void setCharacteristicType(CharacteristicTypeDTO characteristicType) {
         this.characteristicType = characteristicType;
     }
 
@@ -68,11 +68,11 @@ class CharacteristicOperationDTO {
     }
 
     public InspectionResultDTO getRestult() {
-        return restult;
+        return result;
     }
 
     public void setRestult(InspectionResultDTO restult) {
-        this.restult = restult;
+        this.result = restult;
     }
 
     public InspectionOperationCommentDTO getComment() {

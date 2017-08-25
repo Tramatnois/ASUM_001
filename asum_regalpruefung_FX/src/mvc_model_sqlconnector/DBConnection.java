@@ -19,9 +19,10 @@ public class DBConnection extends DBConnector{
     private String driver;
     private String host;
     
-    private final boolean isConnected;
+    private boolean isConnected;
 
     public boolean IsConnected() {
+        isConnected = this.connect(host,database,username,password);
         return isConnected;
     }
 

@@ -2,7 +2,7 @@
  * Empty Stylesheet file.
  */
 
-.CustomerPane {
+.InspPlanOpPane {
     /*-fx-background-color: skyblue, derive(skyblue, 25%);  set background to skyblue */
     /*-fx-background-insets: 0, 20;*/
     -fx-background-radius: 10, 10;
@@ -13,6 +13,7 @@
     -fx-border-width: 5, 5 0 5 0;
     
 }
+
 .tree-table-view{
     -fx-tree-table-color: rgba(0, 150, 0, 0.8);
     -fx-tree-table-rippler-color : rgba(255, 0, 0, 0.9);
@@ -93,3 +94,20 @@
       /*-fx-alignment: CENTER;*/
       /*-fx-text-alignment: center;*/
 }
+.col_inspection_id {
+    -fx-alignment: CENTER;
+}
+.col_customer_id {
+    -fx-alignment: CENTER;
+}
+/*.DatePickerASUM > .arrow-button {
+    -fx-padding: 0px;
+    visibility: hidden;
+}
+.DatePickerASUM > .arrow-button > .arrow {
+    -fx-padding: 0px;
+    visibility: hidden;
+}
+.DatePickerASUM > .date-picker-display-node {
+    -fx-backgroud-insets: 1 1 1 1;
+}*/

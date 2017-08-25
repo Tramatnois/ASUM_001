@@ -10,10 +10,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root styleClass="CustomerPane" stylesheets="@fxml_customer_document.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root styleClass="CustomerPane" stylesheets="@../styles/customer.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
 <BorderPane fx:id="borderPane">
    <center>
-      <JFXTreeTableView fx:id="tbl_view_customer" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+      <JFXTreeTableView fx:id="tbl_view_customer" prefHeight="400.0" prefWidth="950.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
             <BorderPane.margin>
                <Insets bottom="10.0" left="25.0" right="15.0" top="10.0" />
             </BorderPane.margin>

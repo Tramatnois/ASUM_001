@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<fx:root styleClass="InspResultsPane" stylesheets="@fxml_inspection_results_document.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <BorderPane>
+      <center>
+         <AnchorPane BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+               <Insets bottom="10.0" left="25.0" right="15.0" top="10.0" />
+            </BorderPane.margin>
+            <children>
+               <JFXTabPane />
+               <JFXTreeTableView fx:id="tbl_view_inspResults" onMouseClicked="#tbl_view_inspplan_operation_handler" prefHeight="400.0" prefWidth="600.0" />
+            </children>
+         </AnchorPane>
+      </center>
+   </BorderPane>
+</fx:root>

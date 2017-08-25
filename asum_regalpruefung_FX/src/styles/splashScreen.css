@@ -1,0 +1,31 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.SplashScreen {
+    -fx-background-color: #00a75f;
+}
+
+/*NotificationPane Styling*/
+.notification-pane.dark .notification-bar > .pane {
+    -fx-background-color: #ff7878;
+}
+
+.notification-pane.dark .notification-bar > .pane .close-button {
+    
+}
+
+.WarningIcon{
+    /*-glyph-name: "WARNING";*/
+    -icons-color: white;
+    -fx-fill: linear-gradient(-icons-color 0%, 
+        derive(-icons-color, 100%) 30%, derive(whitesmoke, 30%) 85%);
+}
+.StartButton{
+    -fx-background-color:  #FFA500;
+    -fx-background-radius: 50px;
+}
+.RetryButton{
+    -fx-background-color:  #ff7878;
+    -fx-background-radius: 50px;
+}
