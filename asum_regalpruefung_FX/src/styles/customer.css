@@ -124,7 +124,7 @@
 }
 
 .tree-table-row-cell:selected {
-    -fx-background-color: #00a75f;
+    -fx-background-color: #FFA500;
     -fx-background-insets: 0, 1, 2;
 }
 
@@ -134,7 +134,7 @@
 }
 
 .tree-table-row-cell:selected:odd {
-    -fx-background-color: #00a75f;
+    -fx-background-color: #FFA500;
     -fx-background-insets: 0, 1, 2;
 }
 

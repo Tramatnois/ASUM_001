@@ -29,7 +29,7 @@ import mvc_model_sqlconnector.DBConnection;
  *
  * @author tramatnois
  */
-public class FXML_Application_DocumentController extends StackPane {
+public class Application_Controller extends StackPane {
 
     @FXML
     private AnchorPane rootPane;
@@ -64,14 +64,14 @@ public class FXML_Application_DocumentController extends StackPane {
     @FXML
     private TextField tf_connected;
 
-    private static FXML_Application_DocumentController instance;
+    private static Application_Controller instance;
     private static Stage inspPlanOpStage;
     private static Stage customerStage;
 
     protected DBConnection connection;
 
-    private FXML_Application_DocumentController home;
-    private FXML_SidePanel_DocumentController sideMenu;
+    private Application_Controller home;
+    private SidePanel_Controller sideMenu;
     private CustomerController customer;
 
     public CustomerController getCustomer() {
@@ -89,9 +89,9 @@ public class FXML_Application_DocumentController extends StackPane {
      *
      * @return
      */
-    public synchronized static FXML_Application_DocumentController getInstance() {
+    public synchronized static Application_Controller getInstance() {
         if (instance == null) {
-            instance = new FXML_Application_DocumentController();
+            instance = new Application_Controller();
         }
         return instance;
     }
@@ -99,7 +99,7 @@ public class FXML_Application_DocumentController extends StackPane {
     /**
      * Konstruktor ist privat, Klasse darf nicht von außen instanziiert werden.
      */
-    private FXML_Application_DocumentController() {
+    private Application_Controller() {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/mvc_view_application/FXML_Application_Document.fxml"));
 // Tell the loader that this object is the BorderPane we've designed in FXML.
@@ -110,17 +110,17 @@ public class FXML_Application_DocumentController extends StackPane {
         try {
             home = loader.load();
         } catch (IOException ex) {
-            Logger.getLogger(FXML_Application_DocumentController.class.getName()).log(Level.SEVERE, "Unable to load FXML_Application_Document.fxml", ex);
+            Logger.getLogger(Application_Controller.class.getName()).log(Level.SEVERE, "Unable to load FXML_Application_Document.fxml", ex);
         }
         initialize();
     }
 
     private void initialize() {
 
-        this.sideMenu = FXML_SidePanel_DocumentController.getInstance(); //Logger.getLogger(FXML_StorageRackInsp_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        this.sideMenu = SidePanel_Controller.getInstance(); //Logger.getLogger(FXML_StorageRackInsp_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
         sideMenu.setOnMouseClicked(e -> System.out.println("MouseClick: sideMenu"));
         drawerSlideMenue.setSidePane(sideMenu);
-        
+
 //        for (Node node : sideMenu.getChildren()){
 //            if (node.getAccessibleText() != null) {
 //                node.addEventHandler(MouseEvent.MOUSE_CLICKED, (eventHandler) -> {
@@ -133,12 +133,11 @@ public class FXML_Application_DocumentController extends StackPane {
 //                });
 //            }
 //        }
-
         this.customer = CustomerController.getInstance();
 //        customer.setOnMouseClicked(e -> System.out.println("MouseClick: customer"));
 //        customer.setPickOnBounds(false);
         this.inspectionPlanOperations = FXML_InspPlanOp_DocumentController.getInstance();
-        
+
         sideMenu.setReference(this);
 
         HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburger);
@@ -167,7 +166,7 @@ public class FXML_Application_DocumentController extends StackPane {
     }
 
     public void setCustomerStage(Stage customerStage) {
-        FXML_Application_DocumentController.customerStage = customerStage;
+        Application_Controller.customerStage = customerStage;
     }
 
     public Stage getInspPlanOpStage() {
@@ -175,7 +174,7 @@ public class FXML_Application_DocumentController extends StackPane {
     }
 
     public void setInspPlanOpStage(Stage inspPlanOpStage) {
-        FXML_Application_DocumentController.inspPlanOpStage = inspPlanOpStage;
+        Application_Controller.inspPlanOpStage = inspPlanOpStage;
     }
 
     @FXML

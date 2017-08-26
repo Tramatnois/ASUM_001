@@ -28,7 +28,7 @@
                       <children>
                           <AnchorPane fx:id="holderAnchor" prefHeight="621.0" prefWidth="1300.0">
                               <children>
-                                  <JFXTreeTableView fx:id="tbl_view_customer" layoutX="24.0" layoutY="173.0" prefHeight="448.0" prefWidth="868.0">
+                                  <JFXTreeTableView fx:id="tbl_view_customer" layoutX="28.0" layoutY="174.0" onMouseClicked="#tbl_view_customer_handler" prefHeight="440.0" prefWidth="868.0">
                               <columnResizePolicy>
                                  <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                               </columnResizePolicy>
@@ -43,10 +43,10 @@
                                                               <children>
                                                                   <ImageView fitHeight="180.0" fitWidth="314.0" pickOnBounds="true">
                                                                       <image>
-                                                                          <Image url="@../images/background.png" />
+                                                                          <Image url="@../images/customerSidePanel.png" />
                                                                       </image>
                                                                   </ImageView>
-                                                                  <Label fx:id="lblName" alignment="CENTER" layoutX="59.0" layoutY="109.0" prefHeight="30.0" prefWidth="200.0" text="Full Name" textFill="#eeecec">
+                                                                  <Label fx:id="lblName" alignment="CENTER" layoutX="40.0" layoutY="85.0" prefHeight="30.0" prefWidth="200.0" text="Full Name" textFill="#eeecec">
                                                                       <font>
                                                                           <Font name="Roboto Black" size="15.0" />
                                                                       </font>
@@ -64,7 +64,7 @@
                                                                                   <Font name="Roboto Regular" size="14.0" />
                                                                               </font>
                                                                               <graphic>
-                                                                                  <FontAwesomeIconView fill="#404bb6" glyphName="ENVELOPE" size="16.0" wrappingWidth="28.0" />
+                                                                                  <FontAwesomeIconView fill="#009688" glyphName="ENVELOPE" size="16.0" wrappingWidth="28.0" />
                                                                               </graphic>
                                                                           </Label>
                                                                           <Label fx:id="lblPhone" prefHeight="30.0" prefWidth="221.0" textFill="#797878">
@@ -72,59 +72,59 @@
                                                                                   <Font name="Roboto Regular" size="14.0" />
                                                                               </font>
                                                                               <graphic>
-                                                                                  <FontAwesomeIconView fill="#404bb6" glyphName="PHONE" size="16.0" wrappingWidth="28.0" />
+                                                                                  <FontAwesomeIconView fill="#009688" glyphName="PHONE" size="16.0" wrappingWidth="28.0" />
                                                                               </graphic>
                                                                           </Label>
-                                                                          <Label fx:id="lblLocation" prefHeight="30.0" prefWidth="221.0" textFill="#797878">
+                                                         <Label fx:id="lblFax" prefHeight="30.0" prefWidth="221.0" textFill="#797878">
+                                                            <font>
+                                                               <Font name="Roboto Regular" size="14.0" />
+                                                            </font>
+                                                            <graphic>
+                                                               <FontAwesomeIconView fill="#009688" glyphName="FAX" size="16.0" wrappingWidth="28.0" />
+                                                            </graphic>
+                                                         </Label>
+                                                                      </children>
+                                                                  </VBox>
+                                                                  <VBox layoutX="50.0" layoutY="138.0" prefHeight="90.0" prefWidth="221.0">
+                                                                      <children>
+                                                                          <Label fx:id="lblStreet" prefHeight="30.0" prefWidth="221.0" textFill="#797878">
                                                                               <font>
                                                                                   <Font name="Roboto Regular" size="14.0" />
                                                                               </font>
                                                                               <graphic>
-                                                                                  <FontAwesomeIconView fill="#404bb6" glyphName="MAP_MARKER" size="16.0" wrappingWidth="28.0" />
+                                                                                  <FontAwesomeIconView fill="#3f51b5" glyphName="TAXI" size="16.0" wrappingWidth="28.0" />
                                                                               </graphic>
                                                                           </Label>
+                                                         <Label fx:id="lblZipCode" prefHeight="30.0" prefWidth="221.0" textFill="#797878">
+                                                            <font>
+                                                               <Font name="Roboto Regular" size="14.0" />
+                                                            </font>
+                                                            <graphic>
+                                                               <FontAwesomeIconView fill="#3f51b5" glyphName="WEIBO" size="16.0" wrappingWidth="28.0" />
+                                                            </graphic>
+                                                         </Label>
+                                                         <Label fx:id="lblCity" prefHeight="30.0" prefWidth="221.0" textFill="#797878">
+                                                            <font>
+                                                               <Font name="Roboto Regular" size="14.0" />
+                                                            </font>
+                                                            <graphic>
+                                                               <FontAwesomeIconView fill="#3f51b5" glyphName="FORT_AWESOME" size="16.0" wrappingWidth="28.0" />
+                                                            </graphic>
+                                                         </Label>
                                                                       </children>
                                                                   </VBox>
-                                                                  <Label layoutX="80.0" layoutY="293.0" prefHeight="17.0" prefWidth="70.0" text="FEE" textFill="#a19d9d">
+                                                                  <Label layoutX="80.0" layoutY="293.0" prefHeight="17.0" prefWidth="70.0" text="Field001" textFill="#a19d9d">
                                                                       <font>
                                                                           <Font name="Roboto Black" size="12.0" />
                                                                       </font>
                                                                   </Label>
-                                                                  <VBox layoutX="50.0" layoutY="138.0" prefHeight="90.0" prefWidth="221.0">
-                                                                      <children>
-                                                                          <Label fx:id="lblDepartment" prefHeight="30.0" prefWidth="214.0" textFill="#797878">
-                                                                              <font>
-                                                                                  <Font name="Roboto Regular" size="14.0" />
-                                                                              </font>
-                                                                              <graphic>
-                                                                                  <FontAwesomeIconView fill="#404bb6" glyphName="MORTAR_BOARD" size="16.0" wrappingWidth="28.0" />
-                                                                              </graphic>
-                                                                          </Label>
-                                                                          <Label fx:id="lblLevel" prefHeight="30.0" prefWidth="214.0" textFill="#797878">
-                                                                              <font>
-                                                                                  <Font name="Roboto Regular" size="14.0" />
-                                                                              </font>
-                                                                              <graphic>
-                                                                                  <FontAwesomeIconView fill="#404bb6" glyphName="SITEMAP" size="16.0" wrappingWidth="28.0" />
-                                                                              </graphic>
-                                                                          </Label>
-                                                                          <Label fx:id="lblCourse" prefHeight="30.0" prefWidth="214.0" textFill="#797878">
-                                                                              <font>
-                                                                                  <Font name="Roboto Regular" size="14.0" />
-                                                                              </font>
-                                                                              <graphic>
-                                                                                  <FontAwesomeIconView fill="#404bb6" glyphName="EXTERNAL_LINK_SQUARE" size="16.0" wrappingWidth="28.0" />
-                                                                              </graphic>
-                                                                          </Label>
-                                                                      </children>
-                                                                  </VBox>
                                                                   <Label fx:id="lblFee" alignment="CENTER_RIGHT" layoutX="236.0" layoutY="293.0" prefHeight="17.0" prefWidth="70.0" textFill="#868282">
                                                                       <font>
                                                                           <Font name="Roboto Black" size="12.0" />
                                                                       </font>
                                                                   </Label>
                                                                   <Separator layoutX="77.0" layoutY="316.0" prefHeight="2.0" prefWidth="233.0" />
-                                                                  <Label layoutX="80.0" layoutY="326.0" prefHeight="17.0" prefWidth="70.0" text="PAID" textFill="#a19d9d">
+                                                                  <Label layoutX="80.0" layoutY="326.0" prefHeight="17.0" prefWidth="70.0" text="Field002" textFill="#a19d9d">
                                                                       <font>
                                                                           <Font name="Roboto Black" size="12.0" />
                                                                       </font>
@@ -135,7 +135,7 @@
                                                                       </font>
                                                                   </Label>
                                                                   <Separator layoutX="77.0" layoutY="349.0" prefHeight="2.0" prefWidth="233.0" />
-                                                                  <Label layoutX="80.0" layoutY="358.0" prefHeight="17.0" prefWidth="70.0" text="BALANCE" textFill="#a19d9d">
+                                                                  <Label layoutX="80.0" layoutY="358.0" prefHeight="17.0" prefWidth="70.0" text="Field003" textFill="#a19d9d">
                                                                       <font>
                                                                           <Font name="Roboto Black" size="12.0" />
                                                                       </font>
@@ -164,6 +164,12 @@
                                                                   </Label>
                                                               </children>
                                                           </AnchorPane>
+                                             <Label fx:id="fabEdit1" layoutY="157.0" styleClass="fab">
+                                                <padding>
+                                                   <Insets right="5.0" top="5.0" />
+                                                </padding>
+                                             </Label>
+                                             <MaterialDesignIconView fill="WHITE" glyphName="PLUS_BOX" layoutX="10.0" layoutY="185.25" size="35" wrappingWidth="50.00001639127731" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="268.3333435058594" AnchorPane.topAnchor="166.75" />
                                                       </children>
                                                   </AnchorPane>
                                               </children>
@@ -181,12 +187,12 @@
                                                   </ImageView>
                                               </children>
                                           </Pane>
-                                          <Label layoutX="173.0" layoutY="8.0" prefHeight="28.0" prefWidth="115.0" text="Filter by :" textFill="WHITE">
+                                          <Label layoutX="173.0" layoutY="8.0" prefHeight="28.0" prefWidth="115.0" text="Filtern nach :" textFill="WHITE">
                                               <font>
                                                   <Font name="Roboto Black" size="19.0" />
                                               </font>
                                           </Label>
-                                          <JFXRadioButton layoutX="167.0" layoutY="45.0" prefHeight="28.0" prefWidth="77.0" selected="true" styleClass="custom-jfx-check-box" text="Id" textFill="#fffdfd">
+                                          <JFXRadioButton fx:id="rb_customerID" layoutX="167.0" layoutY="45.0" prefHeight="28.0" prefWidth="135.0" selected="true" styleClass="custom-jfx-check-box" text="Kundennummer" textFill="#fffdfd">
                                               <font>
                                                   <Font name="Roboto Black" size="12.0" />
                                               </font>
@@ -194,17 +200,17 @@
                                                   <ToggleGroup fx:id="filter" />
                                               </toggleGroup>
                                           </JFXRadioButton>
-                                          <JFXRadioButton layoutX="250.0" layoutY="45.0" prefHeight="28.0" prefWidth="77.0" styleClass="custom-jfx-check-box" text="Names" textFill="#fffdfd" toggleGroup="$filter">
+                                          <JFXRadioButton fx:id="rb_customerName" layoutX="300.0" layoutY="45.0" prefHeight="28.0" prefWidth="126.0" styleClass="custom-jfx-check-box" text="Kundenname" textFill="#fffdfd" toggleGroup="$filter">
                                               <font>
                                                   <Font name="Roboto Black" size="12.0" />
                                               </font>
                                           </JFXRadioButton>
-                                          <JFXTextField fx:id="tf_filter_name" focusColor="#fcfcfc" labelFloat="true" layoutX="353.0" layoutY="42.0" maxWidth="214.0" minWidth="214.0" prefHeight="31.0" prefWidth="214.0" promptText="Search by name or id " unFocusColor="WHITE">
+                                          <JFXTextField fx:id="tf_filter" focusColor="#fcfcfc" labelFloat="true" layoutX="442.0" layoutY="44.0" maxWidth="214.0" minWidth="214.0" prefHeight="31.0" prefWidth="214.0" promptText="Suche Kunde" unFocusColor="WHITE">
                                               <font>
                                                   <Font name="System Bold" size="13.0" />
                                               </font>
                                           </JFXTextField>
-                                          <JFXButton buttonType="RAISED" layoutX="596.0" layoutY="47.0" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #009688;" text="Search" textFill="#fffefe">
+                                          <JFXButton buttonType="RAISED" layoutX="665.0" layoutY="47.0" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #009688;" text="Suchen" textFill="#fffefe">
                                               <font>
                                                   <Font name="Roboto Black" size="13.0" />
                                               </font>

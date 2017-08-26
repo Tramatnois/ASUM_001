@@ -34,7 +34,7 @@ import org.controlsfx.control.NotificationPane;
  *
  * @author tramatnois
  */
-public class FXML_SplashScreen_DocumentController extends AnchorPane {
+public class SplashScreen_Controller extends AnchorPane {
 
     @FXML
     private AnchorPane splashScreenPane;
@@ -63,8 +63,8 @@ public class FXML_SplashScreen_DocumentController extends AnchorPane {
     @FXML
     private JFXButton btn_application_retry;
 
-    private static FXML_SplashScreen_DocumentController instance;
-    private FXML_Application_DocumentController application_DocumentController;
+    private static SplashScreen_Controller instance;
+    private Application_Controller application_DocumentController;
     private Stage splashScreenStage;
 
     private ParallelTransition paraTransition;
@@ -77,14 +77,14 @@ public class FXML_SplashScreen_DocumentController extends AnchorPane {
         this.notificationPane = notificationPane;
     }
 
-    public synchronized static FXML_SplashScreen_DocumentController getInstance() {
+    public synchronized static SplashScreen_Controller getInstance() {
         if (instance == null) {
-            instance = new FXML_SplashScreen_DocumentController();
+            instance = new SplashScreen_Controller();
         }
         return instance;
     }
 
-    private FXML_SplashScreen_DocumentController() {
+    private SplashScreen_Controller() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/mvc_view_splashScreen/FXML_SplashScreen_Document.fxml"));
 // Tell the loader that this object is the BorderPane we've designed in FXML.
         loader.setRoot(this);
@@ -179,6 +179,7 @@ public class FXML_SplashScreen_DocumentController extends AnchorPane {
 
                             pause.setOnFinished(event6 -> {
                                 if (connection.IsConnected()) {
+                                    notificationPane.hide();
                                     btn_application_start.setVisible(true);
                                 }
                                 FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), spinnerPane);
@@ -238,18 +239,24 @@ public class FXML_SplashScreen_DocumentController extends AnchorPane {
 
         if (notificationPane.isShowing()) {
             notificationPane.hide();
+            spinnerPane.setVisible(true);
+            btn_application_retry.setVisible(false);
+            paraTransition.play();
+        } else {
+            spinnerPane.setVisible(true);
+            btn_application_retry.setVisible(false);
             paraTransition.play();
         }
         if (!connection.IsConnected()) {
             notificationPane.show();
-            spinnerPane.setVisible(false);
+//            spinnerPane.setVisible(false);
         } else {
             spinnerPane.setVisible(true);
             btn_application_retry.setVisible(false);
         }
     }
 
-    public void setReference(FXML_Application_DocumentController controller) {
+    public void setReference(Application_Controller controller) {
         this.application_DocumentController = controller;
     }
 

@@ -4,7 +4,7 @@
 
 .Toolbar {
     -fx-pref-height:50px;
-    -fx-background-color:  #FFA500;
+    -fx-background-color:  #3F51B5;
 }
 .VBox_Inspector {
     -fx-border-radius: 5;
@@ -15,7 +15,7 @@
     -fx-alignment:CENTER;
 }
 .jfx-hamburger {
-	-fx-background-color:  #FFA500;
+	-fx-background-color:  #3F51B5;
 }
 
 .jfx-hamburger StackPane {

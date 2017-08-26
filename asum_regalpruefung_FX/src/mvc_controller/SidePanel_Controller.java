@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 
-public class FXML_SidePanel_DocumentController extends AnchorPane {
+public class SidePanel_Controller extends AnchorPane {
 
     @FXML
     private JFXButton btn_show_Customer;
@@ -26,21 +26,21 @@ public class FXML_SidePanel_DocumentController extends AnchorPane {
     @FXML
     private JFXButton btn5;
 
-    private FXML_Application_DocumentController fxml_application_controller;
-    private static FXML_SidePanel_DocumentController instance;
+    private Application_Controller fxml_application_controller;
+    private static SidePanel_Controller instance;
 
     /**
      * Statische Methode 'getInstance()Ä liefert die einzige Instanz der Klasse
      * zurück. Ist synchronisiert und somit thread-sicher.
      */
-    public synchronized static FXML_SidePanel_DocumentController getInstance() {
+    public synchronized static SidePanel_Controller getInstance() {
         if (instance == null) {
-            instance = new FXML_SidePanel_DocumentController();
+            instance = new SidePanel_Controller();
         }
         return instance;
     }
 
-    private FXML_SidePanel_DocumentController() {
+    private SidePanel_Controller() {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/mvc_view_application/FXML_SidePanel_Document.fxml"));
 // Tell the loader that this object is the BorderPane we've designed in FXML.
@@ -62,7 +62,7 @@ public class FXML_SidePanel_DocumentController extends AnchorPane {
 
     }
 
-    public void setReference(FXML_Application_DocumentController controller) {
+    public void setReference(Application_Controller controller) {
         this.fxml_application_controller = controller;
     }
 
