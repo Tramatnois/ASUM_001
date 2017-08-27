@@ -66,6 +66,16 @@
     -fx-effect: null;
 }
 
+.btn_customer_new {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-family:"Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 1em; /* 12 */
+    -fx-text-fill: #828282;
+}
+
 .toggle-button:focused {
     -fx-background-color: #143038;
 }
