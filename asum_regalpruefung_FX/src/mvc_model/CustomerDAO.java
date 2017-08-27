@@ -60,7 +60,7 @@ public class CustomerDAO extends AbstractDAO{
         ResultSet rs;
         query = "SELECT * FROM customer_tab";
         PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
-        rs = preparedStmt.executeQuery("SELECT * FROM customer_tab");
+        rs = preparedStmt.executeQuery(query);
         while (rs.next()) {
             customerList.add(this.mapCustomer(rs));
         }
@@ -166,6 +166,7 @@ public class CustomerDAO extends AbstractDAO{
         customer.setPhone(rs.getString("phone"));
         customer.setFax(rs.getString("fax"));
         customer.setEmail(rs.getString("email"));
+        customer.setActive(rs.getInt("active"));
         return customer;
     }
 

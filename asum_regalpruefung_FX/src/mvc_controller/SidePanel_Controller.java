@@ -68,16 +68,12 @@ public class SidePanel_Controller extends AnchorPane {
 
     @FXML
     void btn_show_Customer_handler(ActionEvent event) {
-        this.fxml_application_controller.getContentPane().getChildren().clear();
-        this.fxml_application_controller.getContentPane().getChildren().add(fxml_application_controller.getCustomer());
-        this.fxml_application_controller.getDrawerSlideMenue().close();
+        this.fxml_application_controller.setNode("CUSTOMER");        
     }
 
     @FXML
     void btn_show_Inspections_handler(ActionEvent event) {
-        this.fxml_application_controller.getContentPane().getChildren().clear();
-        this.fxml_application_controller.getContentPane().getChildren().add(fxml_application_controller.getInspectionPlanOperations());
-        this.fxml_application_controller.getDrawerSlideMenue().close();
+       this.fxml_application_controller.setNode("INSPPLANOP"); 
     }
 
     @FXML

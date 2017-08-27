@@ -6,6 +6,7 @@
 package mvc_controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
@@ -33,6 +34,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import mvc_helper.FilterableTreeItem;
 import mvc_helper.TreeItemPredicate;
 import mvc_model.CustomerDAO;
@@ -43,7 +45,7 @@ import mvc_model.CustomerDTO;
  *
  * @author tramatnois
  */
-public class CustomerController extends AnchorPane {
+public class Customer_Controller extends AnchorPane {
 
     @FXML
     private AnchorPane holderAnchor;
@@ -62,6 +64,7 @@ public class CustomerController extends AnchorPane {
     @FXML
     private JFXButton btn_searchCustomer;
 
+    
     @FXML
     private Label lblName;
 
@@ -82,6 +85,9 @@ public class CustomerController extends AnchorPane {
 
     @FXML
     private Label lblCity;
+    
+    @FXML
+    private JFXCheckBox cb_activeUser;
 
     @FXML
     private AnchorPane fabPane;
@@ -91,16 +97,16 @@ public class CustomerController extends AnchorPane {
 
     private ObservableList<CustomerDTO> data;
     private FXML_StorageRackInsp_DocumentController fxml_application_controller;
-    private static CustomerController instance;
+    private static Customer_Controller instance;
 
-    public synchronized static CustomerController getInstance() {
+    public synchronized static Customer_Controller getInstance() {
         if (instance == null) {
-            instance = new CustomerController();
+            instance = new Customer_Controller();
         }
         return instance;
     }
 
-    private CustomerController() {
+    private Customer_Controller() {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/mvc_view_application/Customer.fxml"));
 // Tell the loader that this object is the BorderPane we've designed in FXML.
@@ -119,6 +125,12 @@ public class CustomerController extends AnchorPane {
 
     private void initialize() {
 
+// init radio buttons. I dont know, why it is not possible to style them with CSS        
+        rb_customerID.setSelectedColor(Color.DARKGOLDENROD);
+        rb_customerID.setUnSelectedColor(Color.WHITESMOKE);
+        rb_customerName.setSelectedColor(Color.BLUEVIOLET);
+        rb_customerName.setUnSelectedColor(Color.WHITE);
+        
         try {
             //prepare column: CustomerID
             JFXTreeTableColumn<CustomerDTO, Integer> customer_id = new JFXTreeTableColumn<>("ID");
@@ -197,7 +209,7 @@ public class CustomerController extends AnchorPane {
                 }
             });
         } catch (SQLException ex) {
-            Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Customer_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -211,6 +223,7 @@ public class CustomerController extends AnchorPane {
         lblStreet.setText(customer.getValue().getStreet());
         lblZipCode.setText(customer.getValue().getZipcode());
         lblCity.setText(customer.getValue().getCity());
+        cb_activeUser.setSelected(customer.getValue().getActiveBoolean());
 
     }
 

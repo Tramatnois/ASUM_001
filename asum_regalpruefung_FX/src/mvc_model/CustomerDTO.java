@@ -1,6 +1,3 @@
-
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,7 +6,9 @@
 package mvc_model;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -29,6 +28,7 @@ public class CustomerDTO extends RecursiveTreeObject<CustomerDTO> {
     private StringProperty phone = new SimpleStringProperty();
     private StringProperty fax = new SimpleStringProperty();
     private StringProperty email = new SimpleStringProperty();
+    private IntegerProperty active = new SimpleIntegerProperty();
 
     public Integer getId() {
         return id.get();
@@ -45,7 +45,7 @@ public class CustomerDTO extends RecursiveTreeObject<CustomerDTO> {
     public final String getName() {
         return name.get();
     }
-    
+
     public final StringProperty getNameProperty() {
         return name;
     }
@@ -58,18 +58,19 @@ public class CustomerDTO extends RecursiveTreeObject<CustomerDTO> {
         return street.get();
     }
 
-    public final StringProperty getStreetProperty(){
+    public final StringProperty getStreetProperty() {
         return street;
     }
+
     public final void setStreet(final String street) {
         this.street.set(street);
     }
-    
+
     public final String getZipcode() {
         return zipcode.get();
     }
-    
-    public final StringProperty getZipCodeProperty(){
+
+    public final StringProperty getZipCodeProperty() {
         return zipcode;
     }
 
@@ -80,7 +81,7 @@ public class CustomerDTO extends RecursiveTreeObject<CustomerDTO> {
     public final String getCity() {
         return city.get();
     }
-    
+
     public final StringProperty getCityProperty() {
         return city;
     }
@@ -92,7 +93,7 @@ public class CustomerDTO extends RecursiveTreeObject<CustomerDTO> {
     public final String getContactperson() {
         return contactperson.get();
     }
-    
+
     public final StringProperty getContactpersonProperty() {
         return contactperson;
     }
@@ -104,7 +105,7 @@ public class CustomerDTO extends RecursiveTreeObject<CustomerDTO> {
     public final String getPhone() {
         return phone.get();
     }
-    
+
     public final StringProperty getPhoneProperty() {
         return phone;
     }
@@ -116,7 +117,7 @@ public class CustomerDTO extends RecursiveTreeObject<CustomerDTO> {
     public final String getFax() {
         return fax.get();
     }
-    
+
     public final StringProperty getFaxProperty() {
         return fax;
     }
@@ -128,7 +129,7 @@ public class CustomerDTO extends RecursiveTreeObject<CustomerDTO> {
     public final String getEmail() {
         return email.get();
     }
-    
+
     public final StringProperty getEmailProperty() {
         return email;
     }
@@ -136,5 +137,30 @@ public class CustomerDTO extends RecursiveTreeObject<CustomerDTO> {
     public final void setEmail(final String email) {
         this.email.set(email);
     }
-    
+
+    public final Integer getActive() {
+        return active.get();
+    }
+
+    public final Boolean getActiveBoolean() {
+        Boolean boolActive = false;
+        switch (this.active.get()) {
+            case 0:
+                boolActive = false;
+                break;
+            default:
+                boolActive = true;
+                break;
+        }        
+        return boolActive;
+    }
+
+    public final IntegerProperty getActiveProperty() {
+        return active;
+    }
+
+    public final void setActive(final Integer active) {
+        this.active.set(active);
+    }
+
 }

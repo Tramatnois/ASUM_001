@@ -21,3 +21,14 @@
 .jfx-hamburger StackPane {
 	-fx-background-color: white;
 }
+
+/*Buttons*/
+/*.btn_customer_new {
+    -fx-pref-height:50px;   
+    -fx-pref-width:50px;
+    -fx-background-color: #ff4081;
+    -fx-background-radius: 50px;
+    -fx-border-radius: 50px;
+    -fx-alignment: CENTER;
+    -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.30), 6.0, 0.3, 0,1);
+}*/

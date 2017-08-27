@@ -125,7 +125,7 @@
 }
 
 .tree-table-row-cell:selected {
-    -fx-background-color:  rgb(0, 150, 136,0.8);
+    -fx-background-color:   rgb(150, 0, 89,0.8);
     -fx-background-insets: 0, 1, 2;
 }
 
@@ -135,7 +135,7 @@
 }
 
 .tree-table-row-cell:selected:odd {
-    -fx-background-color:  rgb(0, 150, 136,0.8);
+    -fx-background-color:   rgb(150, 0, 89,0.8);
     -fx-background-insets: 0, 1, 2;
 }
 
@@ -145,13 +145,23 @@
     -fx-alignment: center !important;
 }
 
+/*DatePicker*/
+.jfx-date-picker .date-picker-display-node{
+   -fx-alignment: center;
+/*   -fx-font: "Microsoft YaHei UI Light 14px"*/
+}
+.jfx-date-picker .date-picker-display-node .text{
 
-
+}
+.jfx-date-picker .date-picker-display-node .input-line{
+    -fx-background-color:#960059;
+    visibility: false;
+}
 
 /*Radio button*/
 .custom-jfx-check-box{   
-/*    -fx-selected-color: #FFA500;
-    -fx-unselected-color:#F0F0F0;*/
+    /*    -fx-selected-color: #FFA500;
+        -fx-unselected-color:#F0F0F0;*/
 }
 
 /*Progress bar*/
@@ -186,7 +196,7 @@
  * ComboBox, ChoiceBox COMMON                                                 *
  *                                                                             *
  ******************************************************************************/
-.combo-box-base, .choice-box {
+/*.combo-box-base, .choice-box {
     -fx-background-color: transparent;
     -fx-border-color: -swatch-grey;
     -fx-border-width: 0 0 2 0;
@@ -214,7 +224,7 @@
 .combo-box-base .arrow-button:hover .arrow, .spinner .increment-arrow-button:hover .increment-arrow,
 .spinner .decrement-arrow-button:hover .decrement-arrow {
     -fx-background-color: -swatch-dark-grey;
-}
+}*/
 
 .menu-item:focused {
     -fx-background-color: -swatch-light-grey;

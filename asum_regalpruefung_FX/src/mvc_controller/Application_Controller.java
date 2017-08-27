@@ -5,23 +5,31 @@
  */
 package mvc_controller;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import mvc_model_sqlconnector.DBConnection;
 
 /**
@@ -33,6 +41,37 @@ public class Application_Controller extends StackPane {
 
     @FXML
     private AnchorPane rootPane;
+
+    /*Sub Functions Customer*/
+    @FXML
+    private GridPane paneSubFun_Customer;
+    @FXML
+    private JFXButton btn_edit_customer;
+    @FXML
+    private JFXButton btn_add_customer;
+    @FXML
+    private JFXButton btn_del_customer;
+
+    /*Sub Functions InspectionPlan*/
+    @FXML
+    private GridPane paneSubFun_InspPlanOp;
+    @FXML
+    private JFXButton btn_view_inspPlanOp_Template;
+    @FXML
+    private JFXButton btn_change_inspPlanOp_Template;
+    @FXML
+    private JFXButton btn_add_inspPlanOp_Template;
+    @FXML
+    private JFXButton btn_del_inspPlanOp_Template;
+    @FXML
+    private JFXButton btn_view_characteristic_Template;
+    @FXML
+    private JFXButton btn_change_characteristic_Template;
+    @FXML
+    private JFXButton btn_add_characteristic_Template;
+    @FXML
+    private JFXButton btn_del_characteristic_Template;
+
     @FXML
     private AnchorPane contentPane;
 
@@ -45,10 +84,10 @@ public class Application_Controller extends StackPane {
     public JFXDrawer getDrawerSlideMenue() {
         return drawerSlideMenue;
     }
-
     @FXML
-    private JFXHamburger hamburger;
+    private JFXHamburger hamburger;    
 
+        
     @FXML
     private HBox hoxImages;
 
@@ -72,14 +111,20 @@ public class Application_Controller extends StackPane {
 
     private Application_Controller home;
     private SidePanel_Controller sideMenu;
-    private CustomerController customer;
+    private Customer_Controller customer;
+    private InspPlanOp_Controller inspectionPlanOperations;
 
-    public CustomerController getCustomer() {
+    private HamburgerBackArrowBasicTransition hamburger_transition;
+
+    public HamburgerBackArrowBasicTransition getHamburger_transition() {
+        return hamburger_transition;
+    }
+
+    public Customer_Controller getCustomer() {
         return customer;
     }
-    private FXML_InspPlanOp_DocumentController inspectionPlanOperations;
 
-    public FXML_InspPlanOp_DocumentController getInspectionPlanOperations() {
+    public InspPlanOp_Controller getInspectionPlanOperations() {
         return inspectionPlanOperations;
     }
 
@@ -117,6 +162,11 @@ public class Application_Controller extends StackPane {
 
     private void initialize() {
 
+// init buttons
+        btn_add_customer.setTooltip(new Tooltip("Neuen Kunden anlegen"));
+        btn_edit_customer.setTooltip(new Tooltip("Kunden bearbeiten"));
+        btn_del_customer.setTooltip(new Tooltip("Kunden deaktivieren"));
+
         this.sideMenu = SidePanel_Controller.getInstance(); //Logger.getLogger(FXML_StorageRackInsp_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
         sideMenu.setOnMouseClicked(e -> System.out.println("MouseClick: sideMenu"));
         drawerSlideMenue.setSidePane(sideMenu);
@@ -133,18 +183,18 @@ public class Application_Controller extends StackPane {
 //                });
 //            }
 //        }
-        this.customer = CustomerController.getInstance();
+        this.customer = Customer_Controller.getInstance();
 //        customer.setOnMouseClicked(e -> System.out.println("MouseClick: customer"));
 //        customer.setPickOnBounds(false);
-        this.inspectionPlanOperations = FXML_InspPlanOp_DocumentController.getInstance();
+        this.inspectionPlanOperations = InspPlanOp_Controller.getInstance();
 
         sideMenu.setReference(this);
 
-        HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburger);
-        transition.setRate(-1);
+        hamburger_transition = new HamburgerBackArrowBasicTransition(hamburger);
+        hamburger_transition.setRate(-1);
         hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
-            transition.setRate(transition.getRate() * -1);
-            transition.play();
+            hamburger_transition.setRate(hamburger_transition.getRate() * -1);
+            hamburger_transition.play();
 
             if (drawerSlideMenue.isShown()) {
                 drawerSlideMenue.close();
@@ -175,6 +225,103 @@ public class Application_Controller extends StackPane {
 
     public void setInspPlanOpStage(Stage inspPlanOpStage) {
         Application_Controller.inspPlanOpStage = inspPlanOpStage;
+    }
+
+    //Set selected node to a content holder
+    public void setNode(String nodeName) {
+        Node node = null;
+// init content pane        
+        contentPane.getChildren().clear();
+// hide paneSubFunctions
+        paneSubFun_Customer.setVisible(false);
+        paneSubFun_InspPlanOp.setVisible(false);
+// set given node for contentPane        
+        switch (nodeName) {
+            case "CUSTOMER":
+                node = customer;
+                paneSubFun_Customer.setVisible(true);
+                break;
+            case "INSPPLANOP":
+                node = inspectionPlanOperations;
+                paneSubFun_InspPlanOp.setVisible(true);
+                break;
+        }
+        contentPane.getChildren().add((Node) node);
+
+        FadeTransition ft = new FadeTransition(Duration.millis(1500));
+        ft.setNode(node);
+        ft.setFromValue(0.1);
+        ft.setToValue(1);
+        ft.setCycleCount(1);
+        ft.setAutoReverse(false);
+        ft.play();
+// hide sidemenu
+        drawerSlideMenue.close();
+// switch hamburger status
+        hamburger_transition.setRate(hamburger_transition.getRate() * -1);
+        hamburger_transition.play();
+    }
+
+    /*Sub Functions Customer*/
+    @FXML
+    void btn_edit_customer_handler(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btn_add_customer_handler(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btn_del_customer_handler(ActionEvent event) {
+
+    }
+
+    /*Sub Functions InspectionPlanOperation*/
+    @FXML
+    void btn_edit_inspPlanOp_handler(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btn_view_inspPlanOp_Template_handler(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btn_change_inspPlanOp_Template_handler(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btn_add_inspPlanOp_Template_handler(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btn_del_inspPlanOp_Template_handler(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btn_view_characteristic_Template_handler(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btn_change_characteristic_Template_handler(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btn_add_characteristic_Template_handler(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btn_del_characteristic_Template_handler(ActionEvent event) {
+
     }
 
     @FXML
