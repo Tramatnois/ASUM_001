@@ -28,6 +28,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TreeItem;
@@ -44,13 +45,13 @@ import mvc_model.InspectionPlanOperationDTO;
  * @author tramatnois
  */
 public class InspPlanOp_Controller extends AnchorPane {
-
+    
     @FXML
     private AnchorPane holderAnchor;
-
+    
     @FXML
     private JFXTreeTableView<InspectionPlanOperationDTO> tbl_view_inspplan_operation;
-
+    
     @FXML
     private JFXTextField tf_filter;
     @FXML
@@ -64,8 +65,11 @@ public class InspPlanOp_Controller extends AnchorPane {
     @FXML
     private JFXRadioButton rb_customerName;
     @FXML
+    private JFXRadioButton rb_inspPlanOpStatus;
+    
+    @FXML
     private JFXButton btn_searchInspPlanOp;
-
+    
     @FXML
     private Label lblDescription;
     @FXML
@@ -77,32 +81,29 @@ public class InspPlanOp_Controller extends AnchorPane {
     @FXML
     private Label lblStorageRack;
     
-    
-
-    
-
     @FXML
     private JFXCheckBox cb_activeUser;
-
+    
     @FXML
     private AnchorPane fabPane;
-
+    
     @FXML
     private Label fabEdit;
-
+    
     private ObservableList<InspectionPlanOperationDTO> data;
-    private FXML_StorageRackInsp_DocumentController fxml_application_controller;
-    private static InspPlanOp_Controller instance;
+    private Application_Controller application_controller;
 
+    private static InspPlanOp_Controller instance;
+    
     public synchronized static InspPlanOp_Controller getInstance() {
         if (instance == null) {
             instance = new InspPlanOp_Controller();
         }
         return instance;
     }
-
+    
     private InspPlanOp_Controller() {
-
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/mvc_view_application/InspPlanOp.fxml"));
 // Tell the loader that this object is the BorderPane we've designed in FXML.
         loader.setRoot(this);
@@ -113,11 +114,11 @@ public class InspPlanOp_Controller extends AnchorPane {
             loader.load();
         } catch (IOException ex) {
             //Logger.getLogger(FXML_StorageRackInsp_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
-            Logger.getLogger(FXML_StorageRackInsp_DocumentController.class.getName()).log(Level.SEVERE, "Unable to load InspPlanOp.fxml", ex);
+            Logger.getLogger(InspPlanOp_Controller.class.getName()).log(Level.SEVERE, "Unable to load InspPlanOp.fxml", ex);
         }
         initialize();
     }
-
+    
     private void initialize() {
 
 // init radio buttons. I dont know, why it is not possible to style them with CSS        
@@ -125,6 +126,8 @@ public class InspPlanOp_Controller extends AnchorPane {
         rb_inspPlanOpID.setUnSelectedColor(Color.WHITESMOKE);
         rb_inspPlanOpDescr.setSelectedColor(Color.CHARTREUSE);
         rb_inspPlanOpDescr.setUnSelectedColor(Color.WHITESMOKE);
+        rb_inspPlanOpStatus.setSelectedColor(Color.CHARTREUSE);
+        rb_inspPlanOpStatus.setUnSelectedColor(Color.WHITESMOKE);
         rb_customerID.setSelectedColor(Color.CHARTREUSE);
         rb_customerID.setUnSelectedColor(Color.WHITESMOKE);
         rb_customerName.setSelectedColor(Color.CORAL);
@@ -135,45 +138,47 @@ public class InspPlanOp_Controller extends AnchorPane {
             //prepare column: InspectionID
             JFXTreeTableColumn<InspectionPlanOperationDTO, Integer> inspection_id = new JFXTreeTableColumn<>("ID");
             inspection_id.setPrefWidth(50);
-            //inspection_id.setPrefWidth(Control.USE_COMPUTED_SIZE);
+//            inspection_id.setPrefWidth(Control.USE_COMPUTED_SIZE);
             inspection_id.getStyleClass().add("col_inspection_id");
             inspection_id.setCellValueFactory((TreeTableColumn.CellDataFeatures<InspectionPlanOperationDTO, Integer> param) -> param.getValue().getValue().getIdProperty().asObject());
 
 //prepare column: Inspection
             JFXTreeTableColumn<InspectionPlanOperationDTO, String> inspection = new JFXTreeTableColumn<>("Prüfplan");
             inspection.setCellValueFactory((TreeTableColumn.CellDataFeatures<InspectionPlanOperationDTO, String> param) -> param.getValue().getValue().getDescriptionProperty());
+            inspection.setPrefWidth(350);
 
 //prepare column: KundenID
             JFXTreeTableColumn<InspectionPlanOperationDTO, Integer> customer_id = new JFXTreeTableColumn<>("KundenID");
             customer_id.getStyleClass().add("col_customer_id");
             customer_id.setCellValueFactory((TreeTableColumn.CellDataFeatures<InspectionPlanOperationDTO, Integer> param) -> param.getValue().getValue().getIdProperty().asObject());
-
+            customer_id.setPrefWidth(100);
 //prepare column: Kundenname
             JFXTreeTableColumn<InspectionPlanOperationDTO, String> customer = new JFXTreeTableColumn<>("Kunde");
             customer.setCellValueFactory((TreeTableColumn.CellDataFeatures<InspectionPlanOperationDTO, String> param) -> param.getValue().getValue().getCustomer().getNameProperty());
-
+            customer.setPrefWidth(250);
 //prepare column: Status
             JFXTreeTableColumn<InspectionPlanOperationDTO, String> status = new JFXTreeTableColumn<>("Status");
             status.getStyleClass().add("col_status");
             status.setCellValueFactory((TreeTableColumn.CellDataFeatures<InspectionPlanOperationDTO, String> param) -> param.getValue().getValue().getInspectionPlanOperationStatus().getDescriptionProperty());
-
+            status.setPrefWidth(100);
+            
             data = FXCollections.observableArrayList();
-
+            
             for (InspectionPlanOperationDTO inspplan_op : new InspectionPlanOperationDAO().selectAllInspectionPlanOperations()) {
                 data.add(inspplan_op);
             }
-
+            
             final TreeItem<InspectionPlanOperationDTO> root;
             root = new RecursiveTreeItem<InspectionPlanOperationDTO>(data, RecursiveTreeObject::getChildren);
-
+            
             tbl_view_inspplan_operation.getColumns().setAll(inspection_id, inspection, customer_id, customer, status);
             tbl_view_inspplan_operation.setRoot(root);
             tbl_view_inspplan_operation.setShowRoot(false);
-
+            
             tbl_view_inspplan_operation.getColumns().setAll(inspection_id, inspection, customer_id, customer, status);
             tbl_view_inspplan_operation.setRoot(root);
             tbl_view_inspplan_operation.setShowRoot(false);
-            tbl_view_inspplan_operation.getStyleClass().add("InspPlanOpTTable");
+            tbl_view_inspplan_operation.getStyleClass().add("inspPlanOpTable");
 
 // add filter for customer name
             tf_filter.textProperty().addListener(new ChangeListener<String>() {
@@ -196,6 +201,9 @@ public class InspPlanOp_Controller extends AnchorPane {
                             if (rb_customerName.isSelected()) {
                                 flag = inspPlanOp.getValue().getCustomer().getName().contains(newValue);
                             }
+                            if (rb_inspPlanOpStatus.isSelected()) {
+                                flag = inspPlanOp.getValue().getInspectionPlanOperationStatus().getDescription().contains(newValue);
+                            }
                             return flag;
                         }
                     });
@@ -205,13 +213,17 @@ public class InspPlanOp_Controller extends AnchorPane {
             Logger.getLogger(InspPlanOp_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    public void setApplication_controller(Application_Controller controller) {
+        this.application_controller = controller;
+    }
+    
     public static final LocalDate LOCAL_DATE(String dateString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(dateString, formatter);
         return localDate;
     }
-
+    
     @FXML
     void tbl_view_inspplan_operation_handler(MouseEvent event) {
         TreeItem<InspectionPlanOperationDTO> inspPlanOp = tbl_view_inspplan_operation.getSelectionModel().getSelectedItem();
@@ -220,11 +232,19 @@ public class InspPlanOp_Controller extends AnchorPane {
         lblNorm.setText(inspPlanOp.getValue().getNorm());
         lblLocation.setText(inspPlanOp.getValue().getLocation());
         lblStorageRack.setText(inspPlanOp.getValue().getStorageRack());
+        
+//        if (event.getClickCount() == 2) {
+//            System.out.println("doubleclick");
+//            this.fxml_application_controller.setInspectionPlanOperation(inspPlanOp.getValue().getDescription());
+////            Stage stage = (Stage) ap_inspplan_operation.getScene().getWindow();
+////            stage.close();
+//            this.fxml_application_controller.drawerContentView.close();
+//
+//        }
 
 //        cb_activeUser.setSelected(customer.getValue().getActiveBoolean());
-
     }
-
+    
     @FXML
     void btn_searchInspPlanOp_handler(ActionEvent event) {
 //        FilterableTreeItem<CustomerDTO> root = tbl_view_customer.getRoot();

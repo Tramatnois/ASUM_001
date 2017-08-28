@@ -16,9 +16,8 @@ public class SidePanel_Controller extends AnchorPane {
     @FXML
     private JFXButton btn_show_Inspections;
     @FXML
-    private JFXButton btn2;
-    @FXML
-    private JFXButton btn3;
+    private JFXButton btn_ResultsRecording;
+
     @FXML
     private JFXButton btn_exit;
     @FXML
@@ -26,7 +25,7 @@ public class SidePanel_Controller extends AnchorPane {
     @FXML
     private JFXButton btn5;
 
-    private Application_Controller fxml_application_controller;
+    private Application_Controller application_controller;
     private static SidePanel_Controller instance;
 
     /**
@@ -42,7 +41,7 @@ public class SidePanel_Controller extends AnchorPane {
 
     private SidePanel_Controller() {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/mvc_view_application/FXML_SidePanel_Document.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/mvc_view_application/SidePanel.fxml"));
 // Tell the loader that this object is the BorderPane we've designed in FXML.
         loader.setRoot(this);
 // Tell the loader that this is the object whose attributes and methods are referenced in FXML.
@@ -52,7 +51,7 @@ public class SidePanel_Controller extends AnchorPane {
             loader.load();
         } catch (IOException ex) {
             //Logger.getLogger(FXML_StorageRackInsp_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
-            Logger.getLogger(FXML_StorageRackInsp_DocumentController.class.getName()).log(Level.SEVERE, "Unable to load FXML_SidePanel_Document.fxml", ex);
+            Logger.getLogger(SidePanel_Controller.class.getName()).log(Level.SEVERE, "Unable to load SidePanel.fxml", ex);
         }
         initialize();
     }
@@ -62,18 +61,23 @@ public class SidePanel_Controller extends AnchorPane {
 
     }
 
-    public void setReference(Application_Controller controller) {
-        this.fxml_application_controller = controller;
+    public void setApplication_controller(Application_Controller controller) {
+        this.application_controller = controller;
     }
 
     @FXML
     void btn_show_Customer_handler(ActionEvent event) {
-        this.fxml_application_controller.setNode("CUSTOMER");        
+        this.application_controller.setNode("CUSTOMER");
     }
 
     @FXML
     void btn_show_Inspections_handler(ActionEvent event) {
-       this.fxml_application_controller.setNode("INSPPLANOP"); 
+        this.application_controller.setNode("INSPPLANOP");
+    }
+
+    @FXML
+    void btn_ResultsRecording_handler(ActionEvent event) {
+        this.application_controller.setNode("RESULTS_RECORDING");
     }
 
     @FXML
@@ -92,7 +96,7 @@ public class SidePanel_Controller extends AnchorPane {
     }
 
     @FXML
-    void btn_exit_handler(ActionEvent event)  {
+    void btn_exit_handler(ActionEvent event) {
         System.exit(0);
     }
 

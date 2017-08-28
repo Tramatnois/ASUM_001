@@ -55,6 +55,14 @@ public class InspectionResultDTO extends RecursiveTreeObject<InspectionResultDTO
         this.inspectionOperation = inspectionOperation;
     }
 
+    public CharacteristicOperationDTO getCharacteristicOperation() {
+        return characteristic;
+    }
+
+    public void setCharacteristicOperation(CharacteristicOperationDTO characteristic) {
+        this.characteristic = characteristic;
+    }
+
 //    public InspectionOperationCommentDTO getInspectioncomment() {
 //        return inspectioncomment;
 //    }
@@ -62,13 +70,5 @@ public class InspectionResultDTO extends RecursiveTreeObject<InspectionResultDTO
 //    public void setInspectioncomment(InspectionOperationCommentDTO inspectioncomment) {
 //        this.inspectioncomment = inspectioncomment;
 //    }
-
-    public CharacteristicOperationDTO getCharacteristic() {
-        return characteristic;
-    }
-
-    public void setCharacteristic(CharacteristicOperationDTO characteristic) {
-        this.characteristic = characteristic;
-    }
-
+    
 }

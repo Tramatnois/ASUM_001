@@ -36,7 +36,29 @@ public class InspectionResultDAO extends AbstractDAO{
         rs.close();
         preparedStmt.close();
         return inspResultList;
-    }    
+    }  
+    public InspectionResultDTO selectSingleById(int id) throws SQLException {
+        InspectionResultDTO inspResult;
+        String query;
+        PreparedStatement preparedStmt;
+        ResultSet rs;
+
+        query = "SELECT * FROM inspection_result_tab where idinspection_result=?";
+
+        preparedStmt = connection.getConnection().prepareStatement(query);
+        preparedStmt.setInt(1, id);
+
+        rs = preparedStmt.executeQuery();
+        if (rs.next()) {
+            inspResult = this.mapInspResult(rs);
+        } else {
+            return null;
+        }
+        rs.close();
+        preparedStmt.close();
+
+        return inspResult;
+    }
 /**
      * Maps a resutlSet to a CustomerDTO2 Object
      * 
@@ -48,16 +70,23 @@ public class InspectionResultDAO extends AbstractDAO{
     private InspectionResultDTO mapInspResult(ResultSet rs) throws SQLException {
         InspectionPlanOperationDTO inspOperation = new InspectionPlanOperationDTO();
         CharacteristicOperationDTO charOperation = new CharacteristicOperationDTO();
-        InspectionOperationCommentDTO inspOpComment = new InspectionOperationCommentDTO();
+//        InspectionOperationCommentDTO inspOpComment = new InspectionOperationCommentDTO();
         
         InspectionResultDTO inspResult;
         inspResult = new InspectionResultDTO();
         inspResult.setId(rs.getInt("idinspection_result"));
         inspResult.setResult(rs.getString("result"));
-        inspOperation.setId(rs.getInt("inspection_plan_operation_id"));
+        
+//        inspOperation.setId(rs.getInt("inspection_plan_operation_id"));
+        InspectionPlanOperationDAO inspPlanOp_DAO = new InspectionPlanOperationDAO();
+        inspOperation = inspPlanOp_DAO.selectSingleById(rs.getInt("inspection_plan_operation_id"));
         inspResult.setInspectionOperation(inspOperation);
-        charOperation.setId(rs.getInt("characteristic_operation_id"));
-        inspResult.setCharacteristic(charOperation);
+        
+//        charOperation.setId(rs.getInt("characteristic_operation_id"));
+        CharacteristicOperationDAO charOperation_DAO = new CharacteristicOperationDAO();
+        charOperation = charOperation_DAO.selectSingleById(rs.getInt("characteristic_operation_id"));
+        inspResult.setCharacteristicOperation(charOperation);
+        
         return inspResult;
     }    
     

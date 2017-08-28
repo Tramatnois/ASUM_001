@@ -95,7 +95,7 @@ public class SplashScreen_Controller extends AnchorPane {
             loader.load();
         } catch (IOException ex) {
             //Logger.getLogger(FXML_StorageRackInsp_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
-            Logger.getLogger(FXML_StorageRackInsp_DocumentController.class.getName()).log(Level.SEVERE, "Unable to load FXML_Customer_Document.fxml", ex);
+            Logger.getLogger(SplashScreen_Controller.class.getName()).log(Level.SEVERE, "Unable to load FXML_Customer_Document.fxml", ex);
         }
         initialize();
     }

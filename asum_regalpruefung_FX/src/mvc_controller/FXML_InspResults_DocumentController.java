@@ -45,7 +45,7 @@ public class FXML_InspResults_DocumentController extends AnchorPane {
     @FXML
     private AnchorPane ap_inspResults;
 
-    private FXML_StorageRackInsp_DocumentController fxml_application_controller;
+    private Application_Controller fxml_application_controller;
     private static FXML_InspResults_DocumentController instance;
 
     /**
@@ -73,7 +73,7 @@ public class FXML_InspResults_DocumentController extends AnchorPane {
             loader.load();
         } catch (IOException ex) {
             //Logger.getLogger(FXML_StorageRackInsp_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
-            Logger.getLogger(FXML_StorageRackInsp_DocumentController.class.getName()).log(Level.SEVERE, "Unable to load FXML_InspResults_Document.fxml", ex);
+            Logger.getLogger(Application_Controller.class.getName()).log(Level.SEVERE, "Unable to load FXML_InspResults_Document.fxml", ex);
         }
         initialize();
     }
@@ -124,7 +124,7 @@ public class FXML_InspResults_DocumentController extends AnchorPane {
 //        }
     }
 
-    public void setReference(FXML_StorageRackInsp_DocumentController controller) {
+    public void setReference(Application_Controller controller) {
         this.fxml_application_controller = controller;
     }
 

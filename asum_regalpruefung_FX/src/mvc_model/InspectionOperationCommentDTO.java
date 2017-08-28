@@ -9,10 +9,10 @@ package mvc_model;
  *
  * @author LT Dan
  */
-class InspectionOperationCommentDTO {
+public class InspectionOperationCommentDTO {
     private int id;
     private String comment;
-//    private CharacteristicOperationDTO characteristic;
+    private CharacteristicOperationDTO characteristic;
 
     public int getId() {
         return id;
@@ -34,13 +34,13 @@ class InspectionOperationCommentDTO {
 
 
 
-//    public CharacteristicOperationDTO getCharacteristic() {
-//        return characteristic;
-//    }
-//
-//    public void setCharacteristic(CharacteristicOperationDTO characteristic) {
-//        this.characteristic = characteristic;
-//    }
+    public CharacteristicOperationDTO getCharacteristic() {
+        return characteristic;
+    }
+
+    public void setCharacteristic(CharacteristicOperationDTO characteristic) {
+        this.characteristic = characteristic;
+    }
 
 
     

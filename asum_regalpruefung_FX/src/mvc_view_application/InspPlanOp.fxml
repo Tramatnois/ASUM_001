@@ -13,7 +13,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -32,11 +31,7 @@
                       <children>
                           <AnchorPane fx:id="holderAnchor" prefHeight="621.0" prefWidth="1300.0">
                               <children>
-                                  <JFXTreeTableView fx:id="tbl_view_inspplan_operation" layoutX="28.0" layoutY="174.0" onMouseClicked="#tbl_view_inspplan_operation_handler" prefHeight="440.0" prefWidth="868.0">
-                              <columnResizePolicy>
-                                 <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                              </columnResizePolicy>
-                           </JFXTreeTableView>
+                                  <JFXTreeTableView fx:id="tbl_view_inspplan_operation" layoutX="28.0" layoutY="174.0" onMouseClicked="#tbl_view_inspplan_operation_handler" prefHeight="440.0" prefWidth="868.0" />
                                   <AnchorPane layoutX="909.0" layoutY="49.0" prefHeight="568.0" prefWidth="314.0" styleClass="card-white" AnchorPane.rightAnchor="25.0">
                                       <children>
                                           <StackPane layoutX="47.0" layoutY="39.0" prefHeight="611.0" prefWidth="320.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -68,7 +63,7 @@
                                                                <Insets left="-8.0" />
                                                             </VBox.margin>
                                                             <children>
-                                                               <JFXDatePicker fx:id="tf_datepicker" defaultColor="#960059" editable="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="25.0" prefWidth="103.0">
+                                                               <JFXDatePicker fx:id="tf_datepicker" defaultColor="#960059" editable="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="25.0" prefWidth="134.0">
                                                                   <opaqueInsets>
                                                                      <Insets />
                                                                   </opaqueInsets>
@@ -215,22 +210,27 @@
                                                   <Font name="Bauhaus 93" size="14.0" />
                                               </font>
                                           </JFXRadioButton>
-                                 <JFXRadioButton fx:id="rb_customerID" layoutX="392.0" layoutY="45.0" prefHeight="28.0" prefWidth="126.0" styleClass="custom-jfx-check-box" text="KundenID" textFill="#fffdfd" toggleGroup="$filter">
+                                 <JFXRadioButton fx:id="rb_inspPlanOpStatus" layoutX="399.0" layoutY="46.0" prefHeight="28.0" prefWidth="126.0" styleClass="custom-jfx-check-box" text="Status" textFill="#fffdfd" toggleGroup="$filter">
                                     <font>
                                        <Font name="Bauhaus 93" size="14.0" />
                                     </font>
                                  </JFXRadioButton>
-                                 <JFXRadioButton fx:id="rb_customerName" layoutX="490.0" layoutY="45.0" prefHeight="28.0" prefWidth="126.0" styleClass="custom-jfx-check-box" text="Kundenname" textFill="#fffdfd" toggleGroup="$filter">
+                                 <JFXRadioButton fx:id="rb_customerID" layoutX="220.0" layoutY="70.0" prefHeight="28.0" prefWidth="126.0" styleClass="custom-jfx-check-box" text="KundenID" textFill="#fffdfd" toggleGroup="$filter">
                                     <font>
                                        <Font name="Bauhaus 93" size="14.0" />
                                     </font>
                                  </JFXRadioButton>
-                                          <JFXTextField fx:id="tf_filter" focusColor="#fcfcfc" labelFloat="true" layoutX="640.0" layoutY="44.0" maxWidth="214.0" minWidth="214.0" prefHeight="31.0" prefWidth="214.0" promptText="Suche Prüfplan" unFocusColor="WHITE">
+                                 <JFXRadioButton fx:id="rb_customerName" layoutX="336.0" layoutY="70.0" prefHeight="28.0" prefWidth="126.0" styleClass="custom-jfx-check-box" text="Kundenname" textFill="#fffdfd" toggleGroup="$filter">
+                                    <font>
+                                       <Font name="Bauhaus 93" size="14.0" />
+                                    </font>
+                                 </JFXRadioButton>
+                                          <JFXTextField fx:id="tf_filter" focusColor="#fcfcfc" labelFloat="true" layoutX="525.0" layoutY="45.0" maxWidth="214.0" minWidth="214.0" prefHeight="31.0" prefWidth="214.0" promptText="Suche Prüfplan" unFocusColor="WHITE">
                                               <font>
                                                   <Font name="System Bold" size="13.0" />
                                               </font>
                                           </JFXTextField>
-                                          <JFXButton fx:id="btn_searchInspPlanOp" buttonType="RAISED" layoutX="765.0" layoutY="7.0" onAction="#btn_searchInspPlanOp_handler" prefHeight="30.0" prefWidth="89.0" style="-fx-background-color: #960059;" text="Suchen" textFill="#fffefe">
+                                          <JFXButton fx:id="btn_searchInspPlanOp" buttonType="RAISED" layoutX="765.0" layoutY="46.0" onAction="#btn_searchInspPlanOp_handler" prefHeight="30.0" prefWidth="89.0" style="-fx-background-color: #960059;" text="Suchen" textFill="#fffefe">
                                               <font>
                                                   <Font name="Roboto Black" size="13.0" />
                                               </font>

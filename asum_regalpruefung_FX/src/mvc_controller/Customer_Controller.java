@@ -18,13 +18,10 @@ import java.sql.SQLException;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,8 +32,6 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import mvc_helper.FilterableTreeItem;
-import mvc_helper.TreeItemPredicate;
 import mvc_model.CustomerDAO;
 import mvc_model.CustomerDTO;
 
@@ -64,7 +59,6 @@ public class Customer_Controller extends AnchorPane {
     @FXML
     private JFXButton btn_searchCustomer;
 
-    
     @FXML
     private Label lblName;
 
@@ -85,7 +79,7 @@ public class Customer_Controller extends AnchorPane {
 
     @FXML
     private Label lblCity;
-    
+
     @FXML
     private JFXCheckBox cb_activeUser;
 
@@ -96,7 +90,7 @@ public class Customer_Controller extends AnchorPane {
     private Label fabEdit;
 
     private ObservableList<CustomerDTO> data;
-    private FXML_StorageRackInsp_DocumentController fxml_application_controller;
+    private Application_Controller application_controller;
     private static Customer_Controller instance;
 
     public synchronized static Customer_Controller getInstance() {
@@ -118,7 +112,7 @@ public class Customer_Controller extends AnchorPane {
             loader.load();
         } catch (IOException ex) {
             //Logger.getLogger(FXML_StorageRackInsp_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
-            Logger.getLogger(FXML_StorageRackInsp_DocumentController.class.getName()).log(Level.SEVERE, "Unable to load Customer.fxml", ex);
+            Logger.getLogger(Customer_Controller.class.getName()).log(Level.SEVERE, "Unable to load Customer.fxml", ex);
         }
         initialize();
     }
@@ -130,7 +124,7 @@ public class Customer_Controller extends AnchorPane {
         rb_customerID.setUnSelectedColor(Color.WHITESMOKE);
         rb_customerName.setSelectedColor(Color.BLUEVIOLET);
         rb_customerName.setUnSelectedColor(Color.WHITE);
-        
+
         try {
             //prepare column: CustomerID
             JFXTreeTableColumn<CustomerDTO, Integer> customer_id = new JFXTreeTableColumn<>("ID");
@@ -138,7 +132,7 @@ public class Customer_Controller extends AnchorPane {
 //            customer_id.getStyleClass().add("Col_customer_id");
             customer_id.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, Integer> param) -> param.getValue().getValue().getIdProperty().asObject());
 //prepare column: CustomerName
-            JFXTreeTableColumn<CustomerDTO, String> customer_name = new JFXTreeTableColumn<>("Kundenname");
+            JFXTreeTableColumn<CustomerDTO, String> customer_name = new JFXTreeTableColumn<>("Kunde");
             customer_name.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, String> param) -> param.getValue().getValue().getNameProperty());
             customer_name.getStyleClass().add("Col_customer_name");
 //prepare column: CustomerStreet
@@ -211,6 +205,10 @@ public class Customer_Controller extends AnchorPane {
         } catch (SQLException ex) {
             Logger.getLogger(Customer_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void setApplication_controller(Application_Controller controller) {
+        this.application_controller = controller;
     }
 
     @FXML
