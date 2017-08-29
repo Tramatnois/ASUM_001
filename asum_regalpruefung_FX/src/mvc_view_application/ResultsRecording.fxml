@@ -6,6 +6,7 @@
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
+<?import com.jfoenix.controls.JFXTreeView?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import javafx.geometry.Insets?>
@@ -75,9 +76,9 @@
                                                          </HBox>
                                                                       </children>
                                                                   </VBox>
-                                                                  <VBox layoutX="50.0" layoutY="80.0" prefHeight="120.0" prefWidth="221.0">
+                                                                  <VBox layoutX="50.0" layoutY="80.0" prefWidth="221.0">
                                                                       <children>
-                                                         <Label fx:id="lblZipCode" prefHeight="30.0" prefWidth="221.0" text="Ergebniss:" textFill="#797878">
+                                                         <Label fx:id="lblZipCode" prefHeight="30.0" prefWidth="221.0" text="Ergebnis:" textFill="#797878">
                                                             <font>
                                                                <Font name="Bauhaus 93" size="24.0" />
                                                             </font>
@@ -108,47 +109,42 @@
                                                                <Insets bottom="10.0" top="10.0" />
                                                             </VBox.margin>
                                                          </HBox>
-                                                         <VBox>
+                                                                      </children>
+                                                                  </VBox>
+                                                   <VBox layoutX="50.0" layoutY="150.0" prefHeight="98.0" prefWidth="221.0">
+                                                      <children>
+                                                         <HBox>
                                                             <children>
-                                                               <Label fx:id="lblCity" prefHeight="30.0" prefWidth="221.0" textFill="#797878">
+                                                               <Label fx:id="lblZipCode2" prefHeight="30.0" prefWidth="221.0" text="Anlagen" textFill="#797878">
                                                                   <font>
-                                                                     <Font name="Roboto Regular" size="14.0" />
+                                                                     <Font name="Bauhaus 93" size="24.0" />
                                                                   </font>
                                                                   <graphic>
-                                                                     <FontAwesomeIconView fill="#3f51b5" glyphName="FORT_AWESOME" size="16.0" wrappingWidth="28.0" />
+                                                                     <FontAwesomeIconView fill="#e0551f" glyphName="PAPERCLIP" size="26" wrappingWidth="28.0" />
                                                                   </graphic>
                                                                </Label>
-                                                                                <Label fx:id="lblNorm" prefHeight="30.0" prefWidth="221.0" textFill="#797878">
-                                                                                    <font>
-                                                                                        <Font size="14.0" />
-                                                                                    </font>
-                                                                                    <graphic>
-                                                                                        <FontAwesomeIconView fill="#960059" glyphName="LEANPUB" size="16.0" wrappingWidth="28.0" />
-                                                                                    </graphic>
-                                                                                </Label>
-                                                               <Label fx:id="lblLocation" prefHeight="30.0" prefWidth="221.0" textFill="#797878">
-                                                                  <font>
-                                                                     <Font name="Roboto Regular" size="14.0" />
-                                                                  </font>
+                                                               <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY">
                                                                   <graphic>
-                                                                     <FontAwesomeIconView fill="#960059" glyphName="MAP_MARKER" size="20" wrappingWidth="28.0" />
+                                                                     <FontAwesomeIconView fill="#e0551f" glyphName="PLUS_SQUARE_ALT" size="20" />
                                                                   </graphic>
-                                                               </Label>
-                                                                                <Label fx:id="lblStorageRack" prefHeight="30.0" prefWidth="221.0" textFill="#797878">
-                                                                                    <font>
-                                                                                        <Font name="Roboto Regular" size="14.0" />
-                                                                                    </font>
-                                                                                    <graphic>
-                                                                                        <FontAwesomeIconView fill="#960059" glyphName="SITEMAP" size="18" wrappingWidth="28.0" />
-                                                                                    </graphic>
-                                                                                </Label>
+                                                               </JFXButton>
+                                                               <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY">
+                                                                  <graphic>
+                                                                     <FontAwesomeIconView fill="#e0551f" glyphName="TRASH" size="20" />
+                                                                  </graphic>
+                                                               </JFXButton>
+                                                            </children>
+                                                         </HBox>
+                                                         <VBox prefHeight="50.0" prefWidth="221.0">
+                                                            <children>
+                                                               <JFXTreeView />
                                                             </children>
                                                             <VBox.margin>
                                                                <Insets top="15.0" />
                                                             </VBox.margin>
                                                          </VBox>
-                                                                      </children>
-                                                                  </VBox>
+                                                      </children>
+                                                   </VBox>
                                                    <Label fx:id="lblZipCode1" layoutX="50.0" layoutY="250.0" prefHeight="30.0" prefWidth="221.0" text="Kommentar:" textFill="#797878">
                                                       <font>
                                                          <Font name="Bauhaus 93" size="24.0" />
@@ -201,12 +197,18 @@
                                                           <font>
                                                               <Font name="Bauhaus 93" size="22.0" />
                                                           </font>
+                                                <HBox.margin>
+                                                   <Insets right="10.0" />
+                                                </HBox.margin>
                                                       </Label>
-                                             <JFXTextField fx:id="tf_customerID" labelFloat="true" prefWidth="50.0" promptText="ID">
+                                             <JFXTextField fx:id="tf_customerID" labelFloat="true" prefWidth="50.0" promptText="ID" style="-fx-text-inner-color: white;" unFocusColor="#b5acac">
                                                 <HBox.margin>
                                                    <Insets right="10.0" />
                                                 </HBox.margin></JFXTextField>
-                                             <JFXTextField fx:id="tf_customer" promptText="Customer" />
+                                             <JFXTextField fx:id="tf_customer" labelFloat="true" prefWidth="250.0" promptText="Customer" style="-fx-text-inner-color: white;" unFocusColor="#b5acac">
+                                                <font>
+                                                   <Font size="15.0" />
+                                                </font></JFXTextField>
                                              <JFXButton fx:id="btn_load_customer" contentDisplay="GRAPHIC_ONLY" onAction="#btn_load_customer_handler">
                                                 <graphic>
                                                    <FontAwesomeIconView fill="WHITE" glyphName="TH_LIST" size="20" />
@@ -223,12 +225,18 @@
                                                 <font>
                                                    <Font name="Bauhaus 93" size="22.0" />
                                                 </font>
+                                                <HBox.margin>
+                                                   <Insets right="10.0" />
+                                                </HBox.margin>
                                              </Label>
-                                             <JFXTextField fx:id="tf_inspectionID" labelFloat="true" prefHeight="25.0" prefWidth="50.0" promptText="ID">
+                                             <JFXTextField fx:id="tf_inspectionID" labelFloat="true" prefHeight="25.0" prefWidth="50.0" promptText="ID" style="-fx-text-inner-color: white;">
                                                 <HBox.margin>
                                                    <Insets right="10.0" />
                                                 </HBox.margin></JFXTextField>
-                                             <JFXTextField fx:id="tf_inspectionDescr" labelFloat="true" promptText="Inspection" />
+                                             <JFXTextField fx:id="tf_inspectionDescr" labelFloat="true" prefWidth="250.0" promptText="Inspection" style="-fx-text-inner-color: white;">
+                                                <font>
+                                                   <Font size="15.0" />
+                                                </font></JFXTextField>
                                              <JFXButton fx:id="btn_load_inspection" contentDisplay="GRAPHIC_ONLY" onAction="#btn_load_inspection_handler">
                                                 <graphic>
                                                    <FontAwesomeIconView fill="WHITE" glyphName="TH_LIST" size="20" />

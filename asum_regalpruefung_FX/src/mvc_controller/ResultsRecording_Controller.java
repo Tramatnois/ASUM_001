@@ -8,6 +8,7 @@ package mvc_controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -32,6 +33,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import mvc_model.InspectionOperationCommentDAO;
 import mvc_model.InspectionResultDAO;
 import mvc_model.InspectionResultDTO;
@@ -120,6 +122,8 @@ public class ResultsRecording_Controller extends AnchorPane {
 
     private ObservableList<InspectionResultDTO> data;
     private Application_Controller application_controller;
+
+    private JFXPopup popup;
 
     private static ResultsRecording_Controller instance;
 
@@ -229,6 +233,26 @@ public class ResultsRecording_Controller extends AnchorPane {
         this.application_controller = controller;
     }
 
+    public void setCustomer(Integer customer) {
+        this.tf_customerID.setText(customer.toString());
+    }
+
+    public void setCustomer(String customer) {
+        this.tf_customer.setText(customer);
+    }
+
+    public void setInspection(Integer inspection) {
+        this.tf_inspectionID.setText(inspection.toString());
+    }
+
+    public void setInspection(String inspection) {
+        this.tf_inspectionDescr.setText(inspection);
+    }
+
+    public JFXPopup getPopup() {
+        return popup;
+    }
+
     public static final LocalDate LOCAL_DATE(String dateString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(dateString, formatter);
@@ -238,10 +262,21 @@ public class ResultsRecording_Controller extends AnchorPane {
     @FXML
     void btn_load_customer_handler(ActionEvent event) {
 
+        this.application_controller.getCustomerSelect_Controller().prepareCustomerSelectTable();
+        this.popup = new JFXPopup(this.application_controller.getCustomerSelect_Controller());
+//        popup.setPopupContent(this.application_controller.getCustomerSelect_Controller());
+        this.popup.getStyleClass().add("Popup");
+//        popup.getScene().setFill(Color.TRANSPARENT);
+//        popup.setStyle("-fx-background-color: transparent;");
+        this.popup.show(this, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.RIGHT);
+
     }
 
     @FXML
     void btn_load_inspection_handler(ActionEvent event) {
+        this.application_controller.getInspPlanOpSelect_Controller().prepareInspPlanOpSelectTable();
+        this.popup = new JFXPopup(this.application_controller.getInspPlanOpSelect_Controller());
+        this.popup.show(this, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.RIGHT);
 
     }
 
@@ -276,8 +311,6 @@ public class ResultsRecording_Controller extends AnchorPane {
                     tfa_results_comments.clear();
                     break;
             }
-
-            
 
 //        lblDescription.setText(inspResult.getValue().getDescription());
 //        tf_datepicker.setValue(LOCAL_DATE(inspResult.getValue().getDate().toString()));

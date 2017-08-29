@@ -221,6 +221,10 @@
 }
 
 
+.jfx-popup-container{
+    -fx-background-color: greenyellow;
+}
+
 
 /*.CustomerPane {
     -fx-background-color: skyblue, derive(skyblue, 25%);  set background to skyblue 

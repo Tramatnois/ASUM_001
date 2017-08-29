@@ -51,6 +51,10 @@ public class InspPlanOp_Controller extends AnchorPane {
     
     @FXML
     private JFXTreeTableView<InspectionPlanOperationDTO> tbl_view_inspplan_operation;
+
+    public JFXTreeTableView<InspectionPlanOperationDTO> getTbl_view_inspplan_operation() {
+        return tbl_view_inspplan_operation;
+    }
     
     @FXML
     private JFXTextField tf_filter;
@@ -171,9 +175,9 @@ public class InspPlanOp_Controller extends AnchorPane {
             final TreeItem<InspectionPlanOperationDTO> root;
             root = new RecursiveTreeItem<InspectionPlanOperationDTO>(data, RecursiveTreeObject::getChildren);
             
-            tbl_view_inspplan_operation.getColumns().setAll(inspection_id, inspection, customer_id, customer, status);
-            tbl_view_inspplan_operation.setRoot(root);
-            tbl_view_inspplan_operation.setShowRoot(false);
+//            tbl_view_inspplan_operation.getColumns().setAll(inspection_id, inspection, customer_id, customer, status);
+//            tbl_view_inspplan_operation.setRoot(root);
+//            tbl_view_inspplan_operation.setShowRoot(false);
             
             tbl_view_inspplan_operation.getColumns().setAll(inspection_id, inspection, customer_id, customer, status);
             tbl_view_inspplan_operation.setRoot(root);

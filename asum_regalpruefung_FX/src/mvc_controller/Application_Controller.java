@@ -6,7 +6,6 @@
 package mvc_controller;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
@@ -14,8 +13,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
-import javafx.animation.ParallelTransition;
-import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -123,7 +120,9 @@ public class Application_Controller extends StackPane {
     private Application_Controller home;
     private SidePanel_Controller sideMenu;
     private Customer_Controller customer_Controller;
+    private CustomerSelect_Controller customerSelect_Controller;
     private InspPlanOp_Controller inspectionPlanOperations_Controller;
+    private InspPlanOpSelect_Controller inspPlanOpSelect_Controller;
     private ResultsRecording_Controller resultsRecording_Controller;
 
     private HamburgerBackArrowBasicTransition hamburger_transition;
@@ -185,8 +184,12 @@ public class Application_Controller extends StackPane {
 //        }
         this.customer_Controller = Customer_Controller.getInstance();
         this.customer_Controller.setApplication_controller(this);
+        this.customerSelect_Controller = CustomerSelect_Controller.getInstance();
+        this.customerSelect_Controller.setApplication_controller(this);
         this.inspectionPlanOperations_Controller = InspPlanOp_Controller.getInstance();
         this.inspectionPlanOperations_Controller.setApplication_controller(this);
+        this.inspPlanOpSelect_Controller = InspPlanOpSelect_Controller.getInstance();
+        this.inspPlanOpSelect_Controller.setApplication_controller(this);
         this.resultsRecording_Controller = ResultsRecording_Controller.getInstance();
         this.resultsRecording_Controller.setApplication_controller(this);
 
@@ -286,6 +289,13 @@ public class Application_Controller extends StackPane {
 
     public void setInspPlanOpStage(Stage inspPlanOpStage) {
         Application_Controller.inspPlanOpStage = inspPlanOpStage;
+    }
+    public InspPlanOpSelect_Controller getInspPlanOpSelect_Controller() {
+        return inspPlanOpSelect_Controller;
+    }
+
+    public CustomerSelect_Controller getCustomerSelect_Controller() {
+        return customerSelect_Controller;
     }
 
     /*Sub Functions Customer*/

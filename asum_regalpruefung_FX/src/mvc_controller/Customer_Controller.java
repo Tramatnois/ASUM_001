@@ -48,6 +48,10 @@ public class Customer_Controller extends AnchorPane {
     @FXML
     private JFXTreeTableView<CustomerDTO> tbl_view_customer;
 
+    public JFXTreeTableView<CustomerDTO> getTbl_view_customer() {
+        return tbl_view_customer;
+    }
+
     @FXML
     private JFXTextField tf_filter;
     @FXML
