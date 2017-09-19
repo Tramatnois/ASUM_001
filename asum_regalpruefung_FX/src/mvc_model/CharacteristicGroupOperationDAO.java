@@ -22,7 +22,7 @@ public class CharacteristicGroupOperationDAO extends AbstractDAO{
         ArrayList<CharacteristicGroupOperationDTO> characteristicGroupOperationList = new ArrayList<>();
         String query;
         ResultSet rs;
-        query = "SELECT * FROM characteristic_group_operation_tab";
+        query = "SELECT * FROM characteristic_group_operation_tab ";
 
 
         PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
@@ -36,33 +36,39 @@ public class CharacteristicGroupOperationDAO extends AbstractDAO{
         preparedStmt.close();
         return characteristicGroupOperationList;
     }
-     /*
-    public ArrayList<InspectionPlanOperationDTO> selectAllFullLoadWithoutTemplate() throws SQLException {
-        ArrayList<InspectionPlanOperationDTO> inspectionPlanOperationList = new ArrayList<>();
+   
+     
+     
+     /**
+      * Returns a list of CharacteristicGroupOperation Items ordered by the inspectionPlanOperation id.
+      * The given inspectionPlanOperation is mapped to the items.
+      * 
+      * @param id
+      * @return ArrayList of CharacteristicGroup selected by Operation Plan ID
+      * @throws SQLException 
+      */
+     public ArrayList<CharacteristicGroupOperationDTO> selectAllByInspectionPlanOperation(int inspectionPlanOperationId) throws SQLException {
+        ArrayList<CharacteristicGroupOperationDTO> characteristicGroupOperationList = new ArrayList<>();
+        CharacteristicGroupOperationDTO characteristicGroupOperationDTO;
         String query;
         ResultSet rs;
-        //query = "SELECT * FROM inspectionplan_operation_tab";
-        query = "SELECT ipo.idinspectionplan_operation, ipo.date, ipo.norm, ipo.description, ipo.storage_Rack, ipo.location, ipo.inspectionplan_template_id, "
-                + "ipos.idinspectionplan_operation_status as inspectionplan_operation_status_id, ipos.description AS description, "
-                + "cus.idcustomer as customer_id, cus.name AS cusname, cus.street AS cusstreet, cus.zipcode AS cuszipcode, cus.city AS cuscity, cus.contactperson AS cuscontactperson, cus.phone AS cusphone, cus.fax AS cusfax, cus.email AS cusemail, "
-                + "ins.idinspector as inspector_id, ins.name AS insname, ins.street AS insstreet, ins.zipcode AS inszipcode, ins.city AS inscity "
-                + "FROM inspectionplan_operation_tab as ipo "
-                + "JOIN inspectionplan_operation_status_tab as ipos ON ipo.inspectionplan_operation_status_id  = ipos.idinspectionplan_operation_status "
-                + "JOIN customer_tab as cus ON ipo.customer_id=cus.idcustomer "
-                + "JOIN inspector_tab as ins ON ipo.inspector_id=ins.idinspector ";
+        query = "SELECT * FROM characteristic_group_operation_tab "
+                + "WHERE inspectionplan_operation_id=?";
 
         PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
+        preparedStmt.setInt(1, inspectionPlanOperationId);
+
         rs = preparedStmt.executeQuery();
         while (rs.next()) {
-            inspectionPlanOperationList.add(this.mapInspectionPlanOperation(rs));
+            characteristicGroupOperationDTO = this.mapCharacteristicGroupOperation(rs);
+            characteristicGroupOperationList.add(characteristicGroupOperationDTO);
         }
         // execute the preparedstatement
 
         rs.close();
         preparedStmt.close();
-        return inspectionPlanOperationList;
+        return characteristicGroupOperationList;
     }
-*/
     /**
      * Returns a single characteristicGroup ordered by ID
      *
@@ -79,7 +85,7 @@ public class CharacteristicGroupOperationDAO extends AbstractDAO{
 
         //query = "SELECT * FROM inspectionplan_operation_tab where idinspectionplan_operation=?";
         query = "SELECT * FROM characteristic_group_operation_tab "
-                + "where idcharacteristic_group_operation=?";
+                + "WHERE idcharacteristic_group_operation=?";
 
         preparedStmt = connection.getConnection().prepareStatement(query);
         preparedStmt.setInt(1, id);
@@ -95,39 +101,6 @@ public class CharacteristicGroupOperationDAO extends AbstractDAO{
 
         return characteristicGroupOperationDTO;
     }
-/*
-    public InspectionPlanOperationDTO selectSingleFullLoadByIdWithoutTemplate(int id) throws SQLException {
-        InspectionPlanOperationDTO inspectionPlanOperationDTO;
-        String query;
-        PreparedStatement preparedStmt;
-        ResultSet rs;
-
-        //query = "SELECT * FROM inspectionplan_operation_tab where idinspectionplan_operation=?";
-        query = "SELECT ipo.idinspectionplan_operation, ipo.date, ipo.norm, ipo.description, ipo.storage_Rack, ipo.location, ipo.inspectionplan_template_id, "
-                + "ipos.idinspectionplan_operation_status, ipos.description AS iposDescription, "
-                + "cus.idcustomer, cus.name AS cusname, cus.street AS cusstreet, cus.zipcode AS cuszipcode, cus.city AS cuscity, cus.contactperson AS cuscontactperson, cus.phone AS cusphone, cus.fax AS cusfax, cus.email AS cusemail, "
-                + "ins.idinspector, ins.name AS insname, ins.street AS insstreet, ins.zipcode AS inszipcode, ins.city AS inscity "
-                + "FROM inspectionplan_operation_tab ipo "
-                + "JOIN inspectionplan_operation_status_tab ipos ON ipo.inspectionplan_operation_status_id  = ipos.idinspectionplan_operation_status "
-                + "JOIN customer_tab cus ON ipo.customer_id=cus.idcustomer "
-                + "JOIN inspector_tab ins ON ipo.inspector_id=ins.idinspector "
-                + "WHERE idinspectionplan_operation=?";
-
-        preparedStmt = connection.getConnection().prepareStatement(query);
-        preparedStmt.setInt(1, id);
-
-        rs = preparedStmt.executeQuery();
-        if (rs.next()) {
-            inspectionPlanOperationDTO = this.mapFullInspectionPlanOperationWithoutTemplate(rs);
-        } else {
-            return null;
-        }
-        rs.close();
-        preparedStmt.close();
-
-        return inspectionPlanOperationDTO;
-    }
-*/
     /**
      * Adds a characteristicGroupOperation to the Database.
      *
@@ -222,56 +195,7 @@ public class CharacteristicGroupOperationDAO extends AbstractDAO{
 
         return characteristicGroupOperationDTO;
     }
-/*
-    private InspectionPlanOperationDTO mapFullInspectionPlanOperationWithoutTemplate(ResultSet rs) throws SQLException {
-        InspectionPlanOperationDTO inspectionPlanOperation;
 
-        //@ Stefan hier mal langsam: Die Kundendaten etc. stelle ich später bereit
-        CustomerDTO customerDTO = new CustomerDTO();
-        InspectorDTO inspector = new InspectorDTO();
-        InspectionPlanTemplateDTO inspectionPlanTemplateDTO = new InspectionPlanTemplateDTO();
-        InspectionPlanOperationStatusDTO inspectionPlanOperationStatusDTO = new InspectionPlanOperationStatusDTO();
-
-        inspectionPlanOperation = new InspectionPlanOperationDTO();
-        inspectionPlanOperation.setId(rs.getInt("idinspectionplan_operation"));
-        inspectionPlanOperation.setDate(rs.getDate("date"));
-        inspectionPlanOperation.setNorm(rs.getString("norm"));
-        inspectionPlanOperation.setDescription(rs.getString("description"));
-        inspectionPlanOperation.setStorageRack(rs.getString("storage_Rack"));
-        inspectionPlanOperation.setLocation(rs.getString("location"));
-        //Map Customer
-        customerDTO.setId(rs.getInt("idcustomer"));
-        customerDTO.setName(rs.getString("cusname"));
-        customerDTO.setStreet(rs.getString("cusstreet"));
-        customerDTO.setZipcode(rs.getString("cuszipcode"));
-        customerDTO.setCity(rs.getString("cuscity"));
-        customerDTO.setContactperson(rs.getString("cuscontactperson"));
-        customerDTO.setContactperson(rs.getString("cuscontactperson"));
-        customerDTO.setPhone(rs.getString("cusphone"));
-        customerDTO.setFax(rs.getString("cusfax"));
-        customerDTO.setEmail(rs.getString("cusemail"));
-        inspectionPlanOperation.setCustomer(customerDTO);
-
-        //map Inspector
-        inspector.setId(rs.getInt("idinspector"));
-        inspector.setName(rs.getString("insname"));
-        inspector.setStreet(rs.getString("insstreet"));
-        inspector.setZipcode(rs.getString("inszipcode"));
-        inspector.setCity(rs.getString("inscity"));
-        inspectionPlanOperation.setInspector(inspector);
-
-        //map inspectionplan
-        inspectionPlanTemplateDTO.setId(rs.getInt("inspectionplan_template_id"));
-        inspectionPlanOperation.setInspectionplanTemplate(inspectionPlanTemplateDTO);
-        //map operation status
-        inspectionPlanOperationStatusDTO.setId(rs.getInt("idinspectionplan_operation_status"));
-        inspectionPlanOperationStatusDTO.setDescription(rs.getString("iposDescription"));
-
-        inspectionPlanOperation.setInspectionPlanOperationStatus(inspectionPlanOperationStatusDTO);
-
-        return inspectionPlanOperation;
-    }
-*/
 }
 
 
