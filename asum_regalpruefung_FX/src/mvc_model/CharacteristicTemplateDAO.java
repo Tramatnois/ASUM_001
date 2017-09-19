@@ -29,7 +29,7 @@ public class CharacteristicTemplateDAO extends AbstractDAO{
         PreparedStatement preparedStmt;
         ResultSet rs;
 
-        query = "SELECT * FROM characteristic_template_tab where idcharacteristic_template=?";
+        query = "SELECT * FROM characteristic_template_tab WHERE idcharacteristic_template=?";
 
         preparedStmt = connection.getConnection().prepareStatement(query);
         preparedStmt.setInt(1, id);
