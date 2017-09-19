@@ -12,9 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 
 
 /**
@@ -277,9 +275,9 @@ public class CharacteristicOperationDAO extends AbstractDAO {
 //        commentDTO = commentDAO.selectSingleById(rs.getInt("characteristic_type_id"));
         return characteristicOperation;
     }
->>>>>>> origin/master
+
 }**/
-=======
+/**
     public CharacteristicOperationDTO selectSingleById(int id) throws SQLException {
         CharacteristicOperationDTO charOperation_DTO;
         String query;
@@ -333,6 +331,5 @@ public class CharacteristicOperationDAO extends AbstractDAO {
 //        InspectionOperationCommentDAO commentDAO = new InspectionOperationCommentDAO();
 //        commentDTO = commentDAO.selectSingleById(rs.getInt("characteristic_type_id"));
         return characteristicOperation;
-    }
->>>>>>> origin/master
+    }**/
 }
