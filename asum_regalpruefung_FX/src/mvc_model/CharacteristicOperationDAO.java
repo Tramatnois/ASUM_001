@@ -65,7 +65,7 @@ public class CharacteristicOperationDAO extends AbstractDAO {
         rs = preparedStmt.executeQuery();
         while (rs.next()) {
             characteristicOperationDTO = this.mapCharacteristicGroupOperation(rs);
-            characteristicOperationDTO.setInspectionPlanDTO(inspectionPlanOperationDTO);
+            characteristicOperationDTO.setInspectionPlan(inspectionPlanOperationDTO);
             characteristicOperationList.add(characteristicOperationDTO);
         }
         // execute the preparedstatement
@@ -123,9 +123,9 @@ public class CharacteristicOperationDAO extends AbstractDAO {
         // create the mysql insert preparedstatement
         PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         preparedStmt.setInt(1, characteristicOperationDTO.getId());
-        preparedStmt.setInt(2, characteristicOperationDTO.getGroupnumber());
+        preparedStmt.setInt(2, characteristicOperationDTO.getCharacteristicgroup().getGroupnumber());
         preparedStmt.setString(3, characteristicOperationDTO.getDescription());
-        preparedStmt.setInt(4, characteristicOperationDTO.getInspectionPlanDTO().getId());
+        preparedStmt.setInt(4, characteristicOperationDTO.getInspectionPlan().getId());
 
         // execute the preparedstatement
         preparedStmt.execute();
@@ -149,9 +149,9 @@ public class CharacteristicOperationDAO extends AbstractDAO {
 
         // create the mysql insert preparedstatement
         PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
-        preparedStmt.setInt(1, characteristicOperationDTO.getGroupnumber());
+        preparedStmt.setInt(1, characteristicOperationDTO.getCharacteristicgroup().getGroupnumber());
         preparedStmt.setString(2, characteristicOperationDTO.getDescription());
-        preparedStmt.setInt(3, characteristicOperationDTO.getInspectionPlanDTO().getId());
+        preparedStmt.setInt(3, characteristicOperationDTO.getInspectionPlan().getId());
 
         preparedStmt.setInt(4, characteristicOperationDTO.getId());
 

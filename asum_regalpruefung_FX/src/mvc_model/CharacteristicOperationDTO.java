@@ -83,6 +83,7 @@ class CharacteristicOperationDTO {
         this.comment = comment;
     }
 
+  
     
     
 }
