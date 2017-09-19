@@ -1,6 +1,3 @@
-
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,7 +6,9 @@
 package mvc_model;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -20,115 +19,148 @@ import javafx.beans.property.StringProperty;
  */
 public class CustomerDTO extends RecursiveTreeObject<CustomerDTO> {
 
-    private IntegerProperty id;
-    private StringProperty name;
-    private String street;
-    private String zipcode;
-    private String city;
-    private String contactperson;
-    private String phone;
-    private String fax;
-    private String email;
+    private IntegerProperty id = new SimpleIntegerProperty();
+    private StringProperty name = new SimpleStringProperty();
+    private StringProperty street = new SimpleStringProperty();
+    private StringProperty zipcode = new SimpleStringProperty();
+    private StringProperty city = new SimpleStringProperty();
+    private StringProperty contactperson = new SimpleStringProperty();
+    private StringProperty phone = new SimpleStringProperty();
+    private StringProperty fax = new SimpleStringProperty();
+    private StringProperty email = new SimpleStringProperty();
+    private IntegerProperty active = new SimpleIntegerProperty();
 
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
     public Integer getId() {
         return id.get();
     }
 
-    public IntegerProperty getIdProperty() {
+    public final IntegerProperty getIdProperty() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = new SimpleIntegerProperty();
+    public final void setId(final Integer id) {
         this.id.set(id);
     }
-    
 
-    
-    
-//    public int getId() {
-//        return idcustomer;
-//    }
-//
-//    public void setId(int id) {
-//        this.idcustomer = id;
-//    }
-
-
-    public String getName() {
+    public final String getName() {
         return name.get();
     }
-    
-    public StringProperty getNameProperty() {
+
+    public final StringProperty getNameProperty() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = new SimpleStringProperty();
+    public final void setName(final String name) {
         this.name.set(name);
     }
 
-    public String getZipcode() {
+    public final String getStreet() {
+        return street.get();
+    }
+
+    public final StringProperty getStreetProperty() {
+        return street;
+    }
+
+    public final void setStreet(final String street) {
+        this.street.set(street);
+    }
+
+    public final String getZipcode() {
+        return zipcode.get();
+    }
+
+    public final StringProperty getZipCodeProperty() {
         return zipcode;
     }
 
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
+    public final void setZipcode(final String zipcode) {
+        this.zipcode.set(zipcode);
     }
 
-    public String getCity() {
+    public final String getCity() {
+        return city.get();
+    }
+
+    public final StringProperty getCityProperty() {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public final void setCity(final String city) {
+        this.city.set(city);
     }
 
-    public String getContactperson() {
+    public final String getContactperson() {
+        return contactperson.get();
+    }
+
+    public final StringProperty getContactpersonProperty() {
         return contactperson;
     }
 
-    public void setContactperson(String contactperson) {
-        this.contactperson = contactperson;
+    public final void setContactperson(final String contactperson) {
+        this.contactperson.set(contactperson);
     }
 
-    public String getPhone() {
+    public final String getPhone() {
+        return phone.get();
+    }
+
+    public final StringProperty getPhoneProperty() {
         return phone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public final void setPhone(final String phone) {
+        this.phone.set(phone);
     }
 
-    public String getFax() {
+    public final String getFax() {
+        return fax.get();
+    }
+
+    public final StringProperty getFaxProperty() {
         return fax;
     }
 
-    public void setFax(String fax) {
-        this.fax = fax;
+    public final void setFax(final String fax) {
+        this.fax.set(fax);
     }
 
-    public String getEmail() {
+    public final String getEmail() {
+        return email.get();
+    }
+
+    public final StringProperty getEmailProperty() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public final void setEmail(final String email) {
+        this.email.set(email);
     }
-    
+
+    public final Integer getActive() {
+        return active.get();
+    }
+
+    public final Boolean getActiveBoolean() {
+        Boolean boolActive = false;
+        switch (this.active.get()) {
+            case 0:
+                boolActive = false;
+                break;
+            default:
+                boolActive = true;
+                break;
+        }        
+        return boolActive;
+    }
+
+    public final IntegerProperty getActiveProperty() {
+        return active;
+    }
+
+    public final void setActive(final Integer active) {
+        this.active.set(active);
+    }
+
 }

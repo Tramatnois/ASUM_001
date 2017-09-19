@@ -9,7 +9,7 @@ package mvc_model;
  *
  * @author LT Dan
  */
-class InspectionOperationCommentDTO {
+public class InspectionOperationCommentDTO {
     private int id;
     private String comment;
     private CharacteristicOperationDTO characteristic;

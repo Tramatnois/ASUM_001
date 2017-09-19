@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXToolbar?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1300.0" stylesheets="@../styles/application.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane fx:id="borderPane" prefHeight="720.0" prefWidth="1300.0">
+         <center>
+            <AnchorPane prefWidth="1300.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane fx:id="contentPane" layoutY="1.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <AnchorPane style="-fx-background-radius: 50px;">
+                     <children>
+                     <JFXDrawer fx:id="drawerSlideMenue" defaultDrawerSize="230.0" overLayVisible="false" />
+                     </children>
+                     <effect>
+                        <DropShadow color="#030303" />
+                     </effect>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </center>
+         <bottom>
+            <AnchorPane prefWidth="1300.0" BorderPane.alignment="BOTTOM_CENTER">
+               <children>
+                  <HBox alignment="CENTER" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1118.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="79.0" text="connected to:">
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tf_connected" editable="false" mouseTransparent="true" text="Database">
+                           <HBox.margin>
+                              <Insets right="15.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </bottom>
+         <top>
+            <JFXToolbar prefWidth="1300.0" styleClass="Toolbar" BorderPane.alignment="CENTER">
+               <right>
+                  <AnchorPane BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox fx:id="hoxImages" alignment="CENTER" layoutY="21.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <ImageView fx:id="imgInfo" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#btn_showInfo_handler" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/Circle%20Info%20-%2001.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                              <ImageView fx:id="imgHome" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#btn_goHome_handler" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/Home.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                              <ImageView fx:id="imgExit" fitHeight="20.0" fitWidth="20.0" layoutX="35.0" layoutY="10.0" onMouseClicked="#btn_exit_handler" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/Exit%20-%2002.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="107.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="107.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+                           <image>
+                              <Image url="@../images/admin.png" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="152.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="155.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.953125">
+                           <font>
+                              <Font name="Roboto Light" size="14.0" />
+                           </font>
+                        </Text>
+                     </children>
+                     <padding>
+                        <Insets right="25.0" top="5.0" />
+                     </padding>
+                  </AnchorPane>
+               </right>
+               <left>
+                  <HBox BorderPane.alignment="CENTER">
+                     <children>
+                        <JFXHamburger fx:id="hamburger" prefWidth="94.0" />
+                        <AnchorPane>
+                           <children>
+                              <HBox layoutX="-15.0" layoutY="19.0">
+                                 <children>
+                                    <StackPane prefHeight="38.0" prefWidth="775.0">
+                                       <children>
+                                          <GridPane fx:id="paneSubFun_Customer" visible="false">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="71.0" minWidth="2.0" prefWidth="30.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="91.0" minWidth="0.0" prefWidth="82.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="204.0" minWidth="0.0" prefWidth="45.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="239.0" minWidth="8.0" prefWidth="46.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="547.0" minWidth="10.0" prefWidth="547.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <JFXButton fx:id="btn_edit_customer" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#btn_edit_customer_handler" prefHeight="31.0" prefWidth="58.0" styleClass="btn_customer_new" textFill="WHITE">
+                                                   <graphic>
+                                                      <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="28" />
+                                                   </graphic>
+                                                </JFXButton>
+                                                <JFXButton fx:id="btn_add_customer" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#btn_add_customer_handler" prefHeight="31.0" prefWidth="58.0" styleClass="btn_customer_new" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                                   <graphic>
+                                                      <FontAwesomeIconView fill="WHITE" glyphName="USER_PLUS" size="26" styleClass="btn_customer_new" />
+                                                   </graphic>
+                                                </JFXButton>
+                                                <JFXButton fx:id="btn_del_customer" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#btn_del_customer_handler" prefHeight="31.0" prefWidth="58.0" styleClass="btn_customer_new" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                                   <graphic>
+                                                      <FontAwesomeIconView fill="WHITE" glyphName="USER_TIMES" size="26" styleClass="btn_customer_new" />
+                                                   </graphic>
+                                                </JFXButton>
+                                             </children>
+                                          </GridPane>
+                                          <GridPane fx:id="paneSubFun_InspPlanOp" prefHeight="38.0" prefWidth="817.0" visible="false">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="77.0" minWidth="10.0" prefWidth="55.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="107.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="78.0" minWidth="10.0" prefWidth="56.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="79.0" minWidth="10.0" prefWidth="48.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="88.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="0.0" prefWidth="0.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="72.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="37.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints maxHeight="46.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="70.0" minHeight="1.0" prefHeight="38.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <JFXButton fx:id="btn_edit_inspPlanOp" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#btn_edit_inspPlanOp_handler" prefHeight="31.0" prefWidth="58.0" styleClass="btn_customer_new" textFill="WHITE" GridPane.rowIndex="1">
+                                                   <graphic>
+                                                      <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="28" />
+                                                   </graphic>
+                                                </JFXButton>
+                                                <JFXButton fx:id="btn_new_inspPlanOp" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#btn_new_inspPlanOp_handler" prefHeight="31.0" prefWidth="58.0" styleClass="btn_customer_new" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <graphic>
+                                                      <FontAwesomeIconView fill="WHITE" glyphName="PLUS_SQUARE_ALT" size="28" />
+                                                   </graphic>
+                                                </JFXButton>
+                                                <JFXButton fx:id="btn_del_inspPlanOp" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#btn_del_inspPlanOp_handler" prefHeight="31.0" prefWidth="58.0" styleClass="btn_customer_new" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                   <graphic>
+                                                      <FontAwesomeIconView fill="WHITE" glyphName="TRASH" size="28" />
+                                                   </graphic>
+                                                </JFXButton>
+                                                <Label alignment="CENTER" prefHeight="83.0" prefWidth="83.0" text="Templates:" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="Bauhaus 93" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" prefHeight="14.0" prefWidth="172.0" text="Prüfplan" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="5" GridPane.columnSpan="4">
+                                                   <font>
+                                                      <Font name="Bauhaus 93" size="12.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </GridPane.margin>
+                                                </Label>
+                                                <JFXButton fx:id="btn_view_inspPlanOp_Template" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#btn_view_inspPlanOp_Template_handler" prefHeight="31.0" prefWidth="58.0" styleClass="btn_customer_new" textFill="WHITE" GridPane.columnIndex="5" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                   <graphic>
+                                                      <MaterialDesignIconView fill="WHITE" glyphName="FILE_FIND" size="30" wrappingWidth="32.0" />
+                                                   </graphic>
+                                                </JFXButton>
+                                                <JFXButton fx:id="btn_change_inspPlanOp_Template" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#btn_change_inspPlanOp_Template_handler" prefHeight="31.0" prefWidth="58.0" styleClass="btn_customer_new" textFill="WHITE" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                   <graphic>
+                                                      <MaterialDesignIconView fill="WHITE" glyphName="PENCIL_BOX" size="30" wrappingWidth="32.0" />
+                                                   </graphic>
+                                                </JFXButton>
+                                                <JFXButton fx:id="btn_add_inspPlanOp_Template" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#btn_add_inspPlanOp_Template_handler" prefHeight="31.0" prefWidth="58.0" styleClass="btn_customer_new" textFill="WHITE" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                   <graphic>
+                                                      <MaterialDesignIconView fill="WHITE" glyphName="FOLDER_PLUS" size="32" wrappingWidth="32.0" />
+                                                   </graphic>
+                                                </JFXButton>
+                                                <JFXButton fx:id="btn_del_inspPlanOp_Template" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#btn_del_inspPlanOp_Template_handler" prefHeight="31.0" prefWidth="58.0" styleClass="btn_customer_new" textFill="WHITE" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                   <graphic>
+                                                      <MaterialDesignIconView fill="WHITE" glyphName="FOLDER_REMOVE" size="32" />
+                                                   </graphic>
+                                                </JFXButton>
+                                                <Label alignment="CENTER" prefHeight="14.0" prefWidth="171.0" text="Merkmal" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="10" GridPane.columnSpan="4">
+                                                   <font>
+                                                      <Font name="Bauhaus 93" size="12.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </GridPane.margin>
+                                                </Label>
+                                                <JFXButton fx:id="btn_view_characteristic_Template" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#btn_view_characteristic_Template_handler" prefHeight="31.0" prefWidth="58.0" styleClass="btn_customer_new" textFill="WHITE" GridPane.columnIndex="10" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                   <graphic>
+                                                      <MaterialDesignIconView fill="WHITE" glyphName="FILE_FIND" size="30" wrappingWidth="32.0" />
+                                                   </graphic>
+                                                </JFXButton>
+                                                <JFXButton fx:id="btn_change_characteristic_Template" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#btn_change_characteristic_Template_handler" prefHeight="31.0" prefWidth="58.0" styleClass="btn_customer_new" textFill="WHITE" GridPane.columnIndex="11" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                   <graphic>
+                                                      <MaterialDesignIconView fill="WHITE" glyphName="PENCIL_BOX" size="30" wrappingWidth="32.0" />
+                                                   </graphic>
+                                                </JFXButton>
+                                                <JFXButton fx:id="btn_add_characteristic_Template" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#btn_add_characteristic_Template_handler" prefHeight="31.0" prefWidth="58.0" styleClass="btn_customer_new" textFill="WHITE" GridPane.columnIndex="12" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                   <graphic>
+                                                      <MaterialDesignIconView fill="WHITE" glyphName="FOLDER_PLUS" size="32" wrappingWidth="32.0" />
+                                                   </graphic>
+                                                </JFXButton>
+                                                <JFXButton fx:id="btn_del_characteristic_Template" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#btn_del_characteristic_Template_handler" prefHeight="31.0" prefWidth="58.0" styleClass="btn_customer_new" textFill="WHITE" GridPane.columnIndex="13" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                   <graphic>
+                                                      <MaterialDesignIconView fill="WHITE" glyphName="FOLDER_REMOVE" size="32" />
+                                                   </graphic>
+                                                </JFXButton>
+                                                <Label alignment="CENTER" prefHeight="14.0" text="Ergebnisse" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="15">
+                                                   <font>
+                                                      <Font name="Bauhaus 93" size="12.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </GridPane.margin>
+                                                </Label>
+                                                <JFXButton fx:id="btn_show_inspPlanOpResults" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#btn_show_inspPlanOpResults_handler" prefHeight="31.0" prefWidth="58.0" styleClass="btn_customer_new" textFill="WHITE" GridPane.columnIndex="15" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                   <graphic>
+                                                      <FontAwesomeIconView fill="WHITE" glyphName="LIST_ALT" size="28" />
+                                                   </graphic>
+                                                </JFXButton>
+                                                <Label alignment="CENTER" prefHeight="14.0" text="Anlagen" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="17" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                                   <font>
+                                                      <Font name="Bauhaus 93" size="12.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </GridPane.margin>
+                                                </Label>
+                                                <JFXButton fx:id="btn_show_inspPlanOpAttachments" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#btn_show_inspPlanOpAttachments_handler" prefHeight="31.0" prefWidth="58.0" styleClass="btn_customer_new" textFill="WHITE" GridPane.columnIndex="17" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                   <graphic>
+                                                      <FontAwesomeIconView fill="WHITE" glyphName="PAPERCLIP" size="28" />
+                                                   </graphic>
+                                                </JFXButton>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+               </left>
+            </JFXToolbar>
+         </top>
+      </BorderPane>
+   </children>
+</fx:root>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root prefHeight="270.0" prefWidth="534.0" styleClass="Pane_CustomerPopup" stylesheets="@../styles/customer.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <StackPane layoutX="-16.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+         <AnchorPane prefHeight="339.0" prefWidth="534.0">
+            <children>
+               <VBox layoutX="14.0" layoutY="166.0" prefHeight="180.0" prefWidth="505.0">
+                  <children>
+                     <JFXTreeTableView fx:id="tbl_view_customer_select" onMouseClicked="#tbl_view_customer_select_handler" prefHeight="170.0" prefWidth="505.0">
+                        <columnResizePolicy>
+                           <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                        </columnResizePolicy>
+                     </JFXTreeTableView>
+                  </children>
+               </VBox>
+               <AnchorPane layoutX="14.0" layoutY="46.0" prefHeight="106.0" prefWidth="505.0" style="-fx-background-color: rgb(0, 150, 136,0.8); -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 5;">
+                  <children>
+                     <Pane layoutX="22.0" layoutY="-36.0" prefHeight="106.0" prefWidth="115.0" style="-fx-background-color: #009688; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 4;">
+                        <children>
+                           <ImageView fitHeight="85.0" fitWidth="92.0" layoutX="15.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../images/search.png" />
+                              </image>
+                           </ImageView>
+                        </children>
+                     </Pane>
+                     <Label layoutX="173.0" layoutY="8.0" prefHeight="28.0" prefWidth="144.0" text="Filtern nach :" textFill="WHITE">
+                        <font>
+                           <Font name="Bauhaus 93" size="22.0" />
+                        </font>
+                     </Label>
+                     <JFXRadioButton fx:id="rb_customerID" layoutX="337.0" layoutY="8.0" prefHeight="28.0" prefWidth="162.0" style="-fx-selected-color: white;" styleClass="custom-jfx-check-box" text="Kundennummer" textFill="WHITE">
+                        <font>
+                           <Font name="Bauhaus 93" size="14.0" />
+                        </font>
+                        <toggleGroup>
+                           <ToggleGroup fx:id="filter" />
+                        </toggleGroup>
+                     </JFXRadioButton>
+                     <JFXRadioButton fx:id="rb_customerName" layoutX="337.0" layoutY="36.0" prefHeight="28.0" prefWidth="126.0" styleClass="custom-jfx-check-box" text="Kundenname" textFill="#fffdfd" toggleGroup="$filter">
+                        <font>
+                           <Font name="Bauhaus 93" size="14.0" />
+                        </font>
+                     </JFXRadioButton>
+                     <JFXTextField fx:id="tf_searchCustomer" focusColor="#fcfcfc" labelFloat="true" layoutX="173.0" layoutY="55.0" maxWidth="214.0" minWidth="172.0" prefHeight="31.0" prefWidth="172.0" promptText="Suche Kunde" unFocusColor="WHITE">
+                        <font>
+                           <Font name="System Bold" size="13.0" />
+                        </font>
+                     </JFXTextField>
+                  </children>
+               </AnchorPane>
+            </children>
+         </AnchorPane>
+      </children>
+   </StackPane>
+</fx:root>

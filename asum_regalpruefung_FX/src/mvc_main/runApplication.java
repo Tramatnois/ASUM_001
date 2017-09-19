@@ -5,19 +5,19 @@
  */
 package mvc_main;
 
-import java.io.IOException;
-import javafx.animation.PauseTransition;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.application.Application;
-import javafx.concurrent.Task;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.stage.Screen;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
-import mvc_controller.FXML_Application_DocumentController;
-import mvc_view.SplashScreenDrawer;
+import javafx.stage.WindowEvent;
+import mvc_controller.Application_Controller;
+import mvc_controller.SplashScreen_Controller;
+import mvc_model_sqlconnector.DBConnection;
+import org.controlsfx.control.NotificationPane;
 
 /**
  *
@@ -25,80 +25,85 @@ import mvc_view.SplashScreenDrawer;
  */
 public class runApplication extends Application {
 
-//    final Float[] values = new Float[]{-1.0f, 0f, 0.6f, 1.0f};
-//    final Label[] labels = new Label[values.length];
-//    final ProgressBar[] pbs = new ProgressBar[values.length];
-//    final ProgressIndicator[] pins = new ProgressIndicator[values.length];
-//    final HBox hbs[] = new HBox[values.length];
-    Screen screen = Screen.getPrimary();
+//    Screen screen = Screen.getPrimary();
+    private Stage splashScreenStage;
+    private Stage mainStage;
+    private NotificationPane notificationPane;
+
+    Application_Controller rootPrimaryStage;
+
+    protected DBConnection connection;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Task<SplashScreenDrawer> splashScreenTask = createSplashScreenTask();
-        Stage splashScreenStage = new Stage();
+        this.splashScreenStage = primaryStage;
 
-        buildSplashScreenUI(splashScreenStage, splashScreenTask);
+// manage stage layout:
+//        primaryStage.setTitle("Application");
+// init SplashScreen
+        SplashScreen_Controller root_SplashScreen = SplashScreen_Controller.getInstance();
+        Scene scene_SplashScreen = new Scene(root_SplashScreen);
+        splashScreenStage.initStyle(StageStyle.UNDECORATED);
+// init notificationPane        
+        notificationPane = new NotificationPane(root_SplashScreen);
+        notificationPane.getStyleClass().add(NotificationPane.STYLE_CLASS_DARK);
+// set css
+        notificationPane.getStylesheets().addAll("styles/splashScreen.css");
+// get icon for notificationPane        
+        FontAwesomeIconView icon = new FontAwesomeIconView(FontAwesomeIcon.WARNING);
+        icon.setSize("2em");
+        icon.setStyleClass("WarningIcon");
+        notificationPane.setGraphic(icon);
 
-        // manage stage layout:
-        primaryStage.yProperty().addListener((obs, oldY, newY) -> splashScreenStage.setY(newY.doubleValue() - 100));
-        primaryStage.setTitle("Application");
+//        notificationPane.setShowFromTop(false);
+        root_SplashScreen.setNotificationPane(notificationPane);
 
-//        Parent root;
-//        root = FXMLLoader.load(getClass().getResource("/mvc_view_application/FXML_Application_Document.fxml"));
-        FXML_Application_DocumentController root = FXML_Application_DocumentController.getInstance();
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        //splashScreenStage.setTitle("Wie könnte das Programm heißen?");
+        splashScreenStage.setScene(new Scene(notificationPane));
 
-// maximize screen
-        javafx.geometry.Rectangle2D bounds = screen.getVisualBounds();
-        primaryStage.setX(bounds.getMinX());
-        primaryStage.setY(bounds.getMinY());
-        primaryStage.setWidth(bounds.getWidth());
-        primaryStage.setHeight(bounds.getHeight());
-// set full screen for primary stage
-        primaryStage.setFullScreen(true);
-// set delay event and close after delay the scene
-// and open the main scence application
-        PauseTransition delay = new PauseTransition(Duration.seconds(5));
-        delay.setOnFinished(event -> splashScreenStage.close());
-        delay.setOnFinished(event -> primaryStage.show());
+        root_SplashScreen.setSplashScreenStage(splashScreenStage);
 
-        delay.play();
-// display GUI
-
-        splashScreenStage.centerOnScreen();
         splashScreenStage.show();
 
+        mainStage = new Stage();
+
+        connection = DBConnection.getInstance();
+        if (connection.IsConnected()) {
+            rootPrimaryStage = Application_Controller.getInstance();
+            Scene scenePrimaryStage = new Scene(rootPrimaryStage);
+            this.mainStage.getIcons().add(new Image("images/ASUM_logo-1.png"));
+            this.mainStage.setScene(scenePrimaryStage);
+        }
+
+//// maximize screen
+//        javafx.geometry.Rectangle2D bounds = screen.getVisualBounds();
+//        primaryStage.setX(bounds.getMinX());
+//        primaryStage.setY(bounds.getMinY());
+//        primaryStage.setWidth(bounds.getWidth());
+//        primaryStage.setHeight(bounds.getHeight());
+//// set full screen for primary stage
+//        primaryStage.setFullScreen(true);
+// set delay event and close after delay the scene
+// and open the main scence application
+        splashScreenStage.setOnHiding(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                if (rootPrimaryStage == null) {
+                    rootPrimaryStage = Application_Controller.getInstance();
+                    Scene scenePrimaryStage = new Scene(rootPrimaryStage);
+                    mainStage.getIcons().add(new Image("images/ASUM_logo-1.png"));
+                    mainStage.setScene(scenePrimaryStage);
+                }
+                mainStage.show();
+            }
+        });
 //        primaryStage.show();
 //        primaryStage.centerOnScreen();
 //        splashScreenStage.toFront();
-        primaryStage.setOnShowing(event -> splashScreenStage.close());
-        primaryStage.setOnCloseRequest(event -> splashScreenStage.close());
 
     }
 
     public static void main(String[] args) {
         launch(args);
     }
-
-    private Task<SplashScreenDrawer> createSplashScreenTask() {
-        return new Task<SplashScreenDrawer>() {
-            @Override
-            public SplashScreenDrawer call() throws Exception {
-
-                return new SplashScreenDrawer();
-            }
-        };
-    }
-
-    private void buildSplashScreenUI(Stage splashScreenStage, Task<SplashScreenDrawer> splashScreenTask) throws IOException {
-        Parent root_splash;
-        root_splash = FXMLLoader.load(getClass().getResource("/mvc_view_splashScreen/FXML_SplashScreen_Document.fxml"));
-        Scene splashScreenScene = new Scene(root_splash);
-        splashScreenStage.setScene(splashScreenScene);
-        splashScreenStage.initStyle(StageStyle.UNDECORATED);
-    }
-
 }

@@ -5,42 +5,73 @@
  */
 package mvc_model;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  *
  * @author danie
  */
 class CharacteristicOperationDTO {
-    private int id;
-    private String description;
-    private int position;
+    //
+    //private int id;
+    //private String description;
+    //private int position;
+    //private InspectionPlanOperationDTO inspectionPlan;
+    //private CharacteristicTypeDTO characteristicType;
+    //private CharacteristicGroupOperationDTO characteristicgroup;
+    //private InspectionResultDTO result;
+   // private InspectionOperationCommentDTO comment;
+
+    private IntegerProperty id;
+    private StringProperty description;
+    private IntegerProperty position;
     private InspectionPlanOperationDTO inspectionPlan;
     private CharacteristicTypeDTO characteristicType;
     private CharacteristicGroupOperationDTO characteristicgroup;
-    private InspectionResultDTO restult;
+    private InspectionResultDTO result;
     private InspectionOperationCommentDTO comment;
 
-    public int getId() {
+    public Integer getId() {
+        return id.get();
+    }
+
+    public IntegerProperty getIdProperty() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(Integer id) {
+        this.id = new SimpleIntegerProperty();
+        this.id.set(id);
     }
 
     public String getDescription() {
+        return description.get();
+    }
+
+    public StringProperty getDescriptionProperty() {
         return description;
+
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = new SimpleStringProperty();
+        this.description.set(description);
     }
 
     public int getPosition() {
+        return position.get();
+    }
+
+    public IntegerProperty getPositionProperty() {
         return position;
     }
 
-    public void setPosition(int position) {
-        this.position = position;
+    public void setPosition(Integer position) {
+        this.position = new SimpleIntegerProperty();
+        this.position.set(position);
     }
 
     public InspectionPlanOperationDTO getInspectionPlan() {
@@ -67,13 +98,22 @@ class CharacteristicOperationDTO {
         this.characteristicgroup = characteristicgroup;
     }
 
-    public InspectionResultDTO getRestult() {
-        return restult;
-    }
+//    public InspectionResultDTO getRestult() {
+//        return result;
+//    }
+//
+//    public void setRestult(InspectionResultDTO restult) {
+//        this.result = restult;
+//    }
 
-    public void setRestult(InspectionResultDTO restult) {
-        this.restult = restult;
-    }
+//    public InspectionOperationCommentDTO getComment() {
+//        return comment;
+//    }
+//
+//    public void setComment(InspectionOperationCommentDTO comment) {
+//        this.comment = comment;
+//    }
+
 
     public InspectionOperationCommentDTO getComment() {
         return comment;
@@ -84,6 +124,5 @@ class CharacteristicOperationDTO {
     }
 
   
-    
     
 }
