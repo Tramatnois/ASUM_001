@@ -5,7 +5,6 @@
  */
 package mvc_model;
 
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -15,7 +14,16 @@ import javafx.beans.property.StringProperty;
  *
  * @author danie
  */
-public class CharacteristicOperationDTO extends RecursiveTreeObject<InspectionPlanOperationDTO> {
+class CharacteristicOperationDTO {
+    //
+    //private int id;
+    //private String description;
+    //private int position;
+    //private InspectionPlanOperationDTO inspectionPlan;
+    //private CharacteristicTypeDTO characteristicType;
+    //private CharacteristicGroupOperationDTO characteristicgroup;
+    //private InspectionResultDTO result;
+   // private InspectionOperationCommentDTO comment;
 
     private IntegerProperty id;
     private StringProperty description;
@@ -23,8 +31,8 @@ public class CharacteristicOperationDTO extends RecursiveTreeObject<InspectionPl
     private InspectionPlanOperationDTO inspectionPlan;
     private CharacteristicTypeDTO characteristicType;
     private CharacteristicGroupOperationDTO characteristicgroup;
-//    private InspectionResultDTO result;
-//    private InspectionOperationCommentDTO comment;
+    private InspectionResultDTO result;
+    private InspectionOperationCommentDTO comment;
 
     public Integer getId() {
         return id.get();
@@ -106,4 +114,15 @@ public class CharacteristicOperationDTO extends RecursiveTreeObject<InspectionPl
 //        this.comment = comment;
 //    }
 
+
+    public InspectionOperationCommentDTO getComment() {
+        return comment;
+    }
+
+    public void setComment(InspectionOperationCommentDTO comment) {
+        this.comment = comment;
+    }
+
+  
+    
 }
