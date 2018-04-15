@@ -33,6 +33,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import mvc_model.CharacteristicGroupTemplateDAO;
 import mvc_model.CharacteristicGroupTemplateDTO;
 import mvc_model.InspectionPlanTemplateDAO;
 import mvc_model.InspectionPlanTemplateDTO;
@@ -102,32 +103,36 @@ public class CharGroupTemplateManagement_Controller extends AnchorPane {
     private void initialize() {
 
         try {
-            //prepare column: InspectionID
-            JFXTreeTableColumn<InspectionPlanTemplateDTO, Integer> inspection_id = new JFXTreeTableColumn<>("ID");
-            inspection_id.setPrefWidth(50);
-            inspection_id.setCellValueFactory((TreeTableColumn.CellDataFeatures<InspectionPlanTemplateDTO, Integer> param) -> param.getValue().getValue().getIdProperty().asObject());
-//            inspection_id.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-            //prepare column: Norm
-            JFXTreeTableColumn<InspectionPlanTemplateDTO, String> norm = new JFXTreeTableColumn<>("Norm");
-            norm.setCellValueFactory((TreeTableColumn.CellDataFeatures<InspectionPlanTemplateDTO, String> param) -> param.getValue().getValue().getNormProperty());
-            norm.setPrefWidth(350);
-            norm.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-//prepare column: Inspection
-            JFXTreeTableColumn<InspectionPlanTemplateDTO, String> inspection = new JFXTreeTableColumn<>("Prüfplan");
-            inspection.setCellValueFactory((TreeTableColumn.CellDataFeatures<InspectionPlanTemplateDTO, String> param) -> param.getValue().getValue().getDescriptionProperty());
-            inspection.setPrefWidth(350);
-            inspection.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+            //prepare column: CharGroupID
+            JFXTreeTableColumn<CharacteristicGroupTemplateDTO, Integer> charGroup_id = new JFXTreeTableColumn<>("ID");
+            charGroup_id.setPrefWidth(50);
+            charGroup_id.setCellValueFactory((TreeTableColumn.CellDataFeatures<CharacteristicGroupTemplateDTO, Integer> param) -> param.getValue().getValue().getIdProperty().asObject());
+            //prepare column: GroupNumber
+            JFXTreeTableColumn<CharacteristicGroupTemplateDTO, Integer> groupNumber = new JFXTreeTableColumn<>("GruppenID");
+            groupNumber.setCellValueFactory((TreeTableColumn.CellDataFeatures<CharacteristicGroupTemplateDTO, Integer> param) -> param.getValue().getValue().getGroupNumberProperty().asObject());
+            groupNumber.setPrefWidth(350);
+            groupNumber.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+            //prepare column: Description
+            JFXTreeTableColumn<CharacteristicGroupTemplateDTO, String> description = new JFXTreeTableColumn<>("Beschreibung");
+            description.setCellValueFactory((TreeTableColumn.CellDataFeatures<CharacteristicGroupTemplateDTO, String> param) -> param.getValue().getValue().getDescriptionProperty());
+            description.setPrefWidth(350);
+            description.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+            //prepare column: PrüfplanTemplate
+            JFXTreeTableColumn<CharacteristicGroupTemplateDTO, InspectionPlanTemplateDTO> inspectionPlanTemplate = new JFXTreeTableColumn<>("Prüfplan");
+            inspectionPlanTemplate.setCellValueFactory((TreeTableColumn.CellDataFeatures<CharacteristicGroupTemplateDTO, InspectionPlanTemplateDTO> param) -> param.getValue().getValue().getInspectionPlanDTO());
+            inspectionPlanTemplate.setPrefWidth(350);
+            inspectionPlanTemplate.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
             data = FXCollections.observableArrayList();
             newCharGroups = FXCollections.observableArrayList();
 
-            for (InspectionPlanTemplateDTO inspplan_template : new InspectionPlanTemplateDAO().selectAllInspectionPlanTemplates()) {
-                data.add(inspplan_template);
+            for (CharacteristicGroupTemplateDTO charGroup_template : new CharacteristicGroupTemplateDAO().selectAllCharGroupsTemplates()) {
+                data.add(charGroup_template);
             }
 
-            TreeItem<InspectionPlanTemplateDTO> root;
+            TreeItem<CharacteristicGroupTemplateDTO> root;
             root = new RecursiveTreeItem<InspectionPlanTemplateDTO>(data, RecursiveTreeObject::getChildren);
-            this.tbl_view_charGroup_overview.getColumns().setAll(inspection_id, norm, inspection);
+            this.tbl_view_charGroup_overview.getColumns().setAll(charGroup_id, norm, inspection);
             this.tbl_view_charGroup_overview.setRoot(root);
             this.tbl_view_charGroup_overview.setShowRoot(false);
             // set event handler for key pressed event --> Enter or Tab
