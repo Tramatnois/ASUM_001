@@ -23,12 +23,19 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.TreeTableView;
+import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -96,6 +103,8 @@ public class Customer_Controller extends AnchorPane {
     private ObservableList<CustomerDTO> data;
     private Application_Controller application_controller;
     private static Customer_Controller instance;
+    
+    final ContextMenu contextMenu = new ContextMenu();
 
     public synchronized static Customer_Controller getInstance() {
         if (instance == null) {
@@ -139,30 +148,37 @@ public class Customer_Controller extends AnchorPane {
             JFXTreeTableColumn<CustomerDTO, String> customer_name = new JFXTreeTableColumn<>("Kunde");
             customer_name.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, String> param) -> param.getValue().getValue().getNameProperty());
             customer_name.getStyleClass().add("Col_customer_name");
+            customer_name.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 //prepare column: CustomerStreet
             JFXTreeTableColumn<CustomerDTO, String> customer_street = new JFXTreeTableColumn<>("Straße");
             customer_street.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, String> param) -> param.getValue().getValue().getStreetProperty());
 //            customer_street.getStyleClass().add("Col_customer_street");
+            customer_street.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 //prepare column: CustomerZipCode
             JFXTreeTableColumn<CustomerDTO, String> customer_zipCode = new JFXTreeTableColumn<>("Postleitzahl");
             customer_zipCode.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, String> param) -> param.getValue().getValue().getZipCodeProperty());
 //            customer_zipCode.getStyleClass().add("Col_customer_zipCode");
+            customer_zipCode.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 //prepare column: CustomerCity
             JFXTreeTableColumn<CustomerDTO, String> customer_city = new JFXTreeTableColumn<>("Ort");
             customer_city.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, String> param) -> param.getValue().getValue().getCityProperty());
 //            customer_city.getStyleClass().add("Col_customer_city");
+            customer_city.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 //prepare column: CustomerContactPerson
             JFXTreeTableColumn<CustomerDTO, String> customer_contactPerson = new JFXTreeTableColumn<>("Kontaktperson");
             customer_contactPerson.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, String> param) -> param.getValue().getValue().getContactpersonProperty());
 //            customer_contactPerson.getStyleClass().add("Col_customer_contactPerson");
+            customer_contactPerson.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 //prepare column: CustomerPhone
             JFXTreeTableColumn<CustomerDTO, String> customer_phone = new JFXTreeTableColumn<>("Telefon");
             customer_phone.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, String> param) -> param.getValue().getValue().getPhoneProperty());
-//            customer_phone.getStyleClass().add("Col_customer_phone");            
+//            customer_phone.getStyleClass().add("Col_customer_phone");  
+            customer_phone.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 //prepare column: CustomerFax
             JFXTreeTableColumn<CustomerDTO, String> customer_fax = new JFXTreeTableColumn<>("Fax");
             customer_fax.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, String> param) -> param.getValue().getValue().getFaxProperty());
 //            customer_fax.getStyleClass().add("Col_customer_fax");
+            customer_fax.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 //prepare column: CustomerEmail
             JFXTreeTableColumn<CustomerDTO, String> customer_email = new JFXTreeTableColumn<>("E-Mail");
             customer_email.setCellValueFactory((TreeTableColumn.CellDataFeatures<CustomerDTO, String> param) -> param.getValue().getValue().getEmailProperty());
@@ -184,6 +200,52 @@ public class Customer_Controller extends AnchorPane {
             tbl_view_customer.setFocusTraversable(true);
             tbl_view_customer.setShowRoot(false);
             tbl_view_customer.getStyleClass().add("CustomerTable");
+
+            // add context menu
+            MenuItem edit = new MenuItem("bearbeiten");
+            edit.setOnAction(new EventHandler<ActionEvent>(){
+                @Override
+                public void handle(ActionEvent event) {
+                    System.out.println("edit clicked");
+                    application_controller.setNode("CHANGE_CUSTOMER");
+                }
+                
+            });
+            
+            MenuItem delete = new MenuItem("löschen");
+            delete.setOnAction(new EventHandler<ActionEvent>(){
+                @Override
+                public void handle(ActionEvent event) {
+                    System.out.println("delete clicked");
+                    CustomerDTO customer;
+        CustomerDAO customer_model = new CustomerDAO();
+        TreeTableView.TreeTableViewSelectionModel<CustomerDTO> selectionModel = tbl_view_customer.getSelectionModel();
+        
+        // get the selected row index
+        int rowIndex = selectionModel.getSelectedIndex();
+        // get current customer item
+        TreeItem<CustomerDTO> selectedItem = selectionModel.getModelItem(rowIndex);
+        TreeItem<CustomerDTO> parent = selectedItem.getParent();
+        
+        customer = selectedItem.getValue();
+        
+        customer.setActive(0);
+        try {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText(null);
+            alert.setContentText("Kunde wurde erfolgreich deaktiviert.");
+            alert.showAndWait();
+            customer_model.updateCustomer(customer);
+            parent.getChildren().remove(selectedItem);
+        } catch (SQLException ex) {
+            Logger.getLogger(Application_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                }
+                
+            });
+            contextMenu.getItems().addAll(edit, delete);
+            tbl_view_customer.setContextMenu(contextMenu);
 
 // add filter for customer name
             tf_filter.textProperty().addListener(new ChangeListener<String>() {
@@ -215,6 +277,17 @@ public class Customer_Controller extends AnchorPane {
         this.application_controller = controller;
     }
 
+    public void refreshTable() {
+        data.clear();
+        try {
+            for (CustomerDTO customer : new CustomerDAO().selectAllCustomer()) {
+                data.add(customer);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Customer_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     @FXML
     void tbl_view_customer_handler(MouseEvent event) {
         TreeItem<CustomerDTO> customer = tbl_view_customer.getSelectionModel().getSelectedItem();
@@ -243,5 +316,12 @@ public class Customer_Controller extends AnchorPane {
 //        JFXTreeTableView<CustomerDTO> treeView;
 //        treeView = new JFXTreeTableView<>(root);
 //        tbl_view_customer.setRoot(root);
+    }
+
+    @FXML
+    void tbl_view_customer_handler_context(ContextMenuEvent event) {
+        System.out.println("show context menu");
+        event.consume();
+
     }
 }

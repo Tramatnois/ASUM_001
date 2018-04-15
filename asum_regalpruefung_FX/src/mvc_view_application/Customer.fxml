@@ -31,7 +31,7 @@
                       <children>
                           <AnchorPane fx:id="holderAnchor" prefHeight="621.0" prefWidth="1300.0">
                               <children>
-                                  <JFXTreeTableView fx:id="tbl_view_customer" layoutX="28.0" layoutY="174.0" onMouseClicked="#tbl_view_customer_handler" prefHeight="440.0" prefWidth="868.0">
+                                  <JFXTreeTableView fx:id="tbl_view_customer" layoutX="28.0" layoutY="174.0" onContextMenuRequested="#tbl_view_customer_handler_context" onMouseClicked="#tbl_view_customer_handler" prefHeight="440.0" prefWidth="868.0">
                               <columnResizePolicy>
                                  <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                               </columnResizePolicy>

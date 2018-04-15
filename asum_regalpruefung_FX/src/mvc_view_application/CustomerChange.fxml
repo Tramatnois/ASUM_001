@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root prefHeight="645.0" prefWidth="350.0" styleClass="CustomerPane" stylesheets="@../styles/customer.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <StackPane prefHeight="645.0" prefWidth="270.0" AnchorPane.topAnchor="0.0">
+      <children>
+          <AnchorPane id="AnchorPane" prefHeight="645.0" prefWidth="350.0">
+              <children>
+                  <StackPane layoutY="18.0" prefHeight="645.0" prefWidth="1178.0" AnchorPane.topAnchor="0.0">
+                      <children>
+                          <AnchorPane fx:id="holderAnchor" prefHeight="565.0" prefWidth="1178.0">
+                              <children>
+                                  <AnchorPane layoutX="909.0" layoutY="164.0" prefHeight="329.0" prefWidth="589.0" styleClass="card-white" AnchorPane.rightAnchor="472.0">
+                                      <children>
+                                          <StackPane layoutX="24.0" layoutY="39.0" prefHeight="428.0" prefWidth="684.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
+                                              <children>
+                                                  <VBox prefHeight="428.0" prefWidth="361.0">
+                                                      <children>
+                                                          <AnchorPane prefHeight="428.0" prefWidth="563.0">
+                                                              <children>
+                                                   <HBox layoutX="27.0" layoutY="28.0" prefHeight="220.0" prefWidth="514.0">
+                                                      <children>
+                                                         <VBox prefHeight="408.0" prefWidth="300.0">
+                                                            <children>
+                                                               <JFXTextField fx:id="tf_customer" focusColor="BLACK" labelFloat="true" promptText="Kundenname">
+                                                                  <font>
+                                                                     <Font name="System Bold" size="18.0" />
+                                                                  </font>
+                                                                  <VBox.margin>
+                                                                     <Insets bottom="10.0" top="10.0" />
+                                                                  </VBox.margin>
+                                                               </JFXTextField>
+                                                               <JFXTextField fx:id="tf_street" focusColor="BLACK" labelFloat="true" promptText="Straße">
+                                                                  <font>
+                                                                     <Font name="System Bold" size="18.0" />
+                                                                  </font>
+                                                                  <VBox.margin>
+                                                                     <Insets bottom="10.0" top="10.0" />
+                                                                  </VBox.margin>
+                                                               </JFXTextField>
+                                                               <JFXTextField fx:id="tf_zipcode" focusColor="BLACK" labelFloat="true" layoutX="10.0" layoutY="71.0" promptText="PLZ">
+                                                                  <font>
+                                                                     <Font name="System Bold" size="18.0" />
+                                                                  </font>
+                                                                  <VBox.margin>
+                                                                     <Insets bottom="10.0" top="10.0" />
+                                                                  </VBox.margin>
+                                                               </JFXTextField>
+                                                               <JFXTextField fx:id="tf_city" focusColor="BLACK" labelFloat="true" layoutX="10.0" layoutY="122.0" promptText="Ort">
+                                                                  <font>
+                                                                     <Font name="System Bold" size="18.0" />
+                                                                  </font>
+                                                                  <VBox.margin>
+                                                                     <Insets bottom="10.0" top="10.0" />
+                                                                  </VBox.margin>
+                                                               </JFXTextField>
+                                                            </children>
+                                                         </VBox>
+                                                         <VBox layoutX="10.0" layoutY="10.0" prefHeight="220.0" prefWidth="77.0" />
+                                                         <VBox layoutX="269.0" layoutY="10.0" prefHeight="408.0" prefWidth="324.0">
+                                                            <children>
+                                                               <JFXTextField fx:id="tf_contactPerson" focusColor="BLACK" labelFloat="true" layoutX="10.0" layoutY="173.0" promptText="Ansprechpartner">
+                                                                  <font>
+                                                                     <Font name="System Bold" size="18.0" />
+                                                                  </font>
+                                                                  <VBox.margin>
+                                                                     <Insets bottom="10.0" top="10.0" />
+                                                                  </VBox.margin>
+                                                               </JFXTextField>
+                                                               <JFXTextField fx:id="tf_phone" focusColor="BLACK" labelFloat="true" layoutX="10.0" layoutY="224.0" promptText="Telefon">
+                                                                  <font>
+                                                                     <Font name="System Bold" size="18.0" />
+                                                                  </font>
+                                                                  <VBox.margin>
+                                                                     <Insets bottom="10.0" top="10.0" />
+                                                                  </VBox.margin>
+                                                               </JFXTextField>
+                                                               <JFXTextField fx:id="tf_fax" focusColor="BLACK" labelFloat="true" layoutX="10.0" layoutY="275.0" promptText="Fax">
+                                                                  <font>
+                                                                     <Font name="System Bold" size="18.0" />
+                                                                  </font>
+                                                                  <VBox.margin>
+                                                                     <Insets bottom="10.0" top="10.0" />
+                                                                  </VBox.margin>
+                                                               </JFXTextField>
+                                                               <JFXTextField fx:id="tf_email" focusColor="BLACK" labelFloat="true" layoutX="10.0" layoutY="326.0" promptText="E-Mail">
+                                                                  <font>
+                                                                     <Font name="System Bold" size="18.0" />
+                                                                  </font>
+                                                                  <VBox.margin>
+                                                                     <Insets bottom="10.0" top="10.0" />
+                                                                  </VBox.margin>
+                                                               </JFXTextField>
+                                                            </children>
+                                                         </VBox>
+                                                      </children>
+                                                   </HBox>
+                                                   <Separator layoutX="25.0" layoutY="241.0" prefHeight="31.0" prefWidth="531.0" />
+                                                   <JFXButton fx:id="btn_saveCustomer" layoutX="193.0" layoutY="272.0" onAction="#btn_saveCustomer_Handler" style="-fx-background-color: #009688;" text="Kunde speichern" textFill="WHITE">
+                                                      <graphic>
+                                                         <FontAwesomeIconView fill="WHITE" glyphName="SAVE" size="14.0" wrappingWidth="19.0" />
+                                                      </graphic>
+                                                      <font>
+                                                         <Font name="System Bold" size="14.0" />
+                                                      </font>
+                                                   </JFXButton>
+                                                   <JFXButton fx:id="btn_Exit" layoutX="368.0" layoutY="272.0" onAction="#btn_Exit_Handler" style="-fx-background-color: #009688;" text="Eingabe beenden" textFill="WHITE">
+                                                      <graphic>
+                                                         <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" size="14.0" wrappingWidth="19.0" />
+                                                      </graphic>
+                                                      <font>
+                                                         <Font name="System Bold" size="14.0" />
+                                                      </font>
+                                                   </JFXButton>
+                                                              </children>
+                                                          </AnchorPane>
+                                                      </children>
+                                                  </VBox>
+                                              </children>
+                                          </StackPane>
+                                      </children>
+                                  </AnchorPane>
+                                  <AnchorPane layoutX="26.0" layoutY="47.0" prefHeight="106.0" prefWidth="515.0" style="-fx-background-color: rgb(0, 150, 136,0.8); -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 5;" AnchorPane.topAnchor="47.0">
+                                      <children>
+                                          <Pane layoutX="22.0" layoutY="-36.0" prefHeight="106.0" prefWidth="115.0" style="-fx-background-color: #009688; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 4;">
+                                              <children>
+                                                  <ImageView fitHeight="85.0" fitWidth="92.0" layoutX="15.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                                      <image>
+                                                          <Image url="@../images/search.png" />
+                                                      </image>
+                                                  </ImageView>
+                                              </children>
+                                          </Pane>
+                                          <Label fx:id="tf_title" layoutX="173.0" layoutY="8.0" prefHeight="28.0" prefWidth="235.0" text="Neuen Kunden anlegen" textFill="WHITE">
+                                              <font>
+                                                  <Font name="Bauhaus 93" size="22.0" />
+                                              </font>
+                                          </Label>
+                                      </children>
+                                  </AnchorPane>
+                              </children>
+                          </AnchorPane>
+                      </children>
+                  </StackPane>
+              </children>
+          </AnchorPane>
+      </children>
+   </StackPane>
+</fx:root>

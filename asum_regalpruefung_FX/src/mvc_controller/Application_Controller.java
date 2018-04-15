@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
@@ -18,8 +19,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableView;
+import javafx.scene.control.TreeTableView.TreeTableViewSelectionModel;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -29,6 +34,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import mvc_model.CustomerDAO;
+import mvc_model.CustomerDTO;
 import mvc_model_sqlconnector.DBConnection;
 
 /**
@@ -55,31 +62,23 @@ public class Application_Controller extends StackPane {
     @FXML
     private GridPane paneSubFun_InspPlanOp;
     @FXML
+    private GridPane paneSubFun_InspPlanCharGroup;
+    @FXML
     private JFXButton btn_edit_inspPlanOp;
     @FXML
     private JFXButton btn_new_inspPlanOp;
     @FXML
     private JFXButton btn_del_inspPlanOp;
     @FXML
-    private JFXButton btn_view_inspPlanOp_Template;
-    @FXML
-    private JFXButton btn_change_inspPlanOp_Template;
-    @FXML
-    private JFXButton btn_add_inspPlanOp_Template;
-    @FXML
-    private JFXButton btn_del_inspPlanOp_Template;
-    @FXML
-    private JFXButton btn_view_characteristic_Template;
-    @FXML
-    private JFXButton btn_change_characteristic_Template;
-    @FXML
-    private JFXButton btn_add_characteristic_Template;
-    @FXML
-    private JFXButton btn_del_characteristic_Template;
-    @FXML
     private JFXButton btn_show_inspPlanOpResults;
     @FXML
     private JFXButton btn_show_inspPlanOpAttachments;
+    @FXML
+    private JFXButton btn_manage_inspPlanOp_Template;
+    @FXML
+    private JFXButton btn_manage_characteristic_Template;
+    @FXML
+    private JFXButton btn_manage_CharacterGroup_Template;
 
     @FXML
     private AnchorPane contentPane;
@@ -120,9 +119,12 @@ public class Application_Controller extends StackPane {
     private Application_Controller home;
     private SidePanel_Controller sideMenu;
     private Customer_Controller customer_Controller;
+    private AddCustomer_Controller addCustomer_Controller;
+    private ChangeCustomer_Controller changeCustomer_Controller;
     private CustomerSelect_Controller customerSelect_Controller;
     private InspPlanOp_Controller inspectionPlanOperations_Controller;
     private InspPlanOpSelect_Controller inspPlanOpSelect_Controller;
+    private InspPlanTemplateManagement_Controller inspPlanTemplateManagement_Controller;
     private ResultsRecording_Controller resultsRecording_Controller;
 
     private HamburgerBackArrowBasicTransition hamburger_transition;
@@ -184,8 +186,14 @@ public class Application_Controller extends StackPane {
 //        }
         this.customer_Controller = Customer_Controller.getInstance();
         this.customer_Controller.setApplication_controller(this);
+        this.addCustomer_Controller = AddCustomer_Controller.getInstance();
+        this.addCustomer_Controller.setApplication_controller(this);
+        this.changeCustomer_Controller = ChangeCustomer_Controller.getInstance();
+        this.changeCustomer_Controller.setApplication_controller(this);
         this.customerSelect_Controller = CustomerSelect_Controller.getInstance();
         this.customerSelect_Controller.setApplication_controller(this);
+        this.inspPlanTemplateManagement_Controller = InspPlanTemplateManagement_Controller.getInstance();
+        this.inspPlanTemplateManagement_Controller.setApplication_controller(this);
         this.inspectionPlanOperations_Controller = InspPlanOp_Controller.getInstance();
         this.inspectionPlanOperations_Controller.setApplication_controller(this);
         this.inspPlanOpSelect_Controller = InspPlanOpSelect_Controller.getInstance();
@@ -227,6 +235,19 @@ public class Application_Controller extends StackPane {
             case "CUSTOMER":
                 node = customer_Controller;
                 paneSubFun_Customer.setVisible(true);
+                break;
+            case "ADD_CUSTOMER":
+                node = addCustomer_Controller;
+                paneSubFun_Customer.setVisible(true);
+                break;
+            case "CHANGE_CUSTOMER":
+                node = changeCustomer_Controller;
+                changeCustomer_Controller.prefill();
+                paneSubFun_Customer.setVisible(true);
+                break;
+            case "INSPPLAN_MANAGEMENT":
+                node = inspPlanTemplateManagement_Controller;
+                paneSubFun_InspPlanCharGroup.setVisible(true);
                 break;
             case "INSPPLANOP":
                 node = inspectionPlanOperations_Controller;
@@ -290,6 +311,7 @@ public class Application_Controller extends StackPane {
     public void setInspPlanOpStage(Stage inspPlanOpStage) {
         Application_Controller.inspPlanOpStage = inspPlanOpStage;
     }
+
     public InspPlanOpSelect_Controller getInspPlanOpSelect_Controller() {
         return inspPlanOpSelect_Controller;
     }
@@ -301,72 +323,80 @@ public class Application_Controller extends StackPane {
     /*Sub Functions Customer*/
     @FXML
     void btn_edit_customer_handler(ActionEvent event) {
-
+//        if (getCustomer().getTbl_view_customer().isEditable()) {
+//            getCustomer().getTbl_view_customer().setEditable(false);
+//        } else {
+//            getCustomer().getTbl_view_customer().setEditable(true);
+//        }
+        System.out.println("change/display customer");
+        setNode("CHANGE_CUSTOMER");
     }
 
     @FXML
     void btn_add_customer_handler(ActionEvent event) {
+        System.out.println("add customer");
+        setNode("ADD_CUSTOMER");
 
     }
 
     @FXML
     void btn_del_customer_handler(ActionEvent event) {
+        CustomerDTO customer;
+        CustomerDAO customer_model = new CustomerDAO();
+        TreeTableViewSelectionModel<CustomerDTO> selectionModel = getCustomer().getTbl_view_customer().getSelectionModel();
+
+        // get the selected row index
+        int rowIndex = selectionModel.getSelectedIndex();
+        // get current customer item
+        TreeItem<CustomerDTO> selectedItem = selectionModel.getModelItem(rowIndex);
+        TreeItem<CustomerDTO> parent = selectedItem.getParent();
+
+        customer = selectedItem.getValue();
+
+        customer.setActive(0);
+        try {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText(null);
+            alert.setContentText("Kunde wurde erfolgreich deaktiviert.");
+            alert.showAndWait();
+            customer_model.updateCustomer(customer);
+            parent.getChildren().remove(selectedItem);
+        } catch (SQLException ex) {
+            Logger.getLogger(Application_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
     /*Sub Functions InspectionPlanOperation*/
     @FXML
-    void btn_edit_inspPlanOp_handler(ActionEvent event) {
-
-    }
-
-    @FXML
     void btn_new_inspPlanOp_handler(ActionEvent event) {
 
     }
+    
+    @FXML
+    void btn_edit_inspPlanOp_handler(ActionEvent event) {
 
+    }
+    
     @FXML
     void btn_del_inspPlanOp_handler(ActionEvent event) {
 
     }
-
+    /*Sub Functions InspectionPlanTemplate*/
     @FXML
-    void btn_view_inspPlanOp_Template_handler(ActionEvent event) {
-
+    void btn_manage_inspPlanOp_Template_handler(ActionEvent event) {
+        System.out.println("manage InspectionPlan Template");
+        setNode("INSPPLAN_MANAGEMENT");
     }
 
     @FXML
-    void btn_change_inspPlanOp_Template_handler(ActionEvent event) {
+    void btn_manage_characteristic_Template_handler(ActionEvent event) {
 
     }
-
+    
     @FXML
-    void btn_add_inspPlanOp_Template_handler(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btn_del_inspPlanOp_Template_handler(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btn_view_characteristic_Template_handler(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btn_change_characteristic_Template_handler(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btn_add_characteristic_Template_handler(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btn_del_characteristic_Template_handler(ActionEvent event) {
+    void btn_manage_CharacterGroup_Template_handler(ActionEvent event) {
 
     }
 

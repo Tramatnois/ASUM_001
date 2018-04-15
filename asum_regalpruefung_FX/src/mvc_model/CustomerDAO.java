@@ -58,7 +58,7 @@ public class CustomerDAO extends AbstractDAO{
         ArrayList<CustomerDTO> customerList = new ArrayList<>();
         String query;
         ResultSet rs;
-        query = "SELECT * FROM customer_tab";
+        query = "SELECT * FROM customer_tab where active = 1";
         PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
         rs = preparedStmt.executeQuery(query);
         while (rs.next()) {
@@ -82,8 +82,8 @@ public class CustomerDAO extends AbstractDAO{
         ResultSet rs;
         int generatedKey =-1;
 
-        String query = " insert into customer_tab (name, street, zipcode, city, contactperson, phone, fax, email)"
-                + " values (?, ?, ?, ?, ?, ? , ? , ?)";
+        String query = " insert into customer_tab (name, street, zipcode, city, contactperson, phone, fax, email, active)"
+                + " values (?, ?, ?, ?, ?, ? , ? , ?, ?)";
 
         // create the mysql insert preparedstatement
         PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -95,6 +95,7 @@ public class CustomerDAO extends AbstractDAO{
         preparedStmt.setString(6, customer.getPhone());
         preparedStmt.setString(7, customer.getFax());
         preparedStmt.setString(8, customer.getEmail());
+        preparedStmt.setInt(9, customer.getActive());
 
         // execute the preparedstatement
         preparedStmt.execute();
@@ -112,9 +113,9 @@ public class CustomerDAO extends AbstractDAO{
      */
     public void updateCustomer(CustomerDTO customer) throws SQLException {
 
-        String query = "Update customer_tab SET name=?, street=?, zipcode=?, city=?, contactperson=?, phone=?, fax=?, email=? WHERE idcustomer=?";
+        String query = "Update customer_tab SET name=?, street=?, zipcode=?, city=?, contactperson=?, phone=?, fax=?, email=?, active=? WHERE idcustomer=?";
 
-        // create the mysql insert preparedstatement
+        // create the mysql update preparedstatement
         PreparedStatement preparedStmt = connection.getConnection().prepareStatement(query);
         preparedStmt.setString(1, customer.getName());
         preparedStmt.setString(2, customer.getStreet());
@@ -124,9 +125,10 @@ public class CustomerDAO extends AbstractDAO{
         preparedStmt.setString(6, customer.getPhone());
         preparedStmt.setString(7, customer.getFax());
         preparedStmt.setString(8, customer.getEmail());
-        preparedStmt.setInt(9, customer.getId());
+        preparedStmt.setInt(9, customer.getActive());
+        preparedStmt.setInt(10, customer.getId());
         // execute the preparedstatement
-        preparedStmt.executeUpdate();
+        preparedStmt.execute();
         preparedStmt.close();
 
     }
